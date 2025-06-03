@@ -1,0 +1,41 @@
+<div class="wedding-invitation">
+    <div class="invitation-card">
+        <!-- Header Section -->
+        <header class="invitation-header">
+            <div class="ring-icon">💍</div>
+            <h1 class="couple-names">Emma & Liam</h1>
+            <h2 class="invitation-title">You're Invited to Our Wedding</h2>
+        </header>
+
+        <!-- Event Details Section -->
+        <section class="event-details">
+            <div class="detail-item">
+                <span class="detail-label">Date:</span>
+                <span class="detail-value">October 12, 2025</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Venue:</span>
+                <span class="detail-value">Central Park, New York City</span>
+            </div>
+            <p class="invitation-message">
+                Please join us for a day filled with love, laughter, and celebration.
+            </p>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <button class="rsvp-btn" (click)="navigateToRSVP()">RSVP Now</button>
+        </section>
+
+        <!-- Navigation Links -->
+        <nav class="invitation-nav">
+            <a routerLink="/story" class="nav-link">Our Story</a>
+            <a routerLink="/details" class="nav-link">Event Details</a>
+            <a routerLink="/gallery" class="nav-link">Gallery</a>
+            <a routerLink="/registry" class="nav-link">Registry</a>
+            <a routerLink="/contact" class="nav-link">Contact</a>
+        </nav>
+    </div>
+</div>
+
+<app-footer></app-footer>

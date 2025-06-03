@@ -1,0 +1,27 @@
+/* Move your existing styles from app.html to here */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+    --primary-color: #b76e79;
+    --secondary-color: #e07a8e;
+    --text-dark: #4a3f35;
+    --text-medium: #6d5c51;
+    --background-gradient: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
+    --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    --border-radius: 20px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Copy all the styles from your current app.html here */
+.wedding-invitation {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--background-gradient);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    color: var(--text-dark);
+}
+
+/* ... rest of your existing styles ... */
