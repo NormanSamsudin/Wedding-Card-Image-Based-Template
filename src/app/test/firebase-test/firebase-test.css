@@ -1,0 +1,152 @@
+.firebase-test {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 20px 0;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+}
+
+.firebase-test h3 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.test-button {
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.test-button:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.test-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.clear-button {
+    padding: 12px 24px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.clear-button:hover:not(:disabled) {
+    background-color: #545b62;
+}
+
+.clear-button:disabled {
+    background-color: #adb5bd;
+    cursor: not-allowed;
+}
+
+.status {
+    padding: 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.error-details {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.error-details strong {
+    color: #495057;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.error-details pre {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #495057;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.info-section {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #dee2e6;
+}
+
+.info-section h4 {
+    margin-top: 0;
+    color: #495057;
+    font-size: 16px;
+}
+
+.info-section ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.info-section li {
+    margin: 8px 0;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .firebase-test {
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .test-button,
+    .clear-button {
+        width: 100%;
+    }
+}

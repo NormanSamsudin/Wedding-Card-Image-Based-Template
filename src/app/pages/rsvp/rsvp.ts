@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RSVPFirebaseService } from '../../services/rsvp-firebase.service';
+import { Subscription } from 'rxjs';
 
 interface RSVPForm {
   name: string;
@@ -30,13 +32,21 @@ export class RSVP implements OnInit, OnDestroy {
 
   isSubmitted = false;
   isLoading = false;
+  submitError = '';
+  submitSuccess = false;
   
   // Audio properties
   audio: HTMLAudioElement | null = null;
   isPlaying = false;
   audioError = false;
 
-  constructor(private router: Router) {}
+  // Subscription management
+  private subscriptions: Subscription[] = [];
+
+  constructor(
+    private router: Router,
+    private rsvpService: RSVPFirebaseService
+  ) {}
 
   ngOnInit() {
     this.initializeAudio();
@@ -47,6 +57,9 @@ export class RSVP implements OnInit, OnDestroy {
       this.audio.pause();
       this.audio = null;
     }
+    
+    // Clean up subscriptions
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   initializeAudio() {
@@ -115,28 +128,82 @@ export class RSVP implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (this.isValidForm()) {
-      this.isLoading = true;
-      
-      // Simulate form submission
-      setTimeout(() => {
-        console.log('RSVP Form Submitted:', this.rsvpForm);
+    if (!this.isValidForm()) {
+      this.submitError = 'Please fill in all required fields.';
+      return;
+    }
+
+    this.isLoading = true;
+    this.submitError = '';
+
+    // Check if email already exists
+    const emailCheckSub = this.rsvpService.checkEmailExists(this.rsvpForm.email).subscribe({
+      next: (emailExists) => {
+        if (emailExists) {
+          this.submitError = 'An RSVP with this email already exists. Please use a different email or contact us if you need to update your RSVP.';
+          this.isLoading = false;
+          return;
+        }
+
+        // Email doesn't exist, proceed with submission
+        this.submitRSVP();
+      },
+      error: (error) => {
+        console.error('Error checking email:', error);
+        this.submitError = 'Sorry, there was an error checking your email. Please try again.';
+        this.isLoading = false;
+      }
+    });
+
+    this.subscriptions.push(emailCheckSub);
+  }
+
+  private submitRSVP() {
+    // Prepare data for Firebase
+    const rsvpData = {
+      name: this.rsvpForm.name.trim(),
+      email: this.rsvpForm.email.trim().toLowerCase(),
+      familyNumber: this.rsvpForm.familyNumber,
+      attending: this.rsvpForm.attending,
+      dietaryRestrictions: this.rsvpForm.dietaryRestrictions.trim(),
+      message: this.rsvpForm.message.trim()
+    };
+
+    // Save to Firebase
+    const submitSub = this.rsvpService.addRSVP(rsvpData).subscribe({
+      next: (docId) => {
+        console.log('RSVP successfully submitted with ID:', docId);
+        
         this.isLoading = false;
         this.isSubmitted = true;
+        this.submitSuccess = true;
         
         // Optional: Pause music on successful submission
         if (this.audio && this.isPlaying) {
           this.audio.pause();
           this.isPlaying = false;
         }
-      }, 1500);
-    }
+      },
+      error: (error) => {
+        console.error('Error submitting RSVP:', error);
+        this.submitError = 'Sorry, there was an error submitting your RSVP. Please try again or contact us directly.';
+        this.isLoading = false;
+      }
+    });
+
+    this.subscriptions.push(submitSub);
   }
 
   isValidForm(): boolean {
     return this.rsvpForm.name.trim() !== '' && 
            this.rsvpForm.email.trim() !== '' && 
-           this.rsvpForm.familyNumber > 0;
+           this.rsvpForm.familyNumber > 0 &&
+           this.isValidEmail(this.rsvpForm.email);
+  }
+
+  isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   }
 
   goBackToInvitation() {
@@ -158,6 +225,8 @@ export class RSVP implements OnInit, OnDestroy {
       message: ''
     };
     this.isSubmitted = false;
+    this.submitError = '';
+    this.submitSuccess = false;
     
     // Restart audio
     this.attemptAutoPlay();

@@ -1,0 +1,32 @@
+<div class="firebase-test">
+    <h3>Firebase Connection Test</h3>
+
+    <div class="button-group">
+        <button (click)="testConnection()" [disabled]="testing" class="test-button">
+            {{ testing ? 'Testing...' : 'Test Firebase Connection' }}
+        </button>
+
+        <button (click)="clearResults()" [disabled]="testing || (!connectionStatus && !errorDetails)"
+            class="clear-button">
+            Clear Results
+        </button>
+    </div>
+
+    <div *ngIf="connectionStatus" [class]="connectionStatus.includes('✅') ? 'status success' : 'status error'">
+        {{ connectionStatus }}
+    </div>
+
+    <div *ngIf="errorDetails" class="error-details">
+        <strong>Error Details:</strong>
+        <pre>{{ errorDetails }}</pre>
+    </div>
+
+    <div class="info-section">
+        <h4>Debug Information:</h4>
+        <ul>
+            <li>Check browser console for detailed logs</li>
+            <li>Check Network tab in DevTools for Firebase requests</li>
+            <li>Verify Firestore security rules in Firebase Console</li>
+        </ul>
+    </div>
+</div>
