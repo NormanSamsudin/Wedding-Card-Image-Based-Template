@@ -370,76 +370,69 @@
 }
 
 /* Enhanced Mobile Responsive Design */
+/* Enhanced Mobile Responsive Design with better width management */
 @media (max-width: 768px) {
     .rsvp-page {
         padding: 0.5rem;
+        /* Ensure full width usage without overflow */
+        box-sizing: border-box;
     }
 
     .rsvp-container {
         border-radius: 16px;
         margin: 0;
+        /* Use more of the available space on mobile */
+        width: calc(100% - 1rem);
+        max-width: calc(100vw - 1rem);
     }
 
     .rsvp-header {
         padding: 1.5rem 1rem 1rem;
+        box-sizing: border-box;
     }
 
     .rsvp-form-container {
         padding: 0 1rem 1.5rem;
-    }
-
-    .form-group {
-        margin-bottom: 1rem;
+        box-sizing: border-box;
     }
 
     .form-input,
     .form-select,
     .form-textarea {
         padding: 0.75rem 0.875rem;
+        /* Ensure inputs don't exceed container width */
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .radio-option {
         padding: 0.75rem;
         min-height: 48px;
-    }
-
-    .btn {
-        padding: 0.875rem 1.25rem;
-        min-height: 48px;
-    }
-
-    .audio-control {
-        top: 15px;
-        right: 15px;
-        padding: 10px 12px;
-        font-size: 12px;
+        box-sizing: border-box;
     }
 }
 
 @media (max-width: 480px) {
     .rsvp-page {
         padding: 0.25rem;
+        box-sizing: border-box;
     }
 
     .rsvp-container {
         border-radius: 12px;
+        /* Maximize width usage on very small screens */
+        width: calc(100% - 0.5rem);
+        max-width: calc(100vw - 0.5rem);
     }
 
     .rsvp-header {
         padding: 1.25rem 0.75rem 0.75rem;
+        box-sizing: border-box;
     }
 
     .rsvp-form-container {
         padding: 0 0.75rem 1.25rem;
-    }
-
-    .breadcrumb {
-        flex-direction: column;
-        gap: 0.25rem;
-    }
-
-    .breadcrumb-separator {
-        display: none;
+        box-sizing: border-box;
     }
 
     .form-input,
@@ -447,24 +440,41 @@
     .form-textarea {
         padding: 0.75rem;
         border-radius: 8px;
+        /* Ensure no overflow on smallest screens */
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 16px;
+        /* Prevents zoom on iOS */
     }
 
     .radio-option {
         padding: 0.625rem;
         border-radius: 8px;
+        box-sizing: border-box;
+    }
+}
+
+/* Additional fix for very narrow screens */
+@media (max-width: 320px) {
+    .rsvp-page {
+        padding: 0.125rem;
     }
 
-    .btn {
-        border-radius: 25px;
-        font-size: 0.9rem;
+    .rsvp-container {
+        width: calc(100% - 0.25rem);
+        max-width: calc(100vw - 0.25rem);
     }
 
-    .audio-control {
-        top: 10px;
-        right: 10px;
-        padding: 8px 10px;
-        font-size: 11px;
-        border-radius: 20px;
+    .rsvp-form-container {
+        padding: 0 0.5rem 1rem;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+        padding: 0.625rem 0.5rem;
+        font-size: 16px;
+        /* Prevents zoom on iOS */
     }
 }
 
