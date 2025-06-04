@@ -32,4 +32,9 @@ export class Landing {
   closeModal() {
     this.activeModal = null;
   }
+
+  addToCalendar() {
+    const calendarUrl = 'https://calendar.google.com/calendar/u/0/r/eventedit?text=The+Wedding+Of+Aliah+-+Harris&dates=20250512T030000Z/20250512T070000Z&details=The+Wedding+Of+Aliah++-++Harris&location=Kelab+Impiana+Kayangan+Heights&sprop&sprop=name:&pli=1';
+        window.open(calendarUrl, '_blank');
+  }
 }

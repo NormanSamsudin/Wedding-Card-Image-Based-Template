@@ -29,7 +29,8 @@
             <h3>Wedding Details</h3>
             <p><strong>Date:</strong> Monday, May 12, 2025</p>
             <p><strong>Time:</strong> 4:00 PM</p>
-            <button class="add-to-calendar-btn">Add to Calendar</button>
+            <p><strong>Venue:</strong> Kelab Impiana Kayangan Heights</p>
+            <button class="add-to-calendar-btn" (click)="addToCalendar()">Add to Google Calendar</button>
         </div>
     </app-modal-overlay>
 
@@ -37,7 +38,6 @@
         <div class="modal-content-section">
             <h3>Bride's Family</h3>
             <p>📞 +1 (555) 123-4567</p>
-
             <h3>Groom's Family</h3>
             <p>📞 +1 (555) 987-6543</p>
         </div>
@@ -79,7 +79,7 @@
         </div>
     </app-modal-overlay>
 
-    <app-modal-overlay [isOpen]="activeModal === 'song'" title="Song Requests" (close)="closeModal()">
+    <!-- <app-modal-overlay [isOpen]="activeModal === 'song'" title="Song Requests" (close)="closeModal()">
         <div class="modal-content-section">
             <h3>Request a Song</h3>
             <p>Help us create the perfect playlist for our special day!</p>
@@ -100,5 +100,5 @@
                 <button type="submit" class="submit-btn">Submit Request</button>
             </form>
         </div>
-    </app-modal-overlay>
+    </app-modal-overlay> -->
 </div>

@@ -22,7 +22,7 @@ export class BottomNavigation {
     { id: 'contact', label: 'Contact', icon: 'fas fa-phone' },
     { id: 'location', label: 'Location', icon: 'fas fa-map-marker-alt' },
     { id: 'rsvp', label: 'RSVP', icon: 'fas fa-envelope' },
-    { id: 'song', label: 'Song', icon: 'fas fa-music' }
+    // { id: 'song', label: 'Song', icon: 'fas fa-music' }
   ];
 
   onNavClick(item: NavigationItem) {
