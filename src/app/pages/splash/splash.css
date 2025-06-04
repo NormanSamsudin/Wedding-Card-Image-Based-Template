@@ -1,0 +1,95 @@
+.splash-container {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 20px;
+    /* adds spacing on smaller screens */
+    box-sizing: border-box;
+}
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+    /* NEW */
+}
+
+.video-background iframe {
+    width: 100vw;
+    height: 56.25vw;
+    min-height: 100vh;
+    min-width: 177.77vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    /* ensures it's non-interactive */
+    z-index: -1;
+    /* explicitly send behind */
+}
+
+.background-video {
+    display: none;
+    /* fallback, not used here */
+}
+
+.splash-content {
+    color: white;
+    font-family: 'Arial', sans-serif;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 1rem;
+    animation: fadeIn 1.5s ease-in-out;
+    position: relative;
+}
+
+/* Responsive font sizes */
+.splash-content h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    margin: 0;
+}
+
+.splash-content h2 {
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    margin: 0;
+}
+
+.splash-content p {
+    font-size: clamp(1rem, 3.5vw, 1.3rem);
+    margin: 0.2rem 0;
+}
+
+/* Responsive button */
+button {
+    padding: 12px 24px;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    background-color: #d6b28a;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #c2a77b;
+}
+
+/* Small screen adjustments */
+@media (max-width: 480px) {
+    .splash-content {
+        gap: 8px;
+    }
+}
