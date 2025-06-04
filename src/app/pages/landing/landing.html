@@ -1,13 +1,45 @@
 <div class="landing-container">
-    <!-- Your existing wedding invitation content -->
+    <!-- Wedding Invitation Card -->
     <div class="wedding-card">
+        <!-- First Card Section -->
+        <div class="card-content">
+            <img src="bismillah.png" alt="Bismillah" style="width: 100%; height: auto;" />
+            <br>
+            <h1 class="salam-text">Assalammualaikum W.B.T & Salam Sejahtera</h1>
+            <br>
+
+            <!-- Parents Names -->
+            <div class="name-card-container">
+                <div class="name-section">
+                    <h2>Baseri Ishak</h2>
+                    <div class="ampersand">&</div>
+                    <h2>Siti Nizarina Zakaria</h2>
+                </div>
+                <div class="name-section">
+                    <h2>Zakaria Yasin</h2>
+                    <div class="ampersand">&</div>
+                    <h2>Hartini Mohamed</h2>
+                </div>
+            </div>
+
+            <!-- Invitation Text -->
+            <div class="invitation-text-container">
+                <div class="invitation-text elegant-style">
+                    <span class="line">Dengan penuh kesyukuran, kami menjemput</span>
+                    <span class="line"><span class="special-terms">Dato' | Datin | Tuan | Puan | Encik |
+                            Cik</span></span>
+                    <span class="line">ke majlis perkahwinan anakanda kami</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Card Section -->
         <div class="card-content">
             <h1 class="wedding-title">The Wedding Of</h1>
 
             <div class="names-section">
                 <div class="initial">A</div>
                 <div class="decorative-element">
-                    <!-- Your existing decorative birds/leaves design -->
                     <div class="decoration">🕊️ 🌿 🤍 🌿 🕊️</div>
                 </div>
                 <h2 class="couple-names">ALIAH & HARRIS</h2>
@@ -23,17 +55,20 @@
     <app-bottom-navigation (navigationClick)="onNavigationClick($event)">
     </app-bottom-navigation>
 
-    <!-- Modals for each navigation item -->
+    <!-- Calendar Modal -->
     <app-modal-overlay [isOpen]="activeModal === 'calendar'" title="Save the Date" (close)="closeModal()">
         <div class="modal-content-section">
             <h3>Wedding Details</h3>
             <p><strong>Date:</strong> Monday, May 12, 2025</p>
             <p><strong>Time:</strong> 4:00 PM</p>
             <p><strong>Venue:</strong> Kelab Impiana Kayangan Heights</p>
-            <button class="add-to-calendar-btn" (click)="addToCalendar()">Add to Google Calendar</button>
+            <button class="btn-primary add-to-calendar-btn" (click)="addToCalendar()">
+                Add to Google Calendar
+            </button>
         </div>
     </app-modal-overlay>
 
+    <!-- Contact Modal -->
     <app-modal-overlay [isOpen]="activeModal === 'contact'" title="Contact Information" (close)="closeModal()">
         <div class="modal-content-section">
             <h3>Bride's Family</h3>
@@ -44,7 +79,7 @@
                     <button class="whatsapp-btn" (click)="openWhatsApp('+60182402451')">💬 WhatsApp</button>
                 </div>
             </div>
-    
+
             <h3>Groom's Family</h3>
             <div class="contact-row">
                 <span class="phone-number">📞 +1 (555) 987-6543</span>
@@ -54,29 +89,31 @@
                 </div>
             </div>
         </div>
-        </app-modal-overlay>
+    </app-modal-overlay>
 
-        <app-modal-overlay [isOpen]="activeModal === 'location'" title="Wedding Venue" (close)="closeModal()">
-            <div class="modal-content-section">
-                <h3>Ceremony & Reception</h3>
-                <p><strong>Venue:</strong> Grand Ballroom Hotel</p>
-                <p><strong>Address:</strong> 123 Wedding St, City, State 12345</p>
-        
-                <div class="location-info">
-                    <p><strong>Coordinates:</strong> 3.079934, 101.5669504</p>
-                </div>
-        
-                <div class="directions-buttons">
-                    <button class="google-maps-btn" (click)="openGoogleMaps()">
-                        🗺️ Google Maps
-                    </button>
-                    <button class="waze-btn" (click)="openWaze()">
-                        🚗 Waze
-                    </button>
-                </div>
+    <!-- Location Modal -->
+    <app-modal-overlay [isOpen]="activeModal === 'location'" title="Wedding Venue" (close)="closeModal()">
+        <div class="modal-content-section">
+            <h3>Ceremony & Reception</h3>
+            <p><strong>Venue:</strong> Grand Ballroom Hotel</p>
+            <p><strong>Address:</strong> 123 Wedding St, City, State 12345</p>
+
+            <div class="location-info">
+                <p><strong>Coordinates:</strong> 3.079934, 101.5669504</p>
             </div>
-            </app-modal-overlay>
 
+            <div class="directions-buttons">
+                <button class="google-maps-btn" (click)="openGoogleMaps()">
+                    🗺️ Google Maps
+                </button>
+                <button class="waze-btn" (click)="openWaze()">
+                    🚗 Waze
+                </button>
+            </div>
+        </div>
+    </app-modal-overlay>
+
+    <!-- RSVP Modal -->
     <app-modal-overlay [isOpen]="activeModal === 'rsvp'" title="RSVP" (close)="closeModal()">
         <div class="modal-content-section">
             <form class="rsvp-form">
@@ -99,31 +136,8 @@
                     <label>Number of Guests</label>
                     <input type="number" min="1" max="5" value="1">
                 </div>
-                <button type="submit" class="submit-btn">Submit RSVP</button>
+                <button type="submit" class="btn-primary submit-btn">Submit RSVP</button>
             </form>
         </div>
     </app-modal-overlay>
-
-    <!-- <app-modal-overlay [isOpen]="activeModal === 'song'" title="Song Requests" (close)="closeModal()">
-        <div class="modal-content-section">
-            <h3>Request a Song</h3>
-            <p>Help us create the perfect playlist for our special day!</p>
-
-            <form class="song-form">
-                <div class="form-group">
-                    <label>Song Title</label>
-                    <input type="text" placeholder="Enter song title">
-                </div>
-                <div class="form-group">
-                    <label>Artist</label>
-                    <input type="text" placeholder="Enter artist name">
-                </div>
-                <div class="form-group">
-                    <label>Special Message (Optional)</label>
-                    <textarea placeholder="Why is this song special to you?"></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Submit Request</button>
-            </form>
-        </div>
-    </app-modal-overlay> -->
 </div>

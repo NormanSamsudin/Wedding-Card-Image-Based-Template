@@ -1,46 +1,32 @@
+/* ===== RESET & BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+}
+
+/* ===== MAIN CONTAINER ===== */
 .landing-container {
     position: relative;
     min-height: 100vh;
-    /* Background image with fallback gradient */
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    max-width: 430px;
+    margin: 0 auto;
     background-image: url('http://localhost:4200/bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-
-    /* Mobile app screen ratio */
-    max-width: 430px;
-    margin: 0 auto;
-
-    padding: 20px;
-    padding-bottom: 100px;
-    /* Space for bottom navigation */
-
-    /* Optional: Add subtle overlay for better text readability */
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(0.5px);
-        z-index: 1;
-    }
-
-    /* Ensure content is above overlay */
-    &>* {
-        position: relative;
-        z-index: 2;
-    }
 }
 
+/* ===== WEDDING CARD ===== */
 .wedding-card {
     max-width: 400px;
     margin: 40px auto;
-    /* Enhanced glassmorphism effect */
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -53,8 +39,17 @@
 }
 
 .card-content {
-    padding: 60px 40px;
+    padding: 16px;
     text-align: center;
+}
+
+/* ===== TYPOGRAPHY ===== */
+.salam-text {
+    font-size: 13px;
+    color: #666;
+    letter-spacing: 2px;
+    font-weight: 200;
+    margin-bottom: 1rem;
 }
 
 .wedding-title {
@@ -63,6 +58,35 @@
     margin-bottom: 40px;
     letter-spacing: 2px;
     font-weight: 300;
+}
+
+/* ===== NAMES SECTION ===== */
+.name-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.name-section {
+    text-align: center;
+    flex: 1;
+}
+
+.name-section h2 {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 800;
+    margin-bottom: 8px;
+    line-height: 1;
+}
+
+.ampersand {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 12px 0;
+    font-weight: normal;
 }
 
 .names-section {
@@ -96,9 +120,48 @@
     margin-top: 40px;
 }
 
+/* ===== INVITATION TEXT ===== */
+.invitation-text-container {
+    max-width: 500px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 40px 30px;
+}
+
+.invitation-text {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.invitation-text .line {
+    display: block;
+    margin-bottom: 12px;
+}
+
+.invitation-text .line:last-child {
+    margin-bottom: 0;
+}
+
+.special-terms {
+    font-style: italic;
+    color: #666;
+}
+
+.elegant-style {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: 18px;
+    color: #333;
+    line-height: 2;
+    letter-spacing: 1px;
+}
+
+/* ===== MODAL STYLES ===== */
 .modal-content-section {
     text-align: left;
-    /* Enhanced modal styling with glassmorphism */
     background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -121,9 +184,8 @@
     line-height: 1.6;
 }
 
-.add-to-calendar-btn,
-.directions-btn,
-.submit-btn {
+/* ===== BUTTONS ===== */
+.btn-primary {
     background: #333;
     color: white;
     border: none;
@@ -132,68 +194,22 @@
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
-    margin-top: 16px;
     transition: all 0.3s ease;
 }
 
-.add-to-calendar-btn:hover,
-.directions-btn:hover,
-.submit-btn:hover {
+.btn-primary:hover {
     background: #555;
     transform: translateY(-1px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-.rsvp-form,
-.song-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.form-group label {
-    font-weight: 500;
-    color: #333;
-    font-size: 14px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    padding: 12px;
-    border: 2px solid #f0f0f0;
-    border-radius: 8px;
-    font-size: 14px;
-    transition: border-color 0.3s ease;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(5px);
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #333;
-    background: rgba(255, 255, 255, 0.95);
-}
-
-.form-group textarea {
-    min-height: 80px;
-    resize: vertical;
-}
-
+.add-to-calendar-btn,
 .submit-btn {
-    margin-top: 8px;
+    margin-top: 16px;
     width: 100%;
 }
 
-/* Contact Modal Styles */
+/* ===== CONTACT BUTTONS ===== */
 .contact-row {
     display: flex;
     justify-content: space-between;
@@ -250,7 +266,7 @@
     box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
 }
 
-/* Location Modal Styles */
+/* ===== LOCATION STYLES ===== */
 .location-info {
     margin: 15px 0;
     padding: 10px;
@@ -305,25 +321,53 @@
     box-shadow: 0 6px 20px rgba(0, 212, 255, 0.3);
 }
 
-/* Loading state for background image */
-.landing-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: inherit;
-    background-image: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 0;
+/* ===== FORM STYLES ===== */
+.rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-/* Mobile responsiveness */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px;
+    border: 2px solid #f0f0f0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #333;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.form-group textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
     .landing-container {
-        /* Better performance on mobile */
         background-attachment: scroll;
         padding: 15px;
         padding-bottom: 100px;
@@ -336,6 +380,29 @@
 
     .card-content {
         padding: 40px 30px;
+    }
+
+    .name-card-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .name-section h2 {
+        font-size: 1.2rem;
+    }
+
+    .invitation-text-container {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+
+    .invitation-text {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .elegant-style {
+        font-size: 16px;
     }
 
     .initial {
@@ -369,63 +436,7 @@
         font-size: 14px;
     }
 
-    .modal-content-section {
-        padding: 15px;
-        margin: 5px 0;
-    }
-
-    .contact-row {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-    }
-
-    .contact-buttons {
-        justify-content: center;
-        width: 100%;
-    }
-
-    .call-btn,
-    .whatsapp-btn {
-        flex: 1;
-        max-width: 120px;
-    }
-
-    .directions-buttons {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .google-maps-btn,
-    .waze-btn {
-        width: 100%;
-        min-width: auto;
-    }
-}
-
-/* High DPI displays */
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
-    .landing-container {
-        background-image: url('/assets/images/wedding-background@2x.jpg');
-    }
-}
-
-/* Prefers reduced motion */
-@media (prefers-reduced-motion: reduce) {
-    .landing-container {
-        background-attachment: scroll;
-    }
-
-    .add-to-calendar-btn,
-    .directions-btn,
-    .submit-btn {
-        transition: none;
-    }
-
-    .add-to-calendar-btn:hover,
-    .directions-btn:hover,
-    .submit-btn:hover {
-        transform: none;
+    .invitation-text {
+        font-size: 14;
     }
 }
