@@ -56,14 +56,26 @@
         </div>
         </app-modal-overlay>
 
-    <app-modal-overlay [isOpen]="activeModal === 'location'" title="Wedding Venue" (close)="closeModal()">
-        <div class="modal-content-section">
-            <h3>Ceremony & Reception</h3>
-            <p><strong>Venue:</strong> Grand Ballroom Hotel</p>
-            <p><strong>Address:</strong> 123 Wedding St, City, State 12345</p>
-            <button class="directions-btn">Get Directions</button>
-        </div>
-    </app-modal-overlay>
+        <app-modal-overlay [isOpen]="activeModal === 'location'" title="Wedding Venue" (close)="closeModal()">
+            <div class="modal-content-section">
+                <h3>Ceremony & Reception</h3>
+                <p><strong>Venue:</strong> Grand Ballroom Hotel</p>
+                <p><strong>Address:</strong> 123 Wedding St, City, State 12345</p>
+        
+                <div class="location-info">
+                    <p><strong>Coordinates:</strong> 3.079934, 101.5669504</p>
+                </div>
+        
+                <div class="directions-buttons">
+                    <button class="google-maps-btn" (click)="openGoogleMaps()">
+                        🗺️ Google Maps
+                    </button>
+                    <button class="waze-btn" (click)="openWaze()">
+                        🚗 Waze
+                    </button>
+                </div>
+            </div>
+            </app-modal-overlay>
 
     <app-modal-overlay [isOpen]="activeModal === 'rsvp'" title="RSVP" (close)="closeModal()">
         <div class="modal-content-section">

@@ -193,103 +193,6 @@
     width: 100%;
 }
 
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-    .landing-container {
-        /* Better performance on mobile */
-        background-attachment: scroll;
-        padding: 15px;
-        padding-bottom: 100px;
-    }
-
-    .wedding-card {
-        margin: 20px auto;
-        max-width: 100%;
-    }
-
-    .card-content {
-        padding: 40px 30px;
-    }
-
-    .initial {
-        font-size: 40px;
-    }
-
-    .couple-names {
-        font-size: 20px;
-    }
-
-    .decoration {
-        font-size: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .card-content {
-        padding: 30px 20px;
-    }
-
-    .initial {
-        font-size: 36px;
-    }
-
-    .couple-names {
-        font-size: 18px;
-        letter-spacing: 2px;
-    }
-
-    .wedding-title {
-        font-size: 14px;
-    }
-
-    .modal-content-section {
-        padding: 15px;
-        margin: 5px 0;
-    }
-}
-
-/* Loading state for background image */
-.landing-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: inherit;
-    background-image: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 0;
-}
-
-/* High DPI displays */
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
-    .landing-container {
-        background-image: url('/assets/images/wedding-background@2x.jpg');
-    }
-}
-
-/* Prefers reduced motion */
-@media (prefers-reduced-motion: reduce) {
-    .landing-container {
-        background-attachment: scroll;
-    }
-
-    .add-to-calendar-btn,
-    .directions-btn,
-    .submit-btn {
-        transition: none;
-    }
-
-    .add-to-calendar-btn:hover,
-    .directions-btn:hover,
-    .submit-btn:hover {
-        transform: none;
-    }
-}
-
 /* Contact Modal Styles */
 .contact-row {
     display: flex;
@@ -347,8 +250,130 @@
     box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
 }
 
-/* Responsive design for smaller screens */
+/* Location Modal Styles */
+.location-info {
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(248, 249, 250, 0.8);
+    border-radius: 6px;
+    font-size: 14px;
+    color: #666;
+}
+
+.directions-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.google-maps-btn,
+.waze-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.google-maps-btn {
+    background: linear-gradient(135deg, #4285F4, #1a73e8);
+    color: white;
+}
+
+.google-maps-btn:hover {
+    background: linear-gradient(135deg, #1a73e8, #1557b0);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(66, 133, 244, 0.3);
+}
+
+.waze-btn {
+    background: linear-gradient(135deg, #00D4FF, #00B8E6);
+    color: white;
+}
+
+.waze-btn:hover {
+    background: linear-gradient(135deg, #00B8E6, #009FC7);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.3);
+}
+
+/* Loading state for background image */
+.landing-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    background-image: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .landing-container {
+        /* Better performance on mobile */
+        background-attachment: scroll;
+        padding: 15px;
+        padding-bottom: 100px;
+    }
+
+    .wedding-card {
+        margin: 20px auto;
+        max-width: 100%;
+    }
+
+    .card-content {
+        padding: 40px 30px;
+    }
+
+    .initial {
+        font-size: 40px;
+    }
+
+    .couple-names {
+        font-size: 20px;
+    }
+
+    .decoration {
+        font-size: 20px;
+    }
+}
+
 @media (max-width: 480px) {
+    .card-content {
+        padding: 30px 20px;
+    }
+
+    .initial {
+        font-size: 36px;
+    }
+
+    .couple-names {
+        font-size: 18px;
+        letter-spacing: 2px;
+    }
+
+    .wedding-title {
+        font-size: 14px;
+    }
+
+    .modal-content-section {
+        padding: 15px;
+        margin: 5px 0;
+    }
+
     .contact-row {
         flex-direction: column;
         gap: 10px;
@@ -364,4 +389,43 @@
     .whatsapp-btn {
         flex: 1;
         max-width: 120px;
-    } }
+    }
+
+    .directions-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .google-maps-btn,
+    .waze-btn {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    .landing-container {
+        background-image: url('/assets/images/wedding-background@2x.jpg');
+    }
+}
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .landing-container {
+        background-attachment: scroll;
+    }
+
+    .add-to-calendar-btn,
+    .directions-btn,
+    .submit-btn {
+        transition: none;
+    }
+
+    .add-to-calendar-btn:hover,
+    .directions-btn:hover,
+    .submit-btn:hover {
+        transform: none;
+    }
+}

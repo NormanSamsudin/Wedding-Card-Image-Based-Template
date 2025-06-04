@@ -51,4 +51,19 @@ export class Landing {
     // Open WhatsApp in a new tab/window
     window.open(whatsappUrl, '_blank');
   }
+  openGoogleMaps() {
+    // Google Maps URL with coordinates
+    const googleMapsUrl = 'https://www.google.com/maps/place/3.079934,101.5669504';
+    
+    // Open Google Maps in a new tab/window
+    window.open(googleMapsUrl, '_blank');
+  }
+
+  openWaze() {
+    // Waze URL with coordinates
+    const wazeUrl = 'https://www.waze.com/live-map/directions?to=ll.3.079934%2C101.5669504';
+    
+    // Open Waze in a new tab/window
+    window.open(wazeUrl, '_blank');
+  }
 }
