@@ -1,0 +1,10 @@
+<div class="bottom-navigation">
+    <div class="nav-container">
+        <button *ngFor="let item of navigationItems" class="nav-item" (click)="onNavClick(item)">
+            <div class="nav-icon">
+                <i [class]="item.icon"></i>
+            </div>
+            <span class="nav-label">{{ item.label }}</span>
+        </button>
+    </div>
+</div>

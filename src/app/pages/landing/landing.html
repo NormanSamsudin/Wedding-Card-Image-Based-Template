@@ -1,41 +1,104 @@
-<div class="wedding-invitation">
-    <div class="invitation-card">
-        <!-- Header Section -->
-        <header class="invitation-header">
-            <div class="ring-icon">💍</div>
-            <h1 class="couple-names">Emma & Liam</h1>
-            <h2 class="invitation-title">You're Invited to Our Wedding</h2>
-        </header>
+<div class="landing-container">
+    <!-- Your existing wedding invitation content -->
+    <div class="wedding-card">
+        <div class="card-content">
+            <h1 class="wedding-title">The Wedding Of</h1>
 
-        <!-- Event Details Section -->
-        <section class="event-details">
-            <div class="detail-item">
-                <span class="detail-label">Date:</span>
-                <span class="detail-value">October 12, 2025</span>
+            <div class="names-section">
+                <div class="initial">A</div>
+                <div class="decorative-element">
+                    <!-- Your existing decorative birds/leaves design -->
+                    <div class="decoration">🕊️ 🌿 🤍 🌿 🕊️</div>
+                </div>
+                <h2 class="couple-names">ALIAH & HARRIS</h2>
             </div>
-            <div class="detail-item">
-                <span class="detail-label">Venue:</span>
-                <span class="detail-value">Central Park, New York City</span>
+
+            <div class="date-section">
+                <p class="wedding-date">Monday | 12.05.2025</p>
             </div>
-            <p class="invitation-message">
-                Please join us for a day filled with love, laughter, and celebration.
-            </p>
-        </section>
-
-        <!-- Call to Action -->
-        <section class="cta-section">
-            <button class="rsvp-btn" (click)="navigateToRSVP()">RSVP Now</button>
-        </section>
-
-        <!-- Navigation Links -->
-        <nav class="invitation-nav">
-            <a routerLink="/story" class="nav-link">Our Story</a>
-            <a routerLink="/details" class="nav-link">Event Details</a>
-            <a routerLink="/gallery" class="nav-link">Gallery</a>
-            <a routerLink="/registry" class="nav-link">Registry</a>
-            <a routerLink="/contact" class="nav-link">Contact</a>
-        </nav>
+        </div>
     </div>
-</div>
 
-<app-footer></app-footer>
+    <!-- Bottom Navigation -->
+    <app-bottom-navigation (navigationClick)="onNavigationClick($event)">
+    </app-bottom-navigation>
+
+    <!-- Modals for each navigation item -->
+    <app-modal-overlay [isOpen]="activeModal === 'calendar'" title="Save the Date" (close)="closeModal()">
+        <div class="modal-content-section">
+            <h3>Wedding Details</h3>
+            <p><strong>Date:</strong> Monday, May 12, 2025</p>
+            <p><strong>Time:</strong> 4:00 PM</p>
+            <button class="add-to-calendar-btn">Add to Calendar</button>
+        </div>
+    </app-modal-overlay>
+
+    <app-modal-overlay [isOpen]="activeModal === 'contact'" title="Contact Information" (close)="closeModal()">
+        <div class="modal-content-section">
+            <h3>Bride's Family</h3>
+            <p>📞 +1 (555) 123-4567</p>
+
+            <h3>Groom's Family</h3>
+            <p>📞 +1 (555) 987-6543</p>
+        </div>
+    </app-modal-overlay>
+
+    <app-modal-overlay [isOpen]="activeModal === 'location'" title="Wedding Venue" (close)="closeModal()">
+        <div class="modal-content-section">
+            <h3>Ceremony & Reception</h3>
+            <p><strong>Venue:</strong> Grand Ballroom Hotel</p>
+            <p><strong>Address:</strong> 123 Wedding St, City, State 12345</p>
+            <button class="directions-btn">Get Directions</button>
+        </div>
+    </app-modal-overlay>
+
+    <app-modal-overlay [isOpen]="activeModal === 'rsvp'" title="RSVP" (close)="closeModal()">
+        <div class="modal-content-section">
+            <form class="rsvp-form">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Will you attend?</label>
+                    <select>
+                        <option>Yes, I'll be there!</option>
+                        <option>Sorry, can't make it</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Number of Guests</label>
+                    <input type="number" min="1" max="5" value="1">
+                </div>
+                <button type="submit" class="submit-btn">Submit RSVP</button>
+            </form>
+        </div>
+    </app-modal-overlay>
+
+    <app-modal-overlay [isOpen]="activeModal === 'song'" title="Song Requests" (close)="closeModal()">
+        <div class="modal-content-section">
+            <h3>Request a Song</h3>
+            <p>Help us create the perfect playlist for our special day!</p>
+
+            <form class="song-form">
+                <div class="form-group">
+                    <label>Song Title</label>
+                    <input type="text" placeholder="Enter song title">
+                </div>
+                <div class="form-group">
+                    <label>Artist</label>
+                    <input type="text" placeholder="Enter artist name">
+                </div>
+                <div class="form-group">
+                    <label>Special Message (Optional)</label>
+                    <textarea placeholder="Why is this song special to you?"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Request</button>
+            </form>
+        </div>
+    </app-modal-overlay>
+</div>

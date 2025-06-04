@@ -9,10 +9,7 @@ export const routes: Routes = [
     path: 'landing',
     loadComponent: () => import('./pages/landing/landing').then(m => m.Landing)
   },
-  {
-    path: 'rsvp',
-    loadComponent: () => import('./pages/rsvp/rsvp').then(m => m.RSVP)
-  },
+  // Remove individual routes since we'll handle them as modals
   {
     path: '**',
     redirectTo: ''

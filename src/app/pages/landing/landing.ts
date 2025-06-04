@@ -1,19 +1,35 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { Footer } from '../../components/footer/footer';
+import { CommonModule } from '@angular/common';
+import { BottomNavigation, NavigationItem } from '../../components/bottom-navigation/bottom-navigation';
+import { ModalOverlay } from '../../components/modal-overlay/modal-overlay';
+
+
 
 
 @Component({
   selector: 'app-landing',
-  imports: [RouterLink, Footer],
+  imports: [CommonModule, BottomNavigation, ModalOverlay],
   templateUrl: './landing.html',
   styleUrl: './landing.css'
 })
 export class Landing {
-  constructor(private router: Router) {}
+  activeModal: string | null = null;
 
-  navigateToRSVP() {
-    // Navigate to RSVP page or open external form
-    this.router.navigate(['/rsvp']);
+  backgroundImage = 'bg.png';
+
+  ngOnInit() {
+    // Optional: Set background dynamically
+    document.body.style.backgroundImage = `url(${this.backgroundImage})`;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center';
+    document.body.style.backgroundAttachment = 'fixed';
+  }
+
+  onNavigationClick(item: NavigationItem) {
+    this.activeModal = item.id;
+  }
+
+  closeModal() {
+    this.activeModal = null;
   }
 }

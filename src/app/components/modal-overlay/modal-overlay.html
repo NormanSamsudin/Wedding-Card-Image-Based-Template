@@ -1,0 +1,7 @@
+<div *ngIf="isOpen" class="modal-backdrop" [@backdrop]="isOpen ? 'open' : 'closed'" (click)="closeModal()">
+    <div class="modal-content" (click)="stopPropagation($event)">
+        <div class="modal-body">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>
