@@ -37,4 +37,18 @@ export class Landing {
     const calendarUrl = 'https://calendar.google.com/calendar/u/0/r/eventedit?text=The+Wedding+Of+Aliah+-+Harris&dates=20250512T030000Z/20250512T070000Z&details=The+Wedding+Of+Aliah++-++Harris&location=Kelab+Impiana+Kayangan+Heights&sprop&sprop=name:&pli=1';
         window.open(calendarUrl, '_blank');
   }
+
+  makeCall(phoneNumber: string) {
+    // Create tel: link to initiate phone call
+    window.location.href = `tel:${phoneNumber}`;
+  }
+
+  openWhatsApp(phoneNumber: string) {
+    // Create WhatsApp link (removes + and spaces from phone number)
+    const cleanNumber = phoneNumber.replace(/[\s+()-]/g, '');
+    const whatsappUrl = `https://wa.me/${cleanNumber}?text=Hi! I'm contacting you regarding Aliah & Harris's wedding.`;
+    
+    // Open WhatsApp in a new tab/window
+    window.open(whatsappUrl, '_blank');
+  }
 }

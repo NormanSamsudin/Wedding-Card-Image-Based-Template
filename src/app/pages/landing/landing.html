@@ -37,11 +37,24 @@
     <app-modal-overlay [isOpen]="activeModal === 'contact'" title="Contact Information" (close)="closeModal()">
         <div class="modal-content-section">
             <h3>Bride's Family</h3>
-            <p>📞 +1 (555) 123-4567</p>
+            <div class="contact-row">
+                <span class="phone-number">📞 +1 (555) 123-4567</span>
+                <div class="contact-buttons">
+                    <button class="call-btn" (click)="makeCall('+60182402451')">📞 Call</button>
+                    <button class="whatsapp-btn" (click)="openWhatsApp('+60182402451')">💬 WhatsApp</button>
+                </div>
+            </div>
+    
             <h3>Groom's Family</h3>
-            <p>📞 +1 (555) 987-6543</p>
+            <div class="contact-row">
+                <span class="phone-number">📞 +1 (555) 987-6543</span>
+                <div class="contact-buttons">
+                    <button class="call-btn" (click)="makeCall('+60182402450')">📞 Call</button>
+                    <button class="whatsapp-btn" (click)="openWhatsApp('+60182402450')">💬 WhatsApp</button>
+                </div>
+            </div>
         </div>
-    </app-modal-overlay>
+        </app-modal-overlay>
 
     <app-modal-overlay [isOpen]="activeModal === 'location'" title="Wedding Venue" (close)="closeModal()">
         <div class="modal-content-section">
