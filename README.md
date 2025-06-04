@@ -1,6 +1,11 @@
 # InvitaionCard
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
+reference:
+
+1. https://jemputan.me/i/AliahHarris
+2. https://wedding-ardani.thaqiif.dev
+3. https://ekaddigital.com/kadkahwinzyo/AG11658
 
 ## Development server
 
