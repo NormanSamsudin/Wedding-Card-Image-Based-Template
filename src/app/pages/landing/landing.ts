@@ -2,12 +2,13 @@ import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BottomNavigation, NavigationItem } from '../../components/bottom-navigation/bottom-navigation';
 import { ModalOverlay } from '../../components/modal-overlay/modal-overlay';
+import { ScrollAnimationDirective } from '../../directives/scroll-animation.directive';
 
 declare let L: any;
 
 @Component({
   selector: 'app-landing',
-  imports: [CommonModule, BottomNavigation, ModalOverlay],
+  imports: [CommonModule, BottomNavigation, ModalOverlay, ScrollAnimationDirective],
   templateUrl: './landing.html',
   styleUrl: './landing.css'
 })
