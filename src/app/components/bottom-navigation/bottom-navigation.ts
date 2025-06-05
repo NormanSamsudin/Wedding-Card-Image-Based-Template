@@ -21,8 +21,6 @@ export class BottomNavigation {
 
   navigationItems: NavigationItem[] = [
     { id: 'calendar', label: 'Calendar', icon: 'fa-regular fa-calendar' },
-    { id: 'contact', label: 'Contact', icon: 'fa-regular fa-phone' },
-    { id: 'location', label: 'Location', icon: 'fa-regular fa-location-dot' },
     { id: 'rsvp', label: 'RSVP', icon: 'fa-regular fa-envelope' }
   ];
 

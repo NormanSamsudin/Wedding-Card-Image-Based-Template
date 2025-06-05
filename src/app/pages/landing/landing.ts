@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BottomNavigation, NavigationItem } from '../../components/bottom-navigation/bottom-navigation';
 import { ModalOverlay } from '../../components/modal-overlay/modal-overlay';
 
-
-
+declare let L: any;
 
 @Component({
   selector: 'app-landing',
@@ -12,10 +11,12 @@ import { ModalOverlay } from '../../components/modal-overlay/modal-overlay';
   templateUrl: './landing.html',
   styleUrl: './landing.css'
 })
-export class Landing {
+export class Landing implements AfterViewInit {
   activeModal: string | null = null;
-
   backgroundImage = 'bg.png';
+  private map: any;
+  private readonly VENUE_LAT = 3.079934;
+  private readonly VENUE_LNG = 101.5669504;
 
   ngOnInit() {
     // Optional: Set background dynamically
@@ -23,6 +24,30 @@ export class Landing {
     document.body.style.backgroundSize = 'cover';
     document.body.style.backgroundPosition = 'center';
     document.body.style.backgroundAttachment = 'fixed';
+  }
+
+  ngAfterViewInit() {
+    // Initialize map after view is initialized
+    setTimeout(() => {
+      this.initMap();
+    }, 1000); // Delay to ensure the map container is rendered
+  }
+
+  private initMap() {
+    // Create map instance
+    this.map = L.map('venue-map').setView([this.VENUE_LAT, this.VENUE_LNG], 15);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(this.map);
+
+    // Add marker for the venue
+    L.marker([this.VENUE_LAT, this.VENUE_LNG])
+      .addTo(this.map)
+      .bindPopup('Kelab Impiana Kayangan Heights')
+      .openPopup();
   }
 
   onNavigationClick(item: NavigationItem) {

@@ -73,30 +73,49 @@
                 </div>
             </div>
 
-            <div class="event-schedule">
-                <h3>Atur Cara Majlis</h3>
-                <div class="schedule-items">
-                    <div class="schedule-item">
-                        <span class="time">5:00 petang</span>
-                        <span class="event">Ketibaan pengantin</span>
+            <div class="location-section">
+                <h3>Lokasi Majlis</h3>
+                <div class="location-details">
+                    <p class="venue-name">Kelab Impiana Kayangan Heights</p>
+                    <p class="venue-address">Shah Alam, Selangor</p>
+                    <div id="venue-map" class="venue-map"></div>
+                    <div class="location-info">
+                        <p><strong>Koordinat:</strong> 3.079934, 101.5669504</p>
                     </div>
-                    <div class="schedule-item">
-                        <span class="time">6:00 petang</span>
-                        <span class="event">Makan beradab</span>
+                    <div class="directions-buttons">
+                        <button class="google-maps-btn" (click)="openGoogleMaps()">
+                            🗺️ Google Maps
+                        </button>
+                        <button class="waze-btn" (click)="openWaze()">
+                            🚗 Waze
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <div class="event-schedule">
-                <h3>Atur Cara Majlis</h3>
-                <div class="schedule-items">
-                    <div class="schedule-item">
-                        <span class="time">5:00 petang</span>
-                        <span class="event">Ketibaan pengantin</span>
+            <div class="contact-section">
+                <h3>Hubungi Kami</h3>
+                <div class="contact-details">
+                    <div class="contact-group">
+                        <h4>Keluarga Pengantin Perempuan</h4>
+                        <div class="contact-row">
+                            <span class="phone-number">📞 +60182402451</span>
+                            <div class="contact-buttons">
+                                <button class="call-btn" (click)="makeCall('+60182402451')">📞 Call</button>
+                                <button class="whatsapp-btn" (click)="openWhatsApp('+60182402451')">💬 WhatsApp</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="schedule-item">
-                        <span class="time">6:00 petang</span>
-                        <span class="event">Makan beradab</span>
+
+                    <div class="contact-group">
+                        <h4>Keluarga Pengantin Lelaki</h4>
+                        <div class="contact-row">
+                            <span class="phone-number">📞 +60182402450</span>
+                            <div class="contact-buttons">
+                                <button class="call-btn" (click)="makeCall('+60182402450')">📞 Call</button>
+                                <button class="whatsapp-btn" (click)="openWhatsApp('+60182402450')">💬 WhatsApp</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -117,51 +136,6 @@
             <button class="btn-primary add-to-calendar-btn" (click)="addToCalendar()">
                 Add to Google Calendar
             </button>
-        </div>
-    </app-modal-overlay>
-
-    <!-- Contact Modal -->
-    <app-modal-overlay [isOpen]="activeModal === 'contact'" title="Contact Information" (close)="closeModal()">
-        <div class="modal-content-section">
-            <h3>Bride's Family</h3>
-            <div class="contact-row">
-                <span class="phone-number">📞 +1 (555) 123-4567</span>
-                <div class="contact-buttons">
-                    <button class="call-btn" (click)="makeCall('+60182402451')">📞 Call</button>
-                    <button class="whatsapp-btn" (click)="openWhatsApp('+60182402451')">💬 WhatsApp</button>
-                </div>
-            </div>
-
-            <h3>Groom's Family</h3>
-            <div class="contact-row">
-                <span class="phone-number">📞 +1 (555) 987-6543</span>
-                <div class="contact-buttons">
-                    <button class="call-btn" (click)="makeCall('+60182402450')">📞 Call</button>
-                    <button class="whatsapp-btn" (click)="openWhatsApp('+60182402450')">💬 WhatsApp</button>
-                </div>
-            </div>
-        </div>
-    </app-modal-overlay>
-
-    <!-- Location Modal -->
-    <app-modal-overlay [isOpen]="activeModal === 'location'" title="Wedding Venue" (close)="closeModal()">
-        <div class="modal-content-section">
-            <h3>Ceremony & Reception</h3>
-            <p><strong>Venue:</strong> Kelab Impiana Kayangan Heights</p>
-            <p><strong>Address:</strong> Shah Alam, Selangor</p>
-
-            <div class="location-info">
-                <p><strong>Coordinates:</strong> 3.079934, 101.5669504</p>
-            </div>
-
-            <div class="directions-buttons">
-                <button class="google-maps-btn" (click)="openGoogleMaps()">
-                    🗺️ Google Maps
-                </button>
-                <button class="waze-btn" (click)="openWaze()">
-                    🚗 Waze
-                </button>
-            </div>
         </div>
     </app-modal-overlay>
 
