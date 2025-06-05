@@ -3,50 +3,102 @@
     <div class="wedding-card">
         <!-- First Card Section -->
         <div class="card-content">
-            <img src="bismillah.png" alt="Bismillah" style="width: 100%; height: auto;" />
-            <br>
-            <h1 class="salam-text">Assalammualaikum W.B.T & Salam Sejahtera</h1>
-            <br>
+            <img src="bismillah.png" alt="Bismillah" class="bismillah-img" />
 
-            <!-- Parents Names -->
-            <div class="name-card-container">
-                <div class="name-section">
-                    <h2>Baseri Ishak</h2>
-                    <div class="ampersand">&</div>
-                    <h2>Siti Nizarina Zakaria</h2>
-                </div>
-                <div class="name-section">
-                    <h2>Zakaria Yasin</h2>
-                    <div class="ampersand">&</div>
-                    <h2>Hartini Mohamed</h2>
-                </div>
-            </div>
-
-            <!-- Invitation Text -->
             <div class="invitation-text-container">
                 <div class="invitation-text elegant-style">
-                    <span class="line">Dengan penuh kesyukuran, kami menjemput</span>
-                    <span class="line"><span class="special-terms">Dato' | Datin | Tuan | Puan | Encik |
-                            Cik</span></span>
-                    <span class="line">ke majlis perkahwinan anakanda kami</span>
+                    <p>Dengan hormatnya,</p>
+                    <div class="parents-names">
+                        <h2>Baseri Ishak</h2>
+                        <div class="ampersand">&</div>
+                        <h2>Siti Nizarina Zakaria</h2>
+                    </div>
+                    <p>ingin menjemput ke majlis perkahwinan anakanda kami</p>
                 </div>
             </div>
         </div>
 
         <!-- Second Card Section -->
         <div class="card-content">
-            <h1 class="wedding-title">The Wedding Of</h1>
-
-            <div class="names-section">
-                <div class="initial">A</div>
-                <div class="decorative-element">
-                    <div class="decoration">🕊️ 🌿 🤍 🌿 🕊️</div>
+            <div class="couple-names-section">
+                <h1 class="wedding-title">The Wedding Of</h1>
+                <div class="names-section">
+                    <div class="decorative-element">
+                        <div class="decoration">🕊️ 🌿 🤍 🌿 🕊️</div>
+                    </div>
+                    <h2 class="couple-names">Nur Aliah Binti Baseri</h2>
+                    <div class="ampersand">&</div>
+                    <h2 class="couple-names">Muhammad Harris Bin Zakaria</h2>
                 </div>
-                <h2 class="couple-names">ALIAH & HARRIS</h2>
             </div>
 
-            <div class="date-section">
-                <p class="wedding-date">Monday | 12.05.2025</p>
+            <div class="event-details">
+                <div class="detail-item">
+                    <i class="fa-regular fa-calendar"></i>
+                    <div class="detail-content">
+                        <h3>Tarikh Majlis</h3>
+                        <p>Isnin, 12 Mei 2025</p>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <i class="fa-regular fa-clock"></i>
+                    <div class="detail-content">
+                        <h3>Waktu Majlis</h3>
+                        <p>4:00 petang – 10:00 malam</p>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <i class="fa-regular fa-location-dot"></i>
+                    <div class="detail-content">
+                        <h3>Lokasi</h3>
+                        <p>Kelab Impiana Kayangan Heights</p>
+                        <p class="address">Shah Alam, Selangor</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-schedule">
+                <h3>Atur Cara Majlis</h3>
+                <div class="schedule-items">
+                    <div class="schedule-item">
+                        <span class="time">5:00 petang</span>
+                        <span class="event">Ketibaan pengantin</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="time">6:00 petang</span>
+                        <span class="event">Makan beradab</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-schedule">
+                <h3>Atur Cara Majlis</h3>
+                <div class="schedule-items">
+                    <div class="schedule-item">
+                        <span class="time">5:00 petang</span>
+                        <span class="event">Ketibaan pengantin</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="time">6:00 petang</span>
+                        <span class="event">Makan beradab</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-schedule">
+                <h3>Atur Cara Majlis</h3>
+                <div class="schedule-items">
+                    <div class="schedule-item">
+                        <span class="time">5:00 petang</span>
+                        <span class="event">Ketibaan pengantin</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="time">6:00 petang</span>
+                        <span class="event">Makan beradab</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -59,8 +111,8 @@
     <app-modal-overlay [isOpen]="activeModal === 'calendar'" title="Save the Date" (close)="closeModal()">
         <div class="modal-content-section">
             <h3>Wedding Details</h3>
-            <p><strong>Date:</strong> Monday, May 12, 2025</p>
-            <p><strong>Time:</strong> 4:00 PM</p>
+            <p><strong>Date:</strong> Isnin, 12 Mei 2025</p>
+            <p><strong>Time:</strong> 4:00 petang – 10:00 malam</p>
             <p><strong>Venue:</strong> Kelab Impiana Kayangan Heights</p>
             <button class="btn-primary add-to-calendar-btn" (click)="addToCalendar()">
                 Add to Google Calendar
@@ -95,8 +147,8 @@
     <app-modal-overlay [isOpen]="activeModal === 'location'" title="Wedding Venue" (close)="closeModal()">
         <div class="modal-content-section">
             <h3>Ceremony & Reception</h3>
-            <p><strong>Venue:</strong> Grand Ballroom Hotel</p>
-            <p><strong>Address:</strong> 123 Wedding St, City, State 12345</p>
+            <p><strong>Venue:</strong> Kelab Impiana Kayangan Heights</p>
+            <p><strong>Address:</strong> Shah Alam, Selangor</p>
 
             <div class="location-info">
                 <p><strong>Coordinates:</strong> 3.079934, 101.5669504</p>

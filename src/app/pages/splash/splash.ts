@@ -24,7 +24,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
   ]
 })
 export class Splash {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   navigateToLanding(): void {
     this.router.navigate(['/landing']);  // Navigate to the landing page

@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Global styles for mobile-like container */
+:root {
+    --mobile-width: 430px;
+    --mobile-height: 100vh;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+.mobile-container {
+    width: var(--mobile-width);
+    height: var(--mobile-height);
+    background: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure all pages are contained within the mobile container */
+app-splash,
+app-landing,
+app-rsvp {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 430px) {
+    .mobile-container {
+        width: 100%;
+        height: 100vh;
+        box-shadow: none;
+    }
+}

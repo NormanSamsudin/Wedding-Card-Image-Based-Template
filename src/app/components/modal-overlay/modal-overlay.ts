@@ -8,7 +8,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   imports: [CommonModule],
   templateUrl: './modal-overlay.html',
   styleUrl: './modal-overlay.css',
-  animations:[
+  animations: [
     trigger('slideUp', [
       state('closed', style({
         transform: 'translateY(100%)',
@@ -34,7 +34,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ],
 })
 
-export class ModalOverlay implements OnInit, OnDestroy{
+export class ModalOverlay implements OnInit, OnDestroy {
   @Input() isOpen = false;
   @Input() title = '';
   @Output() close = new EventEmitter<void>();
@@ -56,7 +56,7 @@ export class ModalOverlay implements OnInit, OnDestroy{
 
   stopPropagation(event: Event) {
     event.stopPropagation();
-    
-}
+
+  }
 }
 

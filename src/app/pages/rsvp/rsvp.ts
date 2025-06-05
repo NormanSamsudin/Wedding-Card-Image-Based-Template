@@ -34,7 +34,7 @@ export class RSVP implements OnInit, OnDestroy {
   isLoading = false;
   submitError = '';
   submitSuccess = false;
-  
+
   // Audio properties
   audio: HTMLAudioElement | null = null;
   isPlaying = false;
@@ -46,7 +46,7 @@ export class RSVP implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private rsvpService: RSVPFirebaseService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initializeAudio();
@@ -57,7 +57,7 @@ export class RSVP implements OnInit, OnDestroy {
       this.audio.pause();
       this.audio = null;
     }
-    
+
     // Clean up subscriptions
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
@@ -67,18 +67,18 @@ export class RSVP implements OnInit, OnDestroy {
       // You can replace this with your own wedding song URL
       // For demo, using a free wedding music sample
       this.audio = new Audio('fimadina_low.mp3');
-      
+
       // Or use a local file in your assets folder:
       // this.audio = new Audio('/assets/audio/wedding-song.mp3');
-      
+
       this.audio.loop = true;
       this.audio.volume = 0.3; // Set to 30% volume
-      
+
       // Handle audio events
       this.audio.addEventListener('loadeddata', () => {
         console.log('Audio loaded successfully');
       });
-      
+
       this.audio.addEventListener('error', () => {
         console.warn('Audio failed to load');
         this.audioError = true;
@@ -98,7 +98,7 @@ export class RSVP implements OnInit, OnDestroy {
 
   async attemptAutoPlay() {
     if (!this.audio) return;
-    
+
     try {
       await this.audio.play();
       this.isPlaying = true;
@@ -173,11 +173,11 @@ export class RSVP implements OnInit, OnDestroy {
     const submitSub = this.rsvpService.addRSVP(rsvpData).subscribe({
       next: (docId) => {
         console.log('RSVP successfully submitted with ID:', docId);
-        
+
         this.isLoading = false;
         this.isSubmitted = true;
         this.submitSuccess = true;
-        
+
         // Optional: Pause music on successful submission
         if (this.audio && this.isPlaying) {
           this.audio.pause();
@@ -195,10 +195,10 @@ export class RSVP implements OnInit, OnDestroy {
   }
 
   isValidForm(): boolean {
-    return this.rsvpForm.name.trim() !== '' && 
-           this.rsvpForm.email.trim() !== '' && 
-           this.rsvpForm.familyNumber > 0 &&
-           this.isValidEmail(this.rsvpForm.email);
+    return this.rsvpForm.name.trim() !== '' &&
+      this.rsvpForm.email.trim() !== '' &&
+      this.rsvpForm.familyNumber > 0 &&
+      this.isValidEmail(this.rsvpForm.email);
   }
 
   isValidEmail(email: string): boolean {
@@ -227,7 +227,7 @@ export class RSVP implements OnInit, OnDestroy {
     this.isSubmitted = false;
     this.submitError = '';
     this.submitSuccess = false;
-    
+
     // Restart audio
     this.attemptAutoPlay();
   }

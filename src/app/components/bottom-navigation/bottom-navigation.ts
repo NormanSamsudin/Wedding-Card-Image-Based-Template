@@ -17,15 +17,17 @@ export interface NavigationItem {
 export class BottomNavigation {
   @Output() navigationClick = new EventEmitter<NavigationItem>();
 
+  selectedItem: string | null = null;
+
   navigationItems: NavigationItem[] = [
-    { id: 'calendar', label: 'Calendar', icon: 'fas fa-calendar-alt' },
-    { id: 'contact', label: 'Contact', icon: 'fas fa-phone' },
-    { id: 'location', label: 'Location', icon: 'fas fa-map-marker-alt' },
-    { id: 'rsvp', label: 'RSVP', icon: 'fas fa-envelope' },
-    // { id: 'song', label: 'Song', icon: 'fas fa-music' }
+    { id: 'calendar', label: 'Calendar', icon: 'fa-regular fa-calendar' },
+    { id: 'contact', label: 'Contact', icon: 'fa-regular fa-phone' },
+    { id: 'location', label: 'Location', icon: 'fa-regular fa-location-dot' },
+    { id: 'rsvp', label: 'RSVP', icon: 'fa-regular fa-envelope' }
   ];
 
   onNavClick(item: NavigationItem) {
+    this.selectedItem = item.id;
     this.navigationClick.emit(item);
   }
 }
