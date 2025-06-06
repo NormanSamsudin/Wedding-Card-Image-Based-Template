@@ -46,6 +46,9 @@ export class Landing implements OnInit, AfterViewInit, OnDestroy {
   isClosing = false;
   wishes: Wish[] = [];
   isLoadingWishes = true;
+  showToast = false;
+  toastMessage = '';
+  toastType: 'success' | 'error' = 'success';
 
   // RSVP Form
   rsvpForm: RSVPForm = {
@@ -226,9 +229,21 @@ export class Landing implements OnInit, AfterViewInit, OnDestroy {
     window.open(wazeUrl, '_blank');
   }
 
+  private showToastMessage(message: string, type: 'success' | 'error') {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.showToast = true;
+    setTimeout(() => {
+      this.showToast = false;
+    }, 3000);
+  }
+
   async submitRSVP() {
     try {
       await this.rsvpService.submitRSVP(this.rsvpForm);
+      this.showToastMessage('Terima kasih! RSVP anda telah berjaya dihantar.', 'success');
+      this.closeModal();
+
       // Reset form
       this.rsvpForm = {
         name: '',
@@ -237,18 +252,15 @@ export class Landing implements OnInit, AfterViewInit, OnDestroy {
         attendanceStatus: 'Hadir',
         message: ''
       };
-      // Close modal after successful submission
-      this.closeModal();
-      // Clear message after 3 seconds
+
+      // Reload wishes after a short delay
       setTimeout(() => {
-        this.rsvpService.clearMessage();
-      }, 3000);
-    } catch (error: unknown) {
+        this.loadWishes();
+      }, 1000);
+
+    } catch (error) {
       console.error('Error submitting RSVP:', error);
-      // Clear error message after 3 seconds
-      setTimeout(() => {
-        this.rsvpService.clearMessage();
-      }, 3000);
+      this.showToastMessage('Maaf, terdapat ralat. Sila cuba lagi.', 'error');
     }
   }
 

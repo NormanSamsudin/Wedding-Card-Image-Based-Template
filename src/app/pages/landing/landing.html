@@ -160,11 +160,12 @@
     </div>
 
     <!-- Toast Message -->
-    <div class="toast-container" *ngIf="rsvpService.message$ | async as message"
-        [class.success]="message.type === 'success'" [class.error]="message.type === 'error'">
+    <div *ngIf="showToast" class="toast-container" [ngClass]="{'success': toastType === 'success', 'error': toastType === 'error'}">
         <div class="toast-content">
-            <span class="toast-icon">{{ message.type === 'success' ? '✅' : '❌' }}</span>
-            <span class="toast-message">{{ message.text }}</span>
+            <span class="toast-icon" [ngClass]="{'success': toastType === 'success', 'error': toastType === 'error'}">
+                {{ toastType === 'success' ? '✓' : '✕' }}
+            </span>
+            <span class="toast-message">{{ toastMessage }}</span>
         </div>
     </div>
 
