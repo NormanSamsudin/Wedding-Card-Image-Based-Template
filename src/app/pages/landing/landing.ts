@@ -23,6 +23,7 @@ export class Landing implements AfterViewInit {
   isMusicPlaying = true;
   private hasUserInteracted = false;
   isMapModalOpen = false;
+  isClosing = false;
 
   ngOnInit() {
     // Optional: Set background dynamically
@@ -106,12 +107,18 @@ export class Landing implements AfterViewInit {
   }
 
   closeMapModal() {
-    this.isMapModalOpen = false;
-    // Remove large map when modal is closed
-    if (this.largeMap) {
-      this.largeMap.remove();
-      this.largeMap = null;
-    }
+    if (this.isClosing) return; // Prevent multiple close attempts
+
+    this.isClosing = true;
+    // Wait for animation to complete before removing modal
+    setTimeout(() => {
+      this.isMapModalOpen = false;
+      if (this.largeMap) {
+        this.largeMap.remove();
+        this.largeMap = null;
+      }
+      this.isClosing = false;
+    }, 500); // Increased duration to ensure smooth animation
   }
 
   private initLargeMap() {
@@ -140,7 +147,14 @@ export class Landing implements AfterViewInit {
   }
 
   closeModal() {
-    this.activeModal = null;
+    if (this.isClosing) return; // Prevent multiple close attempts
+
+    this.isClosing = true;
+    // Wait for animation to complete before removing modal
+    setTimeout(() => {
+      this.activeModal = null;
+      this.isClosing = false;
+    }, 500); // Increased duration to ensure smooth animation
   }
 
   addToCalendar() {
