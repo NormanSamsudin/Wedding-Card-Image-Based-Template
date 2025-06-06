@@ -17,10 +17,12 @@ export class Landing implements AfterViewInit {
   activeModal: string | null = null;
   backgroundImage = 'bg.png';
   private map: any;
+  private largeMap: any;
   private readonly VENUE_LAT = 3.079934;
   private readonly VENUE_LNG = 101.5669504;
   isMusicPlaying = true;
   private hasUserInteracted = false;
+  isMapModalOpen = false;
 
   ngOnInit() {
     // Optional: Set background dynamically
@@ -91,6 +93,44 @@ export class Landing implements AfterViewInit {
     // Add marker for the venue
     L.marker([this.VENUE_LAT, this.VENUE_LNG])
       .addTo(this.map)
+      .bindPopup('Kelab Impiana Kayangan Heights')
+      .openPopup();
+  }
+
+  openMapModal() {
+    this.isMapModalOpen = true;
+    // Initialize large map after modal is opened
+    setTimeout(() => {
+      this.initLargeMap();
+    }, 100);
+  }
+
+  closeMapModal() {
+    this.isMapModalOpen = false;
+    // Remove large map when modal is closed
+    if (this.largeMap) {
+      this.largeMap.remove();
+      this.largeMap = null;
+    }
+  }
+
+  private initLargeMap() {
+    if (this.largeMap) {
+      this.largeMap.remove();
+    }
+
+    // Create large map instance
+    this.largeMap = L.map('large-venue-map').setView([this.VENUE_LAT, this.VENUE_LNG], 15);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(this.largeMap);
+
+    // Add marker for the venue
+    L.marker([this.VENUE_LAT, this.VENUE_LNG])
+      .addTo(this.largeMap)
       .bindPopup('Kelab Impiana Kayangan Heights')
       .openPopup();
   }

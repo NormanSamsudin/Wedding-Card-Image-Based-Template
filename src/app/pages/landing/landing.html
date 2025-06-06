@@ -87,7 +87,11 @@
                 <div class="location-details">
                     <p class="venue-name">Kelab Impiana Kayangan Heights</p>
                     <p class="venue-address">Shah Alam, Selangor</p>
-                    <div id="venue-map" class="venue-map"></div>
+                    <div id="venue-map" class="venue-map" (click)="openMapModal()">
+                        <div class="map-overlay">
+                            <span class="click-me">Click Me</span>
+                        </div>
+                    </div>
                     <div class="location-info">
                         <p><strong>Koordinat:</strong> 3.079934, 101.5669504</p>
                     </div>
@@ -175,4 +179,12 @@
             </form>
         </div>
     </app-modal-overlay>
+
+    <!-- Map Modal -->
+    <div class="map-modal" [class.show]="isMapModalOpen">
+        <div class="map-modal-content">
+            <button class="close-modal" (click)="closeMapModal()">×</button>
+            <div id="large-venue-map" class="large-venue-map"></div>
+        </div>
+    </div>
 </div>
