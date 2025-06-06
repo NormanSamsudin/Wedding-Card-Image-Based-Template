@@ -54,10 +54,10 @@
                         placeholder="Enter your email address" autocomplete="email">
                 </div>
 
-                <!-- Family Number Field -->
+                <!-- Number of Guests Field -->
                 <div class="form-group">
-                    <label for="familyNumber" class="form-label">Number of Family Members Attending *</label>
-                    <select id="familyNumber" name="familyNumber" [(ngModel)]="rsvpForm.familyNumber" required
+                    <label for="numberOfGuests" class="form-label">Number of Guests *</label>
+                    <select id="numberOfGuests" name="numberOfGuests" [(ngModel)]="rsvpForm.numberOfGuests" required
                         class="form-select">
                         <option value="1">1 person</option>
                         <option value="2">2 people</option>
@@ -68,17 +68,19 @@
                     </select>
                 </div>
 
-                <!-- Attending Field -->
+                <!-- Attendance Status Field -->
                 <div class="form-group">
                     <label class="form-label">Will you be attending?</label>
                     <div class="radio-group">
                         <label class="radio-option">
-                            <input type="radio" name="attending" [value]="true" [(ngModel)]="rsvpForm.attending">
+                            <input type="radio" name="attendanceStatus" value="Hadir"
+                                [(ngModel)]="rsvpForm.attendanceStatus">
                             <span class="radio-custom"></span>
                             <span>Yes, I'll be there! 🎉</span>
                         </label>
                         <label class="radio-option">
-                            <input type="radio" name="attending" [value]="false" [(ngModel)]="rsvpForm.attending">
+                            <input type="radio" name="attendanceStatus" value="Tidak Hadir"
+                                [(ngModel)]="rsvpForm.attendanceStatus">
                             <span class="radio-custom"></span>
                             <span>Sorry, I can't make it 😢</span>
                         </label>
@@ -86,7 +88,7 @@
                 </div>
 
                 <!-- Message Field -->
-                <div class="form-group">
+                <div class="form-group" *ngIf="rsvpForm.attendanceStatus === 'Hadir'">
                     <label for="message" class="form-label">Special Message (Optional)</label>
                     <textarea id="message" name="message" [(ngModel)]="rsvpForm.message" class="form-textarea" rows="4"
                         placeholder="Share your excitement or any special requests..."></textarea>

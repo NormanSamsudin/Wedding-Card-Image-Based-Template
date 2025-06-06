@@ -2,15 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RSVPFirebaseService } from '../../services/rsvp-firebase.service';
+import { RSVPFirebaseService, RSVPData } from '../../services/rsvp-firebase.service';
 import { Subscription } from 'rxjs';
 
 interface RSVPForm {
   name: string;
   email: string;
-  familyNumber: number;
-  attending: boolean;
-  dietaryRestrictions: string;
+  numberOfGuests: number;
+  attendanceStatus: 'Hadir' | 'Tidak Hadir';
   message: string;
 }
 
@@ -24,9 +23,8 @@ export class RSVP implements OnInit, OnDestroy {
   rsvpForm: RSVPForm = {
     name: '',
     email: '',
-    familyNumber: 1,
-    attending: true,
-    dietaryRestrictions: '',
+    numberOfGuests: 1,
+    attendanceStatus: 'Hadir',
     message: ''
   };
 
@@ -64,17 +62,10 @@ export class RSVP implements OnInit, OnDestroy {
 
   initializeAudio() {
     try {
-      // You can replace this with your own wedding song URL
-      // For demo, using a free wedding music sample
       this.audio = new Audio('fimadina_low.mp3');
-
-      // Or use a local file in your assets folder:
-      // this.audio = new Audio('/assets/audio/wedding-song.mp3');
-
       this.audio.loop = true;
-      this.audio.volume = 0.3; // Set to 30% volume
+      this.audio.volume = 0.3;
 
-      // Handle audio events
       this.audio.addEventListener('loadeddata', () => {
         console.log('Audio loaded successfully');
       });
@@ -88,7 +79,6 @@ export class RSVP implements OnInit, OnDestroy {
         this.isPlaying = false;
       });
 
-      // Auto-play with user interaction fallback
       this.attemptAutoPlay();
     } catch (error) {
       console.warn('Audio not supported or failed to initialize:', error);
@@ -103,7 +93,6 @@ export class RSVP implements OnInit, OnDestroy {
       await this.audio.play();
       this.isPlaying = true;
     } catch (error) {
-      // Auto-play failed (common in modern browsers)
       console.log('Auto-play prevented. User interaction required.');
       this.isPlaying = false;
     }
@@ -120,14 +109,14 @@ export class RSVP implements OnInit, OnDestroy {
         .then(() => {
           this.isPlaying = true;
         })
-        .catch((error) => {
+        .catch((error: unknown) => {
           console.warn('Failed to play audio:', error);
           this.audioError = true;
         });
     }
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (!this.isValidForm()) {
       this.submitError = 'Please fill in all required fields.';
       return;
@@ -136,68 +125,28 @@ export class RSVP implements OnInit, OnDestroy {
     this.isLoading = true;
     this.submitError = '';
 
-    // Check if email already exists
-    const emailCheckSub = this.rsvpService.checkEmailExists(this.rsvpForm.email).subscribe({
-      next: (emailExists) => {
-        if (emailExists) {
-          this.submitError = 'An RSVP with this email already exists. Please use a different email or contact us if you need to update your RSVP.';
-          this.isLoading = false;
-          return;
-        }
+    try {
+      await this.rsvpService.submitRSVP(this.rsvpForm);
+      this.isLoading = false;
+      this.isSubmitted = true;
+      this.submitSuccess = true;
 
-        // Email doesn't exist, proceed with submission
-        this.submitRSVP();
-      },
-      error: (error) => {
-        console.error('Error checking email:', error);
-        this.submitError = 'Sorry, there was an error checking your email. Please try again.';
-        this.isLoading = false;
+      // Optional: Pause music on successful submission
+      if (this.audio && this.isPlaying) {
+        this.audio.pause();
+        this.isPlaying = false;
       }
-    });
-
-    this.subscriptions.push(emailCheckSub);
-  }
-
-  private submitRSVP() {
-    // Prepare data for Firebase
-    const rsvpData = {
-      name: this.rsvpForm.name.trim(),
-      email: this.rsvpForm.email.trim().toLowerCase(),
-      familyNumber: this.rsvpForm.familyNumber,
-      attending: this.rsvpForm.attending,
-      dietaryRestrictions: this.rsvpForm.dietaryRestrictions.trim(),
-      message: this.rsvpForm.message.trim()
-    };
-
-    // Save to Firebase
-    const submitSub = this.rsvpService.addRSVP(rsvpData).subscribe({
-      next: (docId) => {
-        console.log('RSVP successfully submitted with ID:', docId);
-
-        this.isLoading = false;
-        this.isSubmitted = true;
-        this.submitSuccess = true;
-
-        // Optional: Pause music on successful submission
-        if (this.audio && this.isPlaying) {
-          this.audio.pause();
-          this.isPlaying = false;
-        }
-      },
-      error: (error) => {
-        console.error('Error submitting RSVP:', error);
-        this.submitError = 'Sorry, there was an error submitting your RSVP. Please try again or contact us directly.';
-        this.isLoading = false;
-      }
-    });
-
-    this.subscriptions.push(submitSub);
+    } catch (error: unknown) {
+      console.error('Error submitting RSVP:', error);
+      this.submitError = 'Sorry, there was an error submitting your RSVP. Please try again or contact us directly.';
+      this.isLoading = false;
+    }
   }
 
   isValidForm(): boolean {
     return this.rsvpForm.name.trim() !== '' &&
       this.rsvpForm.email.trim() !== '' &&
-      this.rsvpForm.familyNumber > 0 &&
+      this.rsvpForm.numberOfGuests > 0 &&
       this.isValidEmail(this.rsvpForm.email);
   }
 
@@ -207,7 +156,6 @@ export class RSVP implements OnInit, OnDestroy {
   }
 
   goBackToInvitation() {
-    // Pause audio when leaving
     if (this.audio && this.isPlaying) {
       this.audio.pause();
       this.isPlaying = false;
@@ -219,16 +167,14 @@ export class RSVP implements OnInit, OnDestroy {
     this.rsvpForm = {
       name: '',
       email: '',
-      familyNumber: 1,
-      attending: true,
-      dietaryRestrictions: '',
+      numberOfGuests: 1,
+      attendanceStatus: 'Hadir',
       message: ''
     };
     this.isSubmitted = false;
     this.submitError = '';
     this.submitSuccess = false;
 
-    // Restart audio
     this.attemptAutoPlay();
   }
 }

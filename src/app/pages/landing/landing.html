@@ -135,6 +135,15 @@
         </div>
     </div>
 
+    <!-- Toast Message -->
+    <div class="toast-container" *ngIf="rsvpService.message$ | async as message"
+        [class.success]="message.type === 'success'" [class.error]="message.type === 'error'">
+        <div class="toast-content">
+            <span class="toast-icon">{{ message.type === 'success' ? '✅' : '❌' }}</span>
+            <span class="toast-message">{{ message.text }}</span>
+        </div>
+    </div>
+
     <!-- Bottom Navigation -->
     <app-bottom-navigation (navigationClick)="onNavigationClick($event)" (musicToggle)="toggleMusic()">
     </app-bottom-navigation>
@@ -184,26 +193,53 @@
             <div class="rsvp-container">
                 <h2>RSVP</h2>
                 <p>Please let us know if you can make it!</p>
-                <form class="rsvp-form">
+
+                <!-- Loading Overlay -->
+                <div class="loading-overlay" *ngIf="rsvpService.loading$ | async">
+                    <div class="loading-spinner"></div>
+                </div>
+
+                <!-- Success/Error Message -->
+                <div class="message-overlay" *ngIf="rsvpService.message$ | async as message"
+                    [class.success]="message.type === 'success'" [class.error]="message.type === 'error'">
+                    {{ message.text }}
+                </div>
+
+                <form class="rsvp-form" (ngSubmit)="submitRSVP()" #rsvpFormRef="ngForm">
                     <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
+                        <input type="text" [(ngModel)]="rsvpForm.name" name="name" placeholder="Nama Penuh" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Your Email" required>
+                        <input type="email" [(ngModel)]="rsvpForm.email" name="email" placeholder="Emel" required>
                     </div>
                     <div class="form-group">
-                        <select required>
-                            <option value="">Number of Guests</option>
-                            <option value="1">1 Person</option>
-                            <option value="2">2 People</option>
-                            <option value="3">3 People</option>
-                            <option value="4">4 People</option>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="attendanceStatus" value="Hadir"
+                                    [(ngModel)]="rsvpForm.attendanceStatus">
+                                Hadir
+                            </label>
+                            <label>
+                                <input type="radio" name="attendanceStatus" value="Tidak Hadir"
+                                    [(ngModel)]="rsvpForm.attendanceStatus">
+                                Tidak Hadir
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="rsvpForm.attendanceStatus === 'Hadir'">
+                        <select [(ngModel)]="rsvpForm.numberOfGuests" name="numberOfGuests" required>
+                            <option value="1">1 Orang</option>
+                            <option value="2">2 Orang</option>
+                            <option value="3">3 Orang</option>
+                            <option value="4">4 Orang</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <textarea placeholder="Any dietary restrictions or special requests?"></textarea>
+                    <div class="form-group" *ngIf="rsvpForm.attendanceStatus === 'Hadir'">
+                        <textarea [(ngModel)]="rsvpForm.message" name="message"
+                            placeholder="Ucapan kepada pengantin"></textarea>
                     </div>
-                    <button type="submit" class="submit-btn">Send RSVP</button>
+                    <button type="submit" class="submit-btn" [disabled]="rsvpService.loading$ | async">Hantar
+                        RSVP</button>
                 </form>
             </div>
         </div>

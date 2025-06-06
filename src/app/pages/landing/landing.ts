@@ -1,18 +1,31 @@
-import { Component, AfterViewInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BottomNavigation, NavigationItem } from '../../components/bottom-navigation/bottom-navigation';
 import { ModalOverlay } from '../../components/modal-overlay/modal-overlay';
 import { ScrollAnimationDirective } from '../../directives/scroll-animation.directive';
+import { RSVPFirebaseService, RSVPData } from '../../services/rsvp-firebase.service';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { Howl } from 'howler';
 
 declare let L: any;
 
+interface RSVPForm {
+  name: string;
+  email: string;
+  numberOfGuests: number;
+  attendanceStatus: 'Hadir' | 'Tidak Hadir';
+  message: string;
+}
+
 @Component({
   selector: 'app-landing',
-  imports: [CommonModule, BottomNavigation, ModalOverlay, ScrollAnimationDirective],
   templateUrl: './landing.html',
-  styleUrl: './landing.css'
+  styleUrl: './landing.css',
+  standalone: true,
+  imports: [CommonModule, FormsModule, BottomNavigation, ModalOverlay, ScrollAnimationDirective, RouterLink]
 })
-export class Landing implements AfterViewInit {
+export class Landing implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('backgroundMusic') backgroundMusic!: ElementRef<HTMLAudioElement>;
   activeModal: string | null = null;
   backgroundImage = 'bg.png';
@@ -24,6 +37,17 @@ export class Landing implements AfterViewInit {
   private hasUserInteracted = false;
   isMapModalOpen = false;
   isClosing = false;
+
+  // RSVP Form
+  rsvpForm: RSVPForm = {
+    name: '',
+    email: '',
+    numberOfGuests: 1,
+    attendanceStatus: 'Hadir',
+    message: ''
+  };
+
+  constructor(public rsvpService: RSVPFirebaseService) { }
 
   ngOnInit() {
     // Optional: Set background dynamically
@@ -189,5 +213,42 @@ export class Landing implements AfterViewInit {
 
     // Open Waze in a new tab/window
     window.open(wazeUrl, '_blank');
+  }
+
+  async submitRSVP() {
+    try {
+      await this.rsvpService.submitRSVP(this.rsvpForm);
+      // Reset form
+      this.rsvpForm = {
+        name: '',
+        email: '',
+        numberOfGuests: 1,
+        attendanceStatus: 'Hadir',
+        message: ''
+      };
+      // Close modal after successful submission
+      this.closeModal();
+      // Clear message after 3 seconds
+      setTimeout(() => {
+        this.rsvpService.clearMessage();
+      }, 3000);
+    } catch (error: unknown) {
+      console.error('Error submitting RSVP:', error);
+      // Clear error message after 3 seconds
+      setTimeout(() => {
+        this.rsvpService.clearMessage();
+      }, 3000);
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.backgroundMusic) {
+      this.backgroundMusic.nativeElement.pause();
+      this.backgroundMusic.nativeElement.src = '';
+    }
+    if (this.largeMap) {
+      this.largeMap.remove();
+      this.largeMap = null;
+    }
   }
 }
