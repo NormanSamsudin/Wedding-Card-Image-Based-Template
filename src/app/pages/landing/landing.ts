@@ -23,7 +23,7 @@ interface RSVPForm {
   templateUrl: './landing.html',
   styleUrl: './landing.css',
   standalone: true,
-  imports: [CommonModule, FormsModule, BottomNavigation, ModalOverlay, ScrollAnimationDirective, RouterLink]
+  imports: [CommonModule, FormsModule, BottomNavigation, ScrollAnimationDirective]
 })
 export class Landing implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('backgroundMusic') backgroundMusic!: ElementRef<HTMLAudioElement>;
