@@ -132,6 +132,30 @@
                     </div>
                 </div>
             </div>
+
+
+            <!-- Wishes Section -->
+            <div class="section wishes-section">
+                <h2 class="section-title">Ucapan & Doa</h2>
+                <div class="wishes-container">
+                    <div *ngIf="isLoadingWishes" class="loading-wishes">
+                        <div class="spinner"></div>
+                        <p>Memuat ucapan...</p>
+                    </div>
+                    <div *ngIf="!isLoadingWishes && wishes.length === 0" class="no-wishes">
+                        <p>Belum ada ucapan. Jadilah yang pertama untuk memberikan ucapan!</p>
+                    </div>
+                    <div *ngIf="!isLoadingWishes && wishes.length > 0" class="wishes-list">
+                        <div *ngFor="let wish of wishes" class="wish-card">
+                            <div class="wish-header">
+                                <h3 class="wish-name">{{ wish.name }}</h3>
+                                <span class="wish-date">{{ wish.timestamp | date:'dd MMM yyyy, HH:mm' }}</span>
+                            </div>
+                            <p class="wish-message">{{ wish.message }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -143,6 +167,8 @@
             <span class="toast-message">{{ message.text }}</span>
         </div>
     </div>
+
+
 
     <!-- Bottom Navigation -->
     <app-bottom-navigation (navigationClick)="onNavigationClick($event)" (musicToggle)="toggleMusic()">

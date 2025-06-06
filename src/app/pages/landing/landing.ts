@@ -7,6 +7,7 @@ import { RSVPFirebaseService, RSVPData } from '../../services/rsvp-firebase.serv
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Howl } from 'howler';
+import { Timestamp } from 'firebase/firestore';
 
 declare let L: any;
 
@@ -16,6 +17,12 @@ interface RSVPForm {
   numberOfGuests: number;
   attendanceStatus: 'Hadir' | 'Tidak Hadir';
   message: string;
+}
+
+interface Wish {
+  name: string;
+  message: string;
+  timestamp: Date;
 }
 
 @Component({
@@ -37,6 +44,8 @@ export class Landing implements OnInit, AfterViewInit, OnDestroy {
   private hasUserInteracted = false;
   isMapModalOpen = false;
   isClosing = false;
+  wishes: Wish[] = [];
+  isLoadingWishes = true;
 
   // RSVP Form
   rsvpForm: RSVPForm = {
@@ -47,7 +56,9 @@ export class Landing implements OnInit, AfterViewInit, OnDestroy {
     message: ''
   };
 
-  constructor(public rsvpService: RSVPFirebaseService) { }
+  constructor(public rsvpService: RSVPFirebaseService) {
+    this.loadWishes();
+  }
 
   ngOnInit() {
     // Optional: Set background dynamically
@@ -238,6 +249,25 @@ export class Landing implements OnInit, AfterViewInit, OnDestroy {
       setTimeout(() => {
         this.rsvpService.clearMessage();
       }, 3000);
+    }
+  }
+
+  private async loadWishes() {
+    try {
+      this.isLoadingWishes = true;
+      const rsvps = await this.rsvpService.getRSVPs();
+      this.wishes = rsvps
+        .filter(rsvp => rsvp.message && rsvp.message.trim() !== '')
+        .map(rsvp => ({
+          name: rsvp.name,
+          message: rsvp.message,
+          timestamp: (rsvp.timestamp as Timestamp).toDate()
+        }))
+        .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
+    } catch (error) {
+      console.error('Error loading wishes:', error);
+    } finally {
+      this.isLoadingWishes = false;
     }
   }
 

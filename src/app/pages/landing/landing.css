@@ -1125,3 +1125,112 @@ body {
         font-size: 13px;
     }
 }
+
+/* Wishes Section */
+.wishes-section {
+    background-color: #faf6f1;
+    padding: 40px 20px;
+}
+
+.wishes-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.loading-wishes {
+    text-align: center;
+    padding: 20px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #333;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.no-wishes {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.wishes-list {
+    display: grid;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.wish-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.wish-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.wish-name {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.wish-date {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.wish-message {
+    margin: 0;
+    color: #444;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .wishes-section {
+        padding: 30px 15px;
+    }
+
+    .wish-card {
+        padding: 15px;
+    }
+
+    .wish-name {
+        font-size: 1rem;
+    }
+
+    .wish-date {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .wishes-section {
+        padding: 20px 10px;
+    }
+
+    .wish-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}

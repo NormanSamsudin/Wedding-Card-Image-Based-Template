@@ -1,6 +1,7 @@
 // src/app/services/rsvp-firebase.service.ts
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, getDocs } from '@angular/fire/firestore';
+import { collection, addDoc, getDocs, query, orderBy, Timestamp } from 'firebase/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 
 export interface RSVPData {
@@ -9,13 +10,17 @@ export interface RSVPData {
   numberOfGuests: number;
   attendanceStatus: 'Hadir' | 'Tidak Hadir';
   message: string;
-  timestamp: Date;
+  timestamp: Timestamp;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class RSVPFirebaseService {
+  private readonly COLLECTION_NAME = 'rsvps';
+  isLoading = false;
+  message: { text: string; type: 'success' | 'error' } | null = null;
+
   private loadingSubject = new BehaviorSubject<boolean>(false);
   loading$ = this.loadingSubject.asObservable();
 
@@ -24,35 +29,42 @@ export class RSVPFirebaseService {
 
   constructor(private firestore: Firestore) { }
 
-  async submitRSVP(data: Omit<RSVPData, 'timestamp'>) {
+  async submitRSVP(data: Omit<RSVPData, 'timestamp'>): Promise<void> {
     try {
-      this.loadingSubject.next(true);
-
-      const rsvpData: RSVPData = {
+      this.isLoading = true;
+      const docRef = await addDoc(collection(this.firestore, this.COLLECTION_NAME), {
         ...data,
-        timestamp: new Date()
-      };
-
-      const rsvpRef = collection(this.firestore, 'rsvps');
-      await addDoc(rsvpRef, rsvpData);
-
-      this.messageSubject.next({
-        type: 'success',
-        text: 'Terima kasih! RSVP anda telah berjaya dihantar.'
+        timestamp: Timestamp.now()
       });
+      this.message = { text: 'RSVP berhasil dikirim!', type: 'success' };
     } catch (error) {
       console.error('Error submitting RSVP:', error);
-      this.messageSubject.next({
-        type: 'error',
-        text: 'Maaf, terdapat ralat. Sila cuba lagi.'
-      });
+      this.message = { text: 'Gagal mengirim RSVP. Silakan coba lagi.', type: 'error' };
+      throw error;
     } finally {
-      this.loadingSubject.next(false);
+      this.isLoading = false;
     }
   }
 
-  clearMessage() {
-    this.messageSubject.next(null);
+  async getRSVPs(): Promise<RSVPData[]> {
+    try {
+      const q = query(
+        collection(this.firestore, this.COLLECTION_NAME),
+        orderBy('timestamp', 'desc')
+      );
+      const querySnapshot = await getDocs(q);
+      return querySnapshot.docs.map(doc => ({
+        ...doc.data(),
+        timestamp: doc.data()['timestamp']
+      })) as RSVPData[];
+    } catch (error) {
+      console.error('Error fetching RSVPs:', error);
+      return [];
+    }
+  }
+
+  clearMessage(): void {
+    this.message = null;
   }
 
   async getTotalGuests(): Promise<number> {
