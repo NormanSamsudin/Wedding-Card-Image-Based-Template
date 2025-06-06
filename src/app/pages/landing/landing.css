@@ -15,7 +15,7 @@ body {
 /* ===== MAIN CONTAINER ===== */
 .landing-container {
     min-height: 100vh;
-    padding: 20px;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,8 +25,8 @@ body {
 /* ===== WEDDING CARD ===== */
 .wedding-card {
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    padding: 30px;
+    border-radius: 0;
+    padding: 20px;
     width: 100%;
     max-width: 500px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -484,14 +484,21 @@ body {
     box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
 }
 
-/* ===== MOBILE RESPONSIVE ===== */
+/* Mobile Responsive Styles */
 @media (max-width: 480px) {
     .landing-container {
-        padding: 15px;
+        padding: 0;
     }
 
     .wedding-card {
-        padding: 20px;
+        border-radius: 0;
+        padding: 15px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .card-content {
+        padding: 0;
     }
 
     .couple-names h1 {
@@ -503,7 +510,9 @@ body {
     }
 
     .detail-item {
-        font-size: 0.9rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
     }
 }
 

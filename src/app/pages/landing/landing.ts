@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BottomNavigation, NavigationItem } from '../../components/bottom-navigation/bottom-navigation';
 import { ModalOverlay } from '../../components/modal-overlay/modal-overlay';
@@ -20,6 +20,7 @@ export class Landing implements AfterViewInit {
   private readonly VENUE_LAT = 3.079934;
   private readonly VENUE_LNG = 101.5669504;
   isMusicPlaying = true;
+  private hasUserInteracted = false;
 
   ngOnInit() {
     // Optional: Set background dynamically
@@ -39,16 +40,30 @@ export class Landing implements AfterViewInit {
     this.playBackgroundMusic();
   }
 
+  @HostListener('document:click')
+  onDocumentClick() {
+    if (!this.hasUserInteracted && this.backgroundMusic && this.backgroundMusic.nativeElement) {
+      this.hasUserInteracted = true;
+      this.backgroundMusic.nativeElement.muted = false;
+      this.playBackgroundMusic();
+    }
+  }
+
   playBackgroundMusic() {
     if (this.backgroundMusic && this.backgroundMusic.nativeElement) {
-      this.backgroundMusic.nativeElement.play()
-        .then(() => {
-          this.isMusicPlaying = true;
-        })
-        .catch(error => {
-          console.error('Error playing background music:', error);
-          this.isMusicPlaying = true; // Keep music state as playing even if autoplay fails
-        });
+      // Try to play the music
+      const playPromise = this.backgroundMusic.nativeElement.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            this.isMusicPlaying = true;
+          })
+          .catch(error => {
+            console.error('Error playing background music:', error);
+            this.isMusicPlaying = true; // Keep music state as playing even if autoplay fails
+          });
+      }
     }
   }
 
