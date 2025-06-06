@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BottomNavigation, NavigationItem } from '../../components/bottom-navigation/bottom-navigation';
 import { ModalOverlay } from '../../components/modal-overlay/modal-overlay';
@@ -13,11 +13,13 @@ declare let L: any;
   styleUrl: './landing.css'
 })
 export class Landing implements AfterViewInit {
+  @ViewChild('backgroundMusic') backgroundMusic!: ElementRef<HTMLAudioElement>;
   activeModal: string | null = null;
   backgroundImage = 'bg.png';
   private map: any;
   private readonly VENUE_LAT = 3.079934;
   private readonly VENUE_LNG = 101.5669504;
+  isMusicPlaying = true;
 
   ngOnInit() {
     // Optional: Set background dynamically
@@ -32,6 +34,33 @@ export class Landing implements AfterViewInit {
     setTimeout(() => {
       this.initMap();
     }, 1000); // Delay to ensure the map container is rendered
+
+    // Start playing music when the page loads
+    this.playBackgroundMusic();
+  }
+
+  playBackgroundMusic() {
+    if (this.backgroundMusic && this.backgroundMusic.nativeElement) {
+      this.backgroundMusic.nativeElement.play()
+        .then(() => {
+          this.isMusicPlaying = true;
+        })
+        .catch(error => {
+          console.error('Error playing background music:', error);
+          this.isMusicPlaying = true; // Keep music state as playing even if autoplay fails
+        });
+    }
+  }
+
+  toggleMusic() {
+    if (this.backgroundMusic && this.backgroundMusic.nativeElement) {
+      if (this.isMusicPlaying) {
+        this.backgroundMusic.nativeElement.pause();
+      } else {
+        this.backgroundMusic.nativeElement.play();
+      }
+      this.isMusicPlaying = !this.isMusicPlaying;
+    }
   }
 
   private initMap() {

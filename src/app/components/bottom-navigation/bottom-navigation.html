@@ -7,5 +7,11 @@
             </div>
             <span class="nav-label">{{ item.label }}</span>
         </button>
+        <button class="nav-item music-control" (click)="onMusicToggle()">
+            <div class="nav-icon">
+                <i [class]="isMusicPlaying ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark'"></i>
+            </div>
+            <span class="nav-label">Music</span>
+        </button>
     </div>
 </div>

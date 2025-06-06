@@ -16,8 +16,10 @@ export interface NavigationItem {
 })
 export class BottomNavigation {
   @Output() navigationClick = new EventEmitter<NavigationItem>();
+  @Output() musicToggle = new EventEmitter<void>();
 
   selectedItem: string | null = null;
+  isMusicPlaying = false;
 
   navigationItems: NavigationItem[] = [
     { id: 'calendar', label: 'Calendar', icon: 'fa-regular fa-calendar' },
@@ -27,6 +29,11 @@ export class BottomNavigation {
   onNavClick(item: NavigationItem) {
     this.selectedItem = item.id;
     this.navigationClick.emit(item);
+  }
+
+  onMusicToggle() {
+    this.isMusicPlaying = !this.isMusicPlaying;
+    this.musicToggle.emit();
   }
 }
 

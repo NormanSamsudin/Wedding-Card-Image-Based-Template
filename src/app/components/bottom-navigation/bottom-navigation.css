@@ -15,7 +15,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
     padding: 0 20px;
     height: 100%;
@@ -73,6 +73,20 @@
 
 .nav-item:active {
     transform: translateY(0);
+}
+
+.music-control {
+    background: rgba(183, 110, 121, 0.1);
+    color: #b76e79;
+}
+
+.music-control:hover {
+    background: rgba(183, 110, 121, 0.2);
+}
+
+.music-control .nav-icon,
+.music-control .nav-label {
+    color: #b76e79;
 }
 
 /* Responsive adjustments */
