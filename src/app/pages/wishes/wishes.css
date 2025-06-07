@@ -1,14 +1,30 @@
+/* Force white background at root level */
+:root {
+    background: #fff;
+}
+
 /* Add base styles to prevent horizontal scroll */
 :host {
     display: block;
     width: 100%;
     overflow-x: hidden;
+    min-height: 100vh;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 body {
     overflow-x: hidden;
     width: 100%;
     position: relative;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
 }
 
 .wishes-page {
@@ -35,6 +51,12 @@ body {
     margin: 0 auto;
     box-sizing: border-box;
     overflow-x: hidden;
+}
+
+.content-wrapper {
+    background: #fff;
+    min-height: 200px;
+    position: relative;
 }
 
 .page-title {
