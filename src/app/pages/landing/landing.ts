@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Howl } from 'howler';
 import { Timestamp } from 'firebase/firestore';
+import { Router } from '@angular/router';
 
 declare let L: any;
 
@@ -59,7 +60,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     message: ''
   };
 
-  constructor(public rsvpService: RSVPFirebaseService) {
+  constructor(public rsvpService: RSVPFirebaseService, private router: Router) {
     this.loadWishes();
   }
 
@@ -181,7 +182,17 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onNavigationClick(item: NavigationItem) {
-    this.activeModal = item.id;
+    switch (item.id) {
+      case 'wishes':
+        this.router.navigate(['/wishes']);
+        break;
+      case 'calendar':
+        this.router.navigate(['/calendar']);
+        break;
+      case 'rsvp':
+        this.router.navigate(['/rsvp']);
+        break;
+    }
   }
 
   closeModal() {

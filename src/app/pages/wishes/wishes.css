@@ -1,0 +1,118 @@
+.wishes-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.wishes-container {
+    flex: 1;
+    padding: 20px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+    text-align: center;
+    color: #b76e79;
+    font-size: 24px;
+    margin-bottom: 30px;
+    font-family: 'Great Vibes', cursive;
+}
+
+.loading-wishes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #b76e79;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.no-wishes {
+    text-align: center;
+    color: #666;
+    padding: 40px 20px;
+    background: #f9f9f9;
+    border-radius: 12px;
+    margin: 20px 0;
+}
+
+.wishes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.wish-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.wish-card:hover {
+    transform: translateY(-2px);
+}
+
+.wish-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.wish-name {
+    color: #b76e79;
+    font-size: 18px;
+    margin: 0;
+    font-weight: 600;
+}
+
+.wish-date {
+    color: #888;
+    font-size: 14px;
+}
+
+.wish-message {
+    color: #444;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+    .wishes-page {
+        padding: 10px;
+    }
+
+    .wishes-container {
+        padding: 15px;
+    }
+}

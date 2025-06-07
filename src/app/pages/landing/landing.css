@@ -17,27 +17,27 @@ body {
 
 .landing-container {
     min-height: 100vh;
-    padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background: url('http://localhost:4200/bg.png') center/cover no-repeat
+    flex-direction: column;
+    background: #fff;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .wedding-card {
-    background: rgba(255, 255, 255, .95);
-    border-radius: 0;
+    flex: 1;
     padding: 20px;
-    width: 100%;
-    max-width: 500px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, .1);
-    text-align: center;
-    animation: fadeIn 1s ease-out
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card-content {
+    width: 100%;
     padding: 0;
-    text-align: center
+    text-align: center;
 }
 
 .bismillah-img {
@@ -615,16 +615,15 @@ body {
 
 @media (max-width:480px) {
     .landing-container {
-        padding: 0
+        padding: 10px;
     }
 
     .wedding-card {
         padding: 15px;
-        max-width: 100%
     }
 
     .card-content {
-        padding: 0
+        padding: 0;
     }
 
     .couple-names h1 {

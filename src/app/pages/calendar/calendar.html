@@ -1,0 +1,37 @@
+<div class="calendar-page">
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <h2>Save the Date</h2>
+            <p>We're counting down to our special day!</p>
+        </div>
+        <div class="calendar-body">
+            <div class="date-display">
+                <div class="month">DECEMBER</div>
+                <div class="day">15</div>
+                <div class="year">2024</div>
+            </div>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number">365</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number">24</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number">60</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number">60</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <app-bottom-navigation (navigationClick)="onNavigationClick($event)" (musicToggle)="toggleMusic()">
+    </app-bottom-navigation>
+</div>

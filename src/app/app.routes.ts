@@ -10,6 +10,14 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/landing/landing').then(m => m.LandingComponent)
   },
   {
+    path: 'wishes',
+    loadComponent: () => import('./pages/wishes/wishes').then(m => m.WishesPage)
+  },
+  {
+    path: 'calendar',
+    loadComponent: () => import('./pages/calendar/calendar').then(m => m.CalendarComponent)
+  },
+  {
     path: 'rsvp',
     loadComponent: () => import('./pages/rsvp/rsvp').then(m => m.RsvpComponent)
   },
