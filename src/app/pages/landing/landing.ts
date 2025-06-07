@@ -32,7 +32,7 @@ interface Wish {
   standalone: true,
   imports: [CommonModule, FormsModule, BottomNavigation, ScrollAnimationDirective]
 })
-export class Landing implements OnInit, AfterViewInit, OnDestroy {
+export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('backgroundMusic') backgroundMusic!: ElementRef<HTMLAudioElement>;
   activeModal: string | null = null;
   backgroundImage = 'bg.png';

@@ -1,32 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
 
-
 @Component({
   selector: 'app-splash',
-  imports: [],
   templateUrl: './splash.html',
-  styleUrl: './splash.css',
+  styleUrls: ['./splash.css'],
   animations: [
-    trigger('fadeIn', [
+    trigger('fadeInOut', [
       transition(':enter', [
         style({ opacity: 0 }),
-        animate('1.5s', style({ opacity: 1 }))  // Animation for fading in the text
+        animate('1s ease-in', style({ opacity: 1 }))
       ]),
-    ]),
-    trigger('fadeOut', [
       transition(':leave', [
-        style({ opacity: 1 }),
-        animate('1s', style({ opacity: 0 }))  // Animation for fading out when transitioning
-      ]),
+        animate('1s ease-out', style({ opacity: 0 }))
+      ])
     ])
   ]
 })
-export class Splash {
+export class SplashComponent implements OnInit, AfterViewInit {
+  @ViewChild('backgroundVideo') videoElement!: ElementRef<HTMLVideoElement>;
+
   constructor(private router: Router) { }
 
-  navigateToLanding(): void {
-    this.router.navigate(['/landing']);  // Navigate to the landing page
+  ngOnInit() { }
+
+  ngAfterViewInit() {
+    // Ensure video plays when component is initialized
+    if (this.videoElement && this.videoElement.nativeElement) {
+      const video = this.videoElement.nativeElement;
+      video.play().catch(error => {
+        console.log('Video autoplay failed:', error);
+        // Try playing with user interaction
+        video.muted = true;
+        video.play().catch(err => console.log('Video play failed:', err));
+      });
+    }
+  }
+
+  navigateToLanding() {
+    this.router.navigate(['/landing']);
   }
 }

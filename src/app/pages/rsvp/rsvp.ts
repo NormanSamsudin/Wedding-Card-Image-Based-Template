@@ -19,7 +19,7 @@ interface RSVPForm {
   templateUrl: './rsvp.html',
   styleUrl: './rsvp.css'
 })
-export class RSVP implements OnInit, OnDestroy {
+export class RsvpComponent implements OnInit, OnDestroy {
   rsvpForm: RSVPForm = {
     name: '',
     email: '',
