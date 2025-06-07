@@ -28,10 +28,18 @@ interface Wish {
 
 @Component({
   selector: 'app-landing',
-  templateUrl: './landing.html',
-  styleUrl: './landing.css',
   standalone: true,
-  imports: [CommonModule, FormsModule, BottomNavigation, ScrollAnimationDirective]
+  imports: [CommonModule, FormsModule, BottomNavigation, ScrollAnimationDirective],
+  templateUrl: './landing.html',
+  styleUrls: ['./landing.css'],
+  styles: [`
+    :host {
+      display: block;
+      width: 100%;
+      overflow-x: hidden;
+      position: relative;
+    }
+  `]
 })
 export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('backgroundMusic') backgroundMusic!: ElementRef<HTMLAudioElement>;

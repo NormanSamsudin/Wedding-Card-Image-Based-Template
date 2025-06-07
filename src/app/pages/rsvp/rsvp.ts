@@ -97,7 +97,8 @@ interface RSVPForm {
             border-radius: 0;
             box-shadow: none;
             width: 100%;
-            max-width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
             box-sizing: border-box;
             overflow-x: hidden;
         }
@@ -255,6 +256,7 @@ interface RSVPForm {
 
             .rsvp-container {
                 padding: 20px;
+                max-width: 360px;
             }
 
             .radio-group {

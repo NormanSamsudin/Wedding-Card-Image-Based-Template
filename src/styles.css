@@ -4,6 +4,9 @@
 :root {
     --mobile-width: 430px;
     --mobile-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
 }
 
 body {
@@ -14,6 +17,9 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #f0f0f0;
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
 }
 
 .mobile-container {
@@ -41,4 +47,20 @@ app-rsvp {
         height: 100vh;
         box-shadow: none;
     }
+}
+
+/* Global styles */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }

@@ -31,7 +31,8 @@ body {
     border-radius: 0;
     box-shadow: none;
     width: 100%;
-    max-width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
     box-sizing: border-box;
     overflow-x: hidden;
 }
@@ -113,11 +114,12 @@ body {
 
 @media (max-width: 480px) {
     .calendar-page {
-        padding: 0;
+        padding: 20px;
     }
 
     .calendar-container {
-        padding: 15px;
+        padding: 20px;
+        max-width: 360px;
     }
 
     .calendar-header h2 {

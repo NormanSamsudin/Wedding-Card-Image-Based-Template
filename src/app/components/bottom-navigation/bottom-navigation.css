@@ -6,19 +6,26 @@
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-    z-index: 100;
+    z-index: 1000;
     padding: 16px 0;
     height: 80px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
 }
 
 .nav-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    max-width: 500px;
+    width: 100%;
+    max-width: 400px;
     margin: 0 auto;
     padding: 0 20px;
     height: 100%;
+    box-sizing: border-box;
 }
 
 .nav-item {
@@ -30,11 +37,11 @@
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    padding: 8px 12px;
+    padding: 8px;
     border-radius: 12px;
-    min-width: 60px;
-    height: 100%;
-    gap: 6px;
+    width: 64px;
+    height: 64px;
+    gap: 4px;
     color: #666;
 }
 
@@ -49,12 +56,14 @@
     align-items: center;
     justify-content: center;
     height: 32px;
+    width: 32px;
 }
 
 .nav-label {
     font-size: 12px;
     font-weight: 500;
     text-align: center;
+    width: 100%;
 }
 
 .nav-item.selected {
@@ -96,9 +105,21 @@
         padding: 12px 0;
     }
 
+    .nav-container {
+        max-width: 360px;
+        padding: 0 16px;
+    }
+
+    .nav-item {
+        width: 56px;
+        height: 56px;
+        padding: 6px;
+    }
+
     .nav-icon {
         font-size: 22px;
         height: 28px;
+        width: 28px;
     }
 
     .nav-label {

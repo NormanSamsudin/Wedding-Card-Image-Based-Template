@@ -2,7 +2,15 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box
+    box-sizing: border-box;
+    max-width: 100vw;
+}
+
+:host {
+    display: block;
+    width: 100vw;
+    overflow-x: hidden;
+    position: relative;
 }
 
 body {
@@ -11,8 +19,10 @@ body {
     color: #333;
     line-height: 1.6;
     padding-bottom: 80px;
-    /* Add padding for bottom navigation */
     min-height: 100vh;
+    overflow-x: hidden;
+    width: 100vw;
+    position: relative;
 }
 
 .landing-container {
@@ -21,24 +31,32 @@ body {
     flex-direction: column;
     background: #fff;
     padding: 20px;
-    width: 100%;
-    max-width: 100%;
+    width: 100vw;
+    max-width: 100vw;
     margin: 0;
+    overflow-x: hidden;
+    position: relative;
 }
 
 .wedding-card {
     flex: 1;
     padding: 20px;
     background: #fff;
-    border-radius: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+    box-shadow: none;
     width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .card-content {
     width: 100%;
     padding: 0;
     text-align: center;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .bismillah-img {
@@ -54,7 +72,9 @@ body {
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp .8s ease-out forwards;
-    animation-delay: .3s
+    animation-delay: .3s;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .invitation-text {
@@ -64,11 +84,15 @@ body {
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp .8s ease-out forwards;
-    animation-delay: .7s
+    animation-delay: .7s;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .parents-names {
-    margin: 20px 0
+    margin: 20px 0;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .parents-names h2 {
@@ -79,7 +103,9 @@ body {
 }
 
 .couple-names-section {
-    margin-bottom: 40px
+    margin-bottom: 40px;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .wedding-title {
@@ -91,7 +117,9 @@ body {
 }
 
 .names-section {
-    margin: 20px 0
+    margin: 20px 0;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .decoration {
@@ -156,7 +184,9 @@ body {
     margin: 30px 0;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity .8s ease-out, transform .8s ease-out
+    transition: opacity .8s ease-out, transform .8s ease-out;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .event-details.animate {
@@ -240,7 +270,9 @@ body {
     margin: 30px 0;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity .8s ease-out, transform .8s ease-out
+    transition: opacity .8s ease-out, transform .8s ease-out;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .location-section.animate {
@@ -453,7 +485,9 @@ body {
     margin: 30px 0;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity .8s ease-out, transform .8s ease-out
+    transition: opacity .8s ease-out, transform .8s ease-out;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .contact-section.animate {
@@ -616,11 +650,12 @@ body {
 
 @media (max-width:480px) {
     .landing-container {
-        padding: 10px;
+        padding: 20px;
     }
 
     .wedding-card {
-        padding: 15px;
+        padding: 20px;
+        max-width: 360px;
     }
 
     .card-content {
@@ -739,7 +774,8 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 2000;
-    /* Increased to be above everything */
+    width: 100vw;
+    overflow-x: hidden;
 }
 
 .modal-overlay.closing {
@@ -751,16 +787,16 @@ body {
     background: #fff;
     padding: 30px;
     border-radius: 20px;
-    max-width: 500px;
+    max-width: 400px;
     width: 90%;
     max-height: 80vh;
-    /* Reduced to prevent overlap */
     overflow-y: auto;
     position: relative;
     transform: translateY(20px);
     transition: transform 0.3s;
     margin-bottom: 80px;
-    /* Add margin for bottom navigation */
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .modal-content.closing {
@@ -1061,7 +1097,6 @@ body {
 .toast-container {
     position: fixed;
     bottom: 90px;
-    /* Increased to be above bottom navigation */
     left: 50%;
     transform: translateX(-50%);
     z-index: 1001;
@@ -1113,7 +1148,6 @@ body {
 @media (max-width: 480px) {
     .toast-container {
         bottom: 70px;
-        /* Further adjusted for smaller screens */
     }
 
     .toast-content {
@@ -1129,16 +1163,17 @@ body {
 .wishes-section {
     background-color: #faf6f1;
     padding: 40px 20px 100px;
-    /* Increased bottom padding */
     margin-bottom: 20px;
-    /* Add margin at the bottom */
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .wishes-container {
-    max-width: 800px;
+    max-width: 400px;
     margin: 0 auto;
     position: relative;
-    /* Ensure proper stacking context */
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .loading-wishes {
@@ -1177,7 +1212,6 @@ body {
     gap: 20px;
     padding: 20px 0;
     margin-bottom: 20px;
-    /* Add margin at the bottom */
 }
 
 .wish-card {
@@ -1212,19 +1246,12 @@ body {
 }
 
 @media (max-width: 768px) {
-    .wishes-section {
-        padding: 30px 15px 90px;
-        /* Adjusted padding for mobile */
-    }
-
     .toast-container {
         bottom: 80px;
-        /* Adjusted for mobile */
     }
 
     .modal-content {
         max-height: 70vh;
-        /* Further reduced for mobile */
         margin-bottom: 70px;
     }
 
@@ -1244,17 +1271,14 @@ body {
 @media (max-width: 480px) {
     .wishes-section {
         padding: 20px 10px 80px;
-        /* Further adjusted padding */
     }
 
     .toast-container {
         bottom: 70px;
-        /* Further adjusted for smaller screens */
     }
 
     .modal-content {
         max-height: 60vh;
-        /* Further reduced for smaller screens */
         margin-bottom: 60px;
     }
 
