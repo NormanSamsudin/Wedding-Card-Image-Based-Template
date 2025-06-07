@@ -10,10 +10,10 @@ import { trigger, transition, style, animate } from '@angular/animations';
     trigger('fadeInOut', [
       transition(':enter', [
         style({ opacity: 0 }),
-        animate('1s ease-in', style({ opacity: 1 }))
+        animate('1.5s ease-in', style({ opacity: 1 }))
       ]),
       transition(':leave', [
-        animate('1s ease-out', style({ opacity: 0 }))
+        animate('1.5s ease-out', style({ opacity: 0 }))
       ])
     ])
   ]
@@ -26,16 +26,27 @@ export class SplashComponent implements OnInit, AfterViewInit {
   ngOnInit() { }
 
   ngAfterViewInit() {
-    // Ensure video plays when component is initialized
+    this.setupVideo();
+  }
+
+  private setupVideo() {
     if (this.videoElement && this.videoElement.nativeElement) {
       const video = this.videoElement.nativeElement;
+      video.playbackRate = 0.5; // Set playback speed to half
+
+      // Handle autoplay with sound muted
       video.play().catch(error => {
-        console.log('Video autoplay failed:', error);
-        // Try playing with user interaction
+        console.log('Autoplay failed:', error);
+        // Try to play with muted sound
         video.muted = true;
-        video.play().catch(err => console.log('Video play failed:', err));
+        video.play();
       });
     }
+  }
+
+  onVideoEnd() {
+    // Optional: Add any actions you want when the video ends
+    console.log('Video playback ended');
   }
 
   navigateToLanding() {
