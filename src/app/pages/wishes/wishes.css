@@ -1,20 +1,39 @@
+/* Add base styles to prevent horizontal scroll */
+:host {
+    display: block;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
 .wishes-page {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     background: #fff;
-    padding: 20px;
-    max-width: 600px;
-    margin: 0 auto;
+    padding: 10px;
     width: 100%;
+    max-width: 100vw;
+    margin: 0;
+    overflow-x: hidden;
+    position: relative;
 }
 
 .wishes-container {
     flex: 1;
-    padding: 20px;
+    padding: 10px;
     background: #fff;
     border-radius: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .page-title {
@@ -63,17 +82,26 @@
 }
 
 .wishes-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    display: grid;
+    gap: 10px;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .wish-card {
     background: #fff;
     border-radius: 12px;
-    padding: 16px;
+    padding: 15px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-x: hidden;
 }
 
 .wish-card:hover {
@@ -84,35 +112,52 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
 }
 
 .wish-name {
-    color: #b76e79;
-    font-size: 18px;
     margin: 0;
-    font-weight: 600;
+    font-size: 1rem;
+    color: #333;
+    word-break: break-word;
+    max-width: 100%;
 }
 
 .wish-date {
-    color: #888;
-    font-size: 14px;
+    font-size: 0.8rem;
+    color: #666;
+    white-space: nowrap;
 }
 
 .wish-message {
-    color: #444;
-    font-size: 16px;
-    line-height: 1.5;
     margin: 0;
+    color: #444;
+    line-height: 1.4;
+    word-wrap: break-word;
+    font-size: 0.9rem;
+    max-width: 100%;
 }
 
 /* Mobile Responsive */
 @media (max-width: 480px) {
     .wishes-page {
-        padding: 10px;
+        padding: 8px;
     }
 
     .wishes-container {
-        padding: 15px;
+        padding: 10px;
+    }
+
+    .wish-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .wish-card {
+        padding: 12px;
     }
 }

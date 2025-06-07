@@ -83,17 +83,23 @@ interface RSVPForm {
             flex-direction: column;
             background: #fff;
             padding: 20px;
-            max-width: 600px;
-            margin: 0 auto;
             width: 100%;
+            max-width: 100%;
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
         }
 
         .rsvp-container {
             flex: 1;
             padding: 20px;
             background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 0;
+            box-shadow: none;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow-x: hidden;
         }
 
         .rsvp-container h2 {
@@ -101,24 +107,28 @@ interface RSVPForm {
             color: #b76e79;
             text-align: center;
             margin-bottom: 10px;
+            width: 100%;
         }
 
         .rsvp-container p {
             color: #666;
             text-align: center;
             margin-bottom: 30px;
+            width: 100%;
         }
 
         .rsvp-form {
             display: flex;
             flex-direction: column;
             gap: 20px;
+            width: 100%;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
             gap: 8px;
+            width: 100%;
         }
 
         .form-group input,
@@ -129,6 +139,8 @@ interface RSVPForm {
             border-radius: 8px;
             font-size: 1em;
             transition: border-color 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .form-group input:focus,
@@ -141,6 +153,7 @@ interface RSVPForm {
         .radio-group {
             display: flex;
             gap: 20px;
+            width: 100%;
         }
 
         .radio-group label {
@@ -170,6 +183,7 @@ interface RSVPForm {
             font-size: 1.1em;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            width: 100%;
         }
 
         .submit-btn:hover {
@@ -236,11 +250,11 @@ interface RSVPForm {
 
         @media (max-width: 480px) {
             .rsvp-page {
-                padding: 10px;
+                padding: 20px;
             }
 
             .rsvp-container {
-                padding: 15px;
+                padding: 20px;
             }
 
             .radio-group {
