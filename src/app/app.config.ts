@@ -1,7 +1,7 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withHashLocation, withInMemoryScrolling } from '@angular/router';
 
 import { routes } from './app.routes';
 
@@ -20,7 +20,11 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(
+      routes,
+      withHashLocation(),
+      withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
+    ),
     provideFirebaseApp(() => {
       console.log('🔥 Initializing Firebase app...');
       const app = initializeApp(environment.firebase);

@@ -21,9 +21,8 @@ export const routes: Routes = [
     path: 'rsvp',
     loadComponent: () => import('./pages/rsvp/rsvp').then(m => m.RsvpComponent)
   },
-  // Remove individual routes since we'll handle them as modals
   {
     path: '**',
-    redirectTo: ''
+    redirectTo: 'landing'
   }
 ];
