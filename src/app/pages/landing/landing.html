@@ -2,7 +2,7 @@
     <!-- Wedding Invitation Card -->
     <div class="wedding-card">
         <!-- First Card Section -->
-        <div class="card-content">
+        <!-- <div class="card-content">
             <img src="bismillah.png" alt="Bismillah" class="bismillah-img" />
 
             <div class="invitation-text-container">
@@ -16,7 +16,7 @@
                     <p>ingin menjemput ke majlis perkahwinan anakanda kami</p>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- Second Card Section -->
         <div class="card-content">
@@ -122,30 +122,6 @@
                                 <button class="call-btn" (click)="makeCall('+60182402450')">📞 Call</button>
                                 <button class="whatsapp-btn" (click)="openWhatsApp('+60182402450')">💬 WhatsApp</button>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Wishes Section -->
-            <div class="section wishes-section">
-                <h2 class="section-title">Ucapan & Doa</h2>
-                <div class="wishes-container">
-                    <div *ngIf="isLoadingWishes" class="loading-wishes">
-                        <div class="spinner"></div>
-                        <p>Memuat ucapan...</p>
-                    </div>
-                    <div *ngIf="!isLoadingWishes && wishes.length === 0" class="no-wishes">
-                        <p>Belum ada ucapan. Jadilah yang pertama untuk memberikan ucapan!</p>
-                    </div>
-                    <div *ngIf="!isLoadingWishes && wishes.length > 0" class="wishes-list">
-                        <div *ngFor="let wish of wishes" class="wish-card">
-                            <div class="wish-header">
-                                <h3 class="wish-name">{{ wish.name }}</h3>
-                                <span class="wish-date">{{ wish.timestamp | date:'dd MMM yyyy, HH:mm' }}</span>
-                            </div>
-                            <p class="wish-message">{{ wish.message }}</p>
                         </div>
                     </div>
                 </div>
