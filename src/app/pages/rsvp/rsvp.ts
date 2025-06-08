@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BottomNavigation } from '../../components/bottom-navigation/bottom-navigation';
 import { Router } from '@angular/router';
 import { RSVPFirebaseService } from '../../services/rsvp-firebase.service';
+import { MusicService } from '../../services/music.service';
 
 interface RSVPForm {
     name: string;
@@ -277,7 +278,8 @@ export class RsvpComponent implements OnInit {
 
     constructor(
         private router: Router,
-        public rsvpService: RSVPFirebaseService
+        public rsvpService: RSVPFirebaseService,
+        private musicService: MusicService
     ) { }
 
     ngOnInit() {
@@ -302,7 +304,7 @@ export class RsvpComponent implements OnInit {
     }
 
     toggleMusic() {
-        // Implement music toggle functionality
+        this.musicService.toggle();
     }
 
     async submitRSVP() {

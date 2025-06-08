@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BottomNavigation } from '../../components/bottom-navigation/bottom-navigation';
 import { Router } from '@angular/router';
+import { MusicService } from '../../services/music.service';
 
 @Component({
     selector: 'app-calendar',
@@ -11,7 +12,10 @@ import { Router } from '@angular/router';
     styleUrl: './calendar.css'
 })
 export class CalendarComponent implements OnInit {
-    constructor(private router: Router) { }
+    constructor(
+        private router: Router,
+        private musicService: MusicService
+    ) { }
 
     ngOnInit() {
         // Initialize any calendar-specific logic here
@@ -35,6 +39,6 @@ export class CalendarComponent implements OnInit {
     }
 
     toggleMusic() {
-        // Implement music toggle functionality
+        this.musicService.toggle();
     }
 } 

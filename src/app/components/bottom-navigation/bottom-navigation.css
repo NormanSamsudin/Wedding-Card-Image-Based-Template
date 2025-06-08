@@ -21,11 +21,12 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
     padding: 0 20px;
     height: 100%;
     box-sizing: border-box;
+    position: relative;
 }
 
 .nav-item {
@@ -84,45 +85,44 @@
     transform: translateY(0);
 }
 
-.music-control {
-    background: rgba(183, 110, 121, 0.1);
-    color: #b76e79;
+/* Special styling for music button */
+.nav-item.music-button {
+    background: #b76e79;
+    color: white;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    box-shadow: 0 4px 12px rgba(183, 110, 121, 0.3);
+    border: 2px solid white;
 }
 
-.music-control:hover {
-    background: rgba(183, 110, 121, 0.2);
+.nav-item.music-button:hover {
+    background: #a55d67;
+    transform: translateY(-2px) scale(1.05);
 }
 
-.music-control .nav-icon,
-.music-control .nav-label {
-    color: #b76e79;
+.nav-item.music-button .nav-icon {
+    font-size: 20px;
+}
+
+.nav-item.music-button .nav-label {
+    display: none;
 }
 
 /* Responsive adjustments */
-@media (max-width: 430px) {
-    .bottom-navigation {
-        height: 70px;
-        padding: 12px 0;
-    }
-
+@media (max-width: 480px) {
     .nav-container {
-        max-width: 360px;
-        padding: 0 16px;
+        max-width: 100%;
+        padding: 0 10px;
     }
 
     .nav-item {
         width: 56px;
         height: 56px;
-        padding: 6px;
     }
 
-    .nav-icon {
-        font-size: 22px;
-        height: 28px;
-        width: 28px;
-    }
-
-    .nav-label {
-        font-size: 11px;
+    .nav-item.music-button {
+        width: 48px;
+        height: 48px;
     }
 }

@@ -4,6 +4,7 @@ import { BottomNavigation } from '../../components/bottom-navigation/bottom-navi
 import { Router } from '@angular/router';
 import { RSVPFirebaseService, RSVPData } from '../../services/rsvp-firebase.service';
 import { Timestamp } from 'firebase/firestore';
+import { MusicService } from '../../services/music.service';
 
 interface WishData {
     name: string;
@@ -24,7 +25,8 @@ export class WishesPage implements OnInit {
 
     constructor(
         private router: Router,
-        private rsvpService: RSVPFirebaseService
+        private rsvpService: RSVPFirebaseService,
+        private musicService: MusicService
     ) { }
 
     ngOnInit() {
@@ -65,6 +67,6 @@ export class WishesPage implements OnInit {
     }
 
     toggleMusic() {
-        // Implement music toggle functionality
+        this.musicService.toggle();
     }
 } 

@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
 import { Howl } from 'howler';
 import { Timestamp } from 'firebase/firestore';
 import { Router } from '@angular/router';
+import { MusicService } from '../../services/music.service';
 
 declare let L: any;
 
@@ -68,7 +69,11 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     message: ''
   };
 
-  constructor(public rsvpService: RSVPFirebaseService, private router: Router) {
+  constructor(
+    public rsvpService: RSVPFirebaseService,
+    private router: Router,
+    private musicService: MusicService
+  ) {
     this.loadWishes();
   }
 
@@ -87,45 +92,19 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 1000); // Delay to ensure the map container is rendered
 
     // Start playing music when the page loads
-    this.playBackgroundMusic();
+    this.musicService.play();
   }
 
   @HostListener('document:click')
   onDocumentClick() {
-    if (!this.hasUserInteracted && this.backgroundMusic && this.backgroundMusic.nativeElement) {
+    if (!this.hasUserInteracted) {
       this.hasUserInteracted = true;
-      this.backgroundMusic.nativeElement.muted = false;
-      this.playBackgroundMusic();
-    }
-  }
-
-  playBackgroundMusic() {
-    if (this.backgroundMusic && this.backgroundMusic.nativeElement) {
-      // Try to play the music
-      const playPromise = this.backgroundMusic.nativeElement.play();
-
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            this.isMusicPlaying = true;
-          })
-          .catch(error => {
-            console.error('Error playing background music:', error);
-            this.isMusicPlaying = true; // Keep music state as playing even if autoplay fails
-          });
-      }
+      this.musicService.unmute();
     }
   }
 
   toggleMusic() {
-    if (this.backgroundMusic && this.backgroundMusic.nativeElement) {
-      if (this.isMusicPlaying) {
-        this.backgroundMusic.nativeElement.pause();
-      } else {
-        this.backgroundMusic.nativeElement.play();
-      }
-      this.isMusicPlaying = !this.isMusicPlaying;
-    }
+    this.musicService.toggle();
   }
 
   private initMap() {
@@ -303,10 +282,6 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.backgroundMusic) {
-      this.backgroundMusic.nativeElement.pause();
-      this.backgroundMusic.nativeElement.src = '';
-    }
     if (this.largeMap) {
       this.largeMap.remove();
       this.largeMap = null;

@@ -1,17 +1,12 @@
 <div class="bottom-navigation">
     <div class="nav-container">
         <button *ngFor="let item of navigationItems" class="nav-item" [class.selected]="selectedItem === item.id"
-            (click)="onNavClick(item)">
+            [class.music-button]="item.isMusicButton" (click)="onNavClick(item)">
             <div class="nav-icon">
-                <i [class]="item.icon"></i>
+                <i
+                    [class]="item.isMusicButton ? (isMusicPlaying ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark') : item.icon"></i>
             </div>
             <span class="nav-label">{{ item.label }}</span>
-        </button>
-        <button class="nav-item music-control" (click)="onMusicToggle()">
-            <div class="nav-icon">
-                <i [class]="isMusicPlaying ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark'"></i>
-            </div>
-            <span class="nav-label">Music</span>
         </button>
     </div>
 </div>
