@@ -294,8 +294,8 @@ export class RsvpComponent implements OnInit {
             case 'wishes':
                 this.router.navigate(['/wishes']);
                 break;
-            case 'calendar':
-                this.router.navigate(['/calendar']);
+            case 'photos':
+                this.router.navigate(['/photos']);
                 break;
             case 'rsvp':
                 // Already on RSVP page

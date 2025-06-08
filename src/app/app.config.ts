@@ -1,6 +1,7 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 import { provideRouter, withHashLocation, withInMemoryScrolling } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -37,6 +38,12 @@ export const appConfig: ApplicationConfig = {
       const firestore = getFirestore();
       console.log('✅ Firestore initialized for app:', firestore.app.name);
       return firestore;
+    }),
+    provideStorage(() => {
+      console.log('🔥 Initializing Firebase Storage...');
+      const storage = getStorage();
+      console.log('✅ Firebase Storage initialized for app:', storage.app.name);
+      return storage;
     }),
   ]
 };

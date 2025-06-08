@@ -29,7 +29,7 @@ export class BottomNavigation implements OnInit {
     { id: 'home', label: 'Home', icon: 'fa-solid fa-house' },
     { id: 'wishes', label: 'Wishes', icon: 'fa-solid fa-heart' },
     { id: 'music', label: 'Music', icon: 'fa-solid fa-volume-high', isMusicButton: true },
-    { id: 'calendar', label: 'Calendar', icon: 'fa-regular fa-calendar' },
+    { id: 'photos', label: 'Photos', icon: 'fa-solid fa-camera' },
     { id: 'rsvp', label: 'RSVP', icon: 'fa-regular fa-envelope' }
   ];
 

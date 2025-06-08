@@ -57,8 +57,11 @@ export class WishesPage implements OnInit {
             case 'home':
                 this.router.navigate(['/landing']);
                 break;
-            case 'calendar':
-                this.router.navigate(['/calendar']);
+            case 'wishes':
+                // Already on wishes page
+                break;
+            case 'photos':
+                this.router.navigate(['/photos']);
                 break;
             case 'rsvp':
                 this.router.navigate(['/rsvp']);

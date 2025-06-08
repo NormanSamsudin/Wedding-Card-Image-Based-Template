@@ -181,8 +181,8 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
       case 'wishes':
         this.router.navigate(['/wishes']);
         break;
-      case 'calendar':
-        this.router.navigate(['/calendar']);
+      case 'photos':
+        this.router.navigate(['/photos']);
         break;
       case 'rsvp':
         this.router.navigate(['/rsvp']);

@@ -1,28 +1,14 @@
 import { Routes } from '@angular/router';
+import { LandingComponent } from './pages/landing/landing';
+import { WishesPage } from './pages/wishes/wishes';
+import { RsvpComponent } from './pages/rsvp/rsvp';
+import { PhotosComponent } from './pages/photos/photos';
 
 export const routes: Routes = [
-  {
-    path: '',
-    loadComponent: () => import('./pages/splash/splash').then(m => m.SplashComponent)
-  },
-  {
-    path: 'landing',
-    loadComponent: () => import('./pages/landing/landing').then(m => m.LandingComponent)
-  },
-  {
-    path: 'wishes',
-    loadComponent: () => import('./pages/wishes/wishes').then(m => m.WishesPage)
-  },
-  {
-    path: 'calendar',
-    loadComponent: () => import('./pages/calendar/calendar').then(m => m.CalendarComponent)
-  },
-  {
-    path: 'rsvp',
-    loadComponent: () => import('./pages/rsvp/rsvp').then(m => m.RsvpComponent)
-  },
-  {
-    path: '**',
-    redirectTo: 'landing'
-  }
+  { path: '', redirectTo: '/landing', pathMatch: 'full' },
+  { path: 'landing', component: LandingComponent },
+  { path: 'wishes', component: WishesPage },
+  { path: 'rsvp', component: RsvpComponent },
+  { path: 'photos', component: PhotosComponent },
+  { path: '**', redirectTo: '/landing' }
 ];
