@@ -10,6 +10,7 @@ import { Howl } from 'howler';
 import { Timestamp } from 'firebase/firestore';
 import { Router } from '@angular/router';
 import { MusicService } from '../../services/music.service';
+import { interval } from 'rxjs';
 
 declare let L: any;
 
@@ -59,6 +60,11 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   showToast = false;
   toastMessage = '';
   toastType: 'success' | 'error' = 'success';
+  daysLeft: number = 0;
+  hoursLeft: number = 0;
+  minutesLeft: number = 0;
+  secondsLeft: number = 0;
+  private countdownSubscription: any;
 
   // RSVP Form
   rsvpForm: RSVPForm = {
@@ -75,6 +81,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     private musicService: MusicService
   ) {
     this.loadWishes();
+    this.startCountdown();
   }
 
   ngOnInit() {
@@ -83,6 +90,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     document.body.style.backgroundSize = 'cover';
     document.body.style.backgroundPosition = 'center';
     document.body.style.backgroundAttachment = 'fixed';
+    this.startCountdown();
   }
 
   ngAfterViewInit() {
@@ -286,5 +294,32 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
       this.largeMap.remove();
       this.largeMap = null;
     }
+    if (this.countdownSubscription) {
+      this.countdownSubscription.unsubscribe();
+    }
+  }
+
+  private startCountdown() {
+    const weddingDate = new Date('2025-05-12T16:00:00'); // 4:00 PM on May 12, 2025
+
+    this.countdownSubscription = interval(1000).subscribe(() => {
+      const now = new Date();
+      const diff = weddingDate.getTime() - now.getTime();
+
+      if (diff > 0) {
+        this.daysLeft = Math.floor(diff / (1000 * 60 * 60 * 24));
+        this.hoursLeft = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        this.minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        this.secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
+      } else {
+        this.daysLeft = 0;
+        this.hoursLeft = 0;
+        this.minutesLeft = 0;
+        this.secondsLeft = 0;
+        if (this.countdownSubscription) {
+          this.countdownSubscription.unsubscribe();
+        }
+      }
+    });
   }
 }

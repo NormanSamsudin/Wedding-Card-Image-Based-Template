@@ -40,7 +40,7 @@ body {
 
 .wedding-card {
     flex: 1;
-    padding: 20px;
+    padding: 20px 15px;
     background: #fff;
     border-radius: 0;
     box-shadow: none;
@@ -103,7 +103,7 @@ body {
 }
 
 .couple-names-section {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     width: 100%;
     overflow-x: hidden;
 }
@@ -113,7 +113,7 @@ body {
     color: #666;
     margin-bottom: 20px;
     letter-spacing: 2px;
-    font-weight: 300
+    font-weight: 300;
 }
 
 .names-section {
@@ -128,22 +128,22 @@ body {
 }
 
 .couple-names {
-    margin: 30px 0;
+    margin: 25px 0;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity .8s ease-out, transform .8s ease-out
+    transition: opacity .8s ease-out, transform .8s ease-out;
 }
 
 .couple-names.animate {
     opacity: 1;
-    transform: translateY(0)
+    transform: translateY(0);
 }
 
 .couple-names h1 {
     font-size: 2.5rem;
     color: #b76e79;
     margin-bottom: 15px;
-    font-weight: 600
+    font-weight: 600;
 }
 
 .decorative-element {
@@ -177,7 +177,7 @@ body {
     font-size: 1.2rem;
     color: #666;
     margin: 10px 0;
-    font-weight: normal
+    font-weight: normal;
 }
 
 .event-details {
@@ -191,7 +191,7 @@ body {
 
 .event-details.animate {
     opacity: 1;
-    transform: translateY(0)
+    transform: translateY(0);
 }
 
 .detail-item {
@@ -199,71 +199,80 @@ body {
     align-items: center;
     justify-content: center;
     margin: 15px 0;
-    color: #666
+    color: #666;
 }
 
 .detail-item i {
-    margin-right: 10px;
-    color: #b76e79
+    margin-right: 12px;
+    color: #b76e79;
+    font-size: 1.2rem;
 }
 
 .detail-content h3 {
     font-size: 14px;
     color: #666;
     margin-bottom: 5px;
-    font-weight: 600
+    font-weight: 600;
 }
 
 .detail-content p {
     font-size: 16px;
     color: #333;
-    margin: 0
+    margin: 0;
 }
 
 .detail-content .address {
     font-size: 14px;
     color: #666;
-    margin-top: 3px
+    margin-top: 5px;
 }
 
 .event-schedule {
     margin: 30px 0;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity .8s ease-out, transform .8s ease-out
+    transition: opacity .8s ease-out, transform .8s ease-out;
 }
 
 .event-schedule.animate {
     opacity: 1;
-    transform: translateY(0)
+    transform: translateY(0);
 }
 
 .event-schedule h3 {
     color: #b76e79;
-    margin-bottom: 15px
+    margin-bottom: 20px;
+    font-size: 1.2rem;
 }
 
 .schedule-items {
     display: flex;
     flex-direction: column;
-    gap: 12px
+    gap: 12px;
+    padding: 0 15px;
 }
 
 .schedule-item {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px 0
+    margin: 8px 0;
+    padding: 12px;
+    background: rgba(248, 249, 250, 0.8);
+    border-radius: 8px;
 }
 
 .schedule-item .time {
     font-weight: bold;
-    margin-right: 15px;
-    color: #b76e79
+    margin-right: 20px;
+    color: #b76e79;
+    min-width: 100px;
 }
 
 .schedule-item .event {
-    color: #333
+    color: #333;
+    text-align: left;
+    flex: 1;
 }
 
 .location-section {
@@ -277,37 +286,38 @@ body {
 
 .location-section.animate {
     opacity: 1;
-    transform: translateY(0)
+    transform: translateY(0);
 }
 
 .location-section h3 {
     color: #b76e79;
-    margin-bottom: 15px;
-    text-align: center
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.2rem;
 }
 
 .location-details {
     background: rgba(255, 255, 255, .9);
-    padding: 20px;
+    padding: 20px 15px;
     border-radius: 0;
-    text-align: center
+    text-align: center;
 }
 
 .venue-name {
     font-size: 18px;
     color: #333;
     margin-bottom: 8px;
-    font-weight: 600
+    font-weight: 600;
 }
 
 .venue-address {
     font-size: 16px;
     color: #666;
-    margin-bottom: 15px
+    margin-bottom: 20px;
 }
 
 .venue-map {
-    height: 200px;
+    height: 180px;
     margin: 20px 0;
     border-radius: 8px;
     overflow: hidden;
@@ -315,7 +325,7 @@ body {
     cursor: pointer;
     transition: all .3s ease;
     border: 1px solid rgba(0, 0, 0, .1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .1)
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
 }
 
 .map-overlay {
@@ -394,45 +404,27 @@ body {
     display: flex;
     gap: 12px;
     margin-top: 20px;
-    justify-content: center
+    justify-content: center;
 }
 
 .google-maps-btn,
 .waze-btn {
-    padding: 12px 24px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
     border: none;
     border-radius: 0;
-    font-size: 16px;
-    font-weight: 600;
     cursor: pointer;
     transition: all .3s ease;
-    min-width: 140px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px
+    background: transparent;
 }
 
-.google-maps-btn {
-    background: linear-gradient(135deg, #4285F4, #1a73e8);
-    color: white
-}
-
-.google-maps-btn:hover {
-    background: linear-gradient(135deg, #1a73e8, #1557b0);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(66, 133, 244, .3)
-}
-
-.waze-btn {
-    background: linear-gradient(135deg, #00D4FF, #00B8E6);
-    color: white
-}
-
+.google-maps-btn:hover,
 .waze-btn:hover {
-    background: linear-gradient(135deg, #00B8E6, #009FC7);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 212, 255, .3)
 }
 
 .modal-content-section {
@@ -492,34 +484,35 @@ body {
 
 .contact-section.animate {
     opacity: 1;
-    transform: translateY(0)
+    transform: translateY(0);
 }
 
 .contact-section h3 {
     color: #b76e79;
-    margin-bottom: 15px;
-    text-align: center
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.2rem;
 }
 
 .contact-details {
     background: rgba(255, 255, 255, .9);
-    padding: 20px;
-    border-radius: 0
+    padding: 20px 15px;
+    border-radius: 0;
 }
 
 .contact-group {
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
 .contact-group:last-child {
-    margin-bottom: 0
+    margin-bottom: 0;
 }
 
 .contact-group h4 {
     color: #333;
     font-size: 16px;
-    margin-bottom: 10px;
-    text-align: center
+    margin-bottom: 12px;
+    text-align: center;
 }
 
 .contact-row {
@@ -528,53 +521,45 @@ body {
     align-items: center;
     padding: 12px;
     background: rgba(248, 249, 250, .8);
-    border-radius: 0;
-    border: 1px solid rgba(0, 0, 0, .1)
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, .1);
 }
 
 .phone-number {
     font-size: 16px;
     color: #333;
-    font-weight: 500
+    font-weight: 500;
 }
 
 .contact-buttons {
     display: flex;
-    gap: 8px
+    gap: 12px;
 }
 
 .call-btn,
 .whatsapp-btn {
-    padding: 8px 16px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
     border: none;
     border-radius: 0;
-    font-size: 14px;
-    font-weight: 500;
     cursor: pointer;
     transition: all .3s ease;
-    min-width: 90px
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
 }
 
-.call-btn {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    color: white
-}
-
-.call-btn:hover {
-    background: linear-gradient(135deg, #45a049, #3d8b40);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(76, 175, 80, .3)
-}
-
-.whatsapp-btn {
-    background: linear-gradient(135deg, #25D366, #20b358);
-    color: white
-}
-
+.call-btn:hover,
 .whatsapp-btn:hover {
-    background: linear-gradient(135deg, #20b358, #1da851);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 211, 102, .3)
+}
+
+.square-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .map-modal {
@@ -600,22 +585,41 @@ body {
 
 .map-modal-content {
     background: #fff;
-    width: 90%;
+    padding: 0;
+    border-radius: 12px;
+    width: 95%;
     max-width: 500px;
     height: 80vh;
+    max-height: 600px;
     position: relative;
-    border-radius: 0;
-    overflow: hidden
+    transform: translateY(20px);
+    transition: transform 0.3s;
+    margin-bottom: 80px;
+    box-sizing: border-box;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.map-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.large-venue-map {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
 }
 
 .close-modal {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 15px;
+    right: 15px;
     background: white;
     border: none;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     font-size: 24px;
     line-height: 1;
@@ -624,23 +628,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     transition: all .3s ease;
 }
 
 .close-modal:hover {
     background: #f0f0f0;
     transform: scale(1.1);
-}
-
-.large-venue-map {
-    width: 100%;
-    height: 100%
-}
-
-.map-modal-content {
-    width: 100%;
-    height: 100vh
 }
 
 .click-me {
@@ -650,11 +644,11 @@ body {
 
 @media (max-width:480px) {
     .landing-container {
-        padding: 20px;
+        padding: 15px;
     }
 
     .wedding-card {
-        padding: 20px;
+        padding: 20px 15px;
         max-width: 360px;
     }
 
@@ -673,16 +667,20 @@ body {
     .detail-item {
         flex-direction: column;
         text-align: center;
-        gap: 5px
+        gap: 8px;
+        margin: 20px 0;
     }
 
     .map-modal-content {
         width: 100%;
-        height: 100vh
+        height: 100vh;
+        max-height: none;
+        border-radius: 0;
+        margin: 0;
     }
 
-    .venue-map {
-        height: 180px
+    .large-venue-map {
+        border-radius: 0;
     }
 
     .preview-content {
@@ -701,8 +699,8 @@ body {
     .close-modal {
         top: 10px;
         right: 10px;
-        width: 36px;
-        height: 36px;
+        width: 32px;
+        height: 32px;
         font-size: 20px;
     }
 }
@@ -769,13 +767,14 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.8);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2000;
     width: 100vw;
     overflow-x: hidden;
+    backdrop-filter: blur(5px);
 }
 
 .modal-overlay.closing {
@@ -1299,4 +1298,99 @@ body {
     padding: 15px;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+}
+
+/* Countdown Section */
+.countdown-section {
+    margin: 30px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .8s ease-out, transform .8s ease-out;
+    text-align: center;
+}
+
+.countdown-section.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.countdown-section h3 {
+    color: #b76e79;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    text-align: center;
+    min-width: 60px;
+    background: rgba(248, 249, 250, 0.8);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, .1);
+}
+
+.countdown-number {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #b76e79;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.countdown-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.add-to-calendar-btn {
+    background: #b76e79;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all .3s ease;
+    margin-top: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.add-to-calendar-btn:hover {
+    background: #a55d68;
+    transform: translateY(-2px);
+}
+
+.add-to-calendar-btn i {
+    font-size: 1.1rem;
+}
+
+@media (max-width: 480px) {
+    .countdown {
+        gap: 10px;
+    }
+
+    .countdown-item {
+        min-width: 50px;
+        padding: 12px;
+    }
+
+    .countdown-number {
+        font-size: 1.5rem;
+    }
+
+    .add-to-calendar-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
 }

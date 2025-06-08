@@ -1,36 +1,17 @@
 <div class="landing-container">
     <!-- Wedding Invitation Card -->
     <div class="wedding-card">
-        <!-- First Card Section -->
-        <!-- <div class="card-content">
-            <img src="bismillah.png" alt="Bismillah" class="bismillah-img" />
-
-            <div class="invitation-text-container">
-                <div class="invitation-text elegant-style">
-                    <p>Dengan hormatnya,</p>
-                    <div class="parents-names">
-                        <h2>Baseri Ishak</h2>
-                        <div class="ampersand">&</div>
-                        <h2>Siti Nizarina Zakaria</h2>
-                    </div>
-                    <p>ingin menjemput ke majlis perkahwinan anakanda kami</p>
-                </div>
-            </div>
-        </div> -->
 
         <!-- Second Card Section -->
         <div class="card-content">
             <div class="couple-names-section">
                 <h1 class="wedding-title">The Wedding Of</h1>
                 <div class="names-section">
-                    <div class="decorative-element">
-                        <div class="decoration">🕊️ 🌿 🤍 🌿 🕊️</div>
-                    </div>
                     <div class="couple-names" appScrollAnimation>
                         <h1>Aliah</h1>
                         <div class="decorative-element"></div>
                         <p class="ampersand">&</p>
-                        <h1>Harris</h1>
+                        <h1>Wan Muhammad Afnan</h1>
                     </div>
                 </div>
             </div>
@@ -62,6 +43,31 @@
                 </div>
             </div>
 
+            <div class="countdown-section" appScrollAnimation>
+                <h3>Menunggu Hari Bahagia</h3>
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-number">{{ daysLeft }}</span>
+                        <span class="countdown-label">Hari</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number">{{ hoursLeft }}</span>
+                        <span class="countdown-label">Jam</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number">{{ minutesLeft }}</span>
+                        <span class="countdown-label">Minit</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number">{{ secondsLeft }}</span>
+                        <span class="countdown-label">Saat</span>
+                    </div>
+                </div>
+                <button class="add-to-calendar-btn" (click)="addToCalendar()">
+                    <i class="fa-regular fa-calendar-plus"></i> Tambah ke Kalendar
+                </button>
+            </div>
+
             <div class="event-schedule" appScrollAnimation>
                 <h3>Atur Cara Majlis</h3>
                 <div class="schedule-items">
@@ -86,15 +92,12 @@
                             <span class="click-me">Click Me</span>
                         </div>
                     </div>
-                    <div class="location-info">
-                        <p><strong>Koordinat:</strong> 3.079934, 101.5669504</p>
-                    </div>
                     <div class="directions-buttons">
                         <button class="google-maps-btn" (click)="openGoogleMaps()">
-                            🗺️ Google Maps
+                            <img src="assets/waze.svg" alt="Google Maps" class="square-icon">
                         </button>
                         <button class="waze-btn" (click)="openWaze()">
-                            🚗 Waze
+                            <img src="assets/waze.svg" alt="Waze" class="square-icon">
                         </button>
                     </div>
                 </div>
@@ -108,8 +111,12 @@
                         <div class="contact-row">
                             <span class="phone-number">📞 +60182402451</span>
                             <div class="contact-buttons">
-                                <button class="call-btn" (click)="makeCall('+60182402451')">📞 Call</button>
-                                <button class="whatsapp-btn" (click)="openWhatsApp('+60182402451')">💬 WhatsApp</button>
+                                <button class="call-btn" (click)="makeCall('+60182402451')">
+                                    <img src="assets/waze.svg" alt="Call" class="square-icon">
+                                </button>
+                                <button class="whatsapp-btn" (click)="openWhatsApp('+60182402451')">
+                                    <img src="assets/waze.svg" alt="WhatsApp" class="square-icon">
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -119,8 +126,12 @@
                         <div class="contact-row">
                             <span class="phone-number">📞 +60182402450</span>
                             <div class="contact-buttons">
-                                <button class="call-btn" (click)="makeCall('+60182402450')">📞 Call</button>
-                                <button class="whatsapp-btn" (click)="openWhatsApp('+60182402450')">💬 WhatsApp</button>
+                                <button class="call-btn" (click)="makeCall('+60182402450')">
+                                    <img src="assets/waze.svg" alt="Call" class="square-icon">
+                                </button>
+                                <button class="whatsapp-btn" (click)="openWhatsApp('+60182402450')">
+                                    <img src="assets/waze.svg" alt="WhatsApp" class="square-icon">
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -146,9 +157,11 @@
 
     <!-- Map Modal -->
     <div class="modal-overlay" *ngIf="isMapModalOpen" [class.closing]="isClosing" (click)="closeMapModal()">
-        <div class="modal-content" [class.closing]="isClosing" (click)="$event.stopPropagation()">
+        <div class="modal-content map-modal-content" [class.closing]="isClosing" (click)="$event.stopPropagation()">
             <button class="close-modal" (click)="closeMapModal()">×</button>
-            <div id="large-venue-map" class="large-venue-map"></div>
+            <div class="map-container">
+                <div id="large-venue-map" class="large-venue-map"></div>
+            </div>
         </div>
     </div>
 </div>
