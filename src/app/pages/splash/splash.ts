@@ -41,12 +41,16 @@ export class SplashComponent implements OnInit, AfterViewInit {
         video.muted = true;
         video.play();
       });
+
+      // Add event listener for video end
+      video.addEventListener('ended', () => {
+        this.navigateToLanding();
+      });
     }
   }
 
   onVideoEnd() {
-    // Optional: Add any actions you want when the video ends
-    console.log('Video playback ended');
+    this.navigateToLanding();
   }
 
   navigateToLanding() {
