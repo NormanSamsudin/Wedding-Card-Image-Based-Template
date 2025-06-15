@@ -32,7 +32,7 @@ export class SplashComponent implements OnInit, AfterViewInit {
   private setupVideo() {
     if (this.videoElement && this.videoElement.nativeElement) {
       const video = this.videoElement.nativeElement;
-      video.playbackRate = 0.5; // Set playback speed to half
+      video.playbackRate = 1;
 
       // Handle autoplay with sound muted
       video.play().catch(error => {
