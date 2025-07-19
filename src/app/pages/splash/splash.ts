@@ -24,7 +24,7 @@ export class SplashComponent implements OnInit {
       setTimeout(() => {
         this.router.navigate(['/landing']);
       }, 4000); // animation duration (5s)
-    }, 6000); // how long splash stays before animating (1s)
+    }, 2000); // how long splash stays before animating (1s)
   }
 
   preloadImage(src: string) {

@@ -129,7 +129,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.initMap();
     }, 1000);
-    this.musicService.play();
+    // Do not auto-play music here; wait for user interaction (see onDocumentClick)
   }
 
   ngOnDestroy() {
@@ -147,7 +147,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   onDocumentClick() {
     if (!this.hasUserInteracted) {
       this.hasUserInteracted = true;
-      this.musicService.unmute();
+      this.musicService.play(); // Start music on first user interaction
     }
   }
 
