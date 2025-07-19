@@ -1,8 +1,9 @@
 :host {
     display: block;
     width: 100%;
-    overflow-x: hidden;
-    position: relative;
+    min-height: 100vh;
+    background: #fff;
+    box-sizing: border-box;
 }
 
 body {
@@ -11,4 +12,18 @@ body {
     width: 100%;
     overflow-x: hidden;
     position: relative;
+}
+
+.main-content {
+    padding: 16px 12px 80px 12px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+}
+
+@media (max-width: 375px) {
+    .main-content {
+        padding: 12px 0 64px 0;
+    }
 }
