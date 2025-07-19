@@ -1,176 +1,85 @@
-<div class="landing-container">
-    <!-- Wedding Invitation Card -->
-    <div class="wedding-card">
+<div class="landing-container landing-bg-image">
+  <img src="/akak/landing_top.jpg" alt="Landing Background" class="landing-bg-scrollable" />
+  <img src="/akak/landing_middle.jpg" alt="Landing Middle" class="landing-bg-scrollable fade-in-middle" />
 
-        <!-- Second Card Section -->
-        <div class="card-content">
+  <!-- Bottom Navigation with RSVP button -->
+  <app-bottom-navigation (navigationClick)="onNavigationClick($event)" (musicToggle)="toggleMusic()"></app-bottom-navigation>
 
-            <!-- invitation speech -->
-            <div class="invitation-speech">
-                <h1 class="wedding-title">ASSALAMUALAIKUM WRT. WBR.</h1>
-                <h1 class="wedding-title">SELAMAT SEJAHTERA</h1>
-                <br>
-                <br>
-                <div class="couple-names" appScrollAnimation>
-                    <h1>Fattah</h1>
-                    <h2>&</h2>
-                    <h1>Zanariah</h1>
-                </div>
-                <p class="invitation-message" appScrollAnimation>Dengan penuh rasa hormat dan sukacitanya, saya Samsudin
-                    bin Man serta Isteri saya Sobihah binti
-                    Othman bersama keluarga kami ingin menjemput tuan/puan untuk bersama-sama meraikan majlis
-                    perkahwinan
-                    anak kami. Kehadiran tuan/puan akan menyerikan lagi majlis kami.</p>
-            </div>
-
-            <div class="event-details">
-                <h1 class="wedding-title">Maklumat Majlis</h1>
-
-                <div class="detail-item">
-                    <i class="fa-regular fa-calendar"></i>
-                    <div class="detail-content">
-                        <h3>Tarikh Majlis</h3>
-                        <p>Isnin, 12 Mei 2025</p>
-                    </div>
-                </div>
-
-                <div class="detail-item">
-                    <i class="fa-regular fa-clock"></i>
-                    <div class="detail-content">
-                        <h3>Waktu Majlis</h3>
-                        <p>4:00 petang – 10:00 malam</p>
-                    </div>
-                </div>
-
-                <div class="detail-item">
-                    <i class="fa-regular fa-location-dot"></i>
-                    <div class="detail-content">
-                        <h3>Lokasi</h3>
-                        <p>Kelab Impiana Kayangan Heights</p>
-                        <p class="address">Shah Alam, Selangor</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="countdown-section" appScrollAnimation>
-                <h3>Menunggu Hari Bahagia</h3>
-                <div class="countdown">
-                    <div class="countdown-item">
-                        <span class="countdown-number">{{ daysLeft }}</span>
-                        <span class="countdown-label">Hari</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number">{{ hoursLeft }}</span>
-                        <span class="countdown-label">Jam</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number">{{ minutesLeft }}</span>
-                        <span class="countdown-label">Minit</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number">{{ secondsLeft }}</span>
-                        <span class="countdown-label">Saat</span>
-                    </div>
-                </div>
-                <button class="add-to-calendar-btn" (click)="addToCalendar()">
-                    <i class="fa-regular fa-calendar-plus"></i> Tambah ke Kalendar
-                </button>
-            </div>
-
-            <div class="event-schedule" appScrollAnimation>
-                <h3>Atur Cara Majlis</h3>
-                <div class="schedule-items">
-                    <div class="schedule-item">
-                        <span class="time">5:00 petang</span>
-                        <span class="event">Ketibaan pengantin</span>
-                    </div>
-                    <div class="schedule-item">
-                        <span class="time">6:00 petang</span>
-                        <span class="event">Makan beradab</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="location-section" appScrollAnimation>
-                <h3>Lokasi Majlis</h3>
-                <div class="location-details">
-                    <p class="venue-name">Kelab Impiana Kayangan Heights</p>
-                    <p class="venue-address">Shah Alam, Selangor</p>
-                    <div id="venue-map" class="venue-map" (click)="openMapModal()">
-                        <div class="map-overlay">
-                            <span class="click-me">Click Me</span>
-                        </div>
-                    </div>
-                    <div class="directions-buttons">
-                        <button class="google-maps-btn" (click)="openGoogleMaps()">
-                            <img src="assets/waze.svg" alt="Google Maps" class="square-icon">
-                        </button>
-                        <button class="waze-btn" (click)="openWaze()">
-                            <img src="assets/waze.svg" alt="Waze" class="square-icon">
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="contact-section" appScrollAnimation>
-                <h3>Hubungi Kami</h3>
-                <div class="contact-details">
-                    <div class="contact-group">
-                        <h4>Keluarga Pengantin Perempuan</h4>
-                        <div class="contact-row">
-                            <span class="phone-number">📞 +60182402451</span>
-                            <div class="contact-buttons">
-                                <button class="call-btn" (click)="makeCall('+60182402451')">
-                                    <img src="assets/waze.svg" alt="Call" class="square-icon">
-                                </button>
-                                <button class="whatsapp-btn" (click)="openWhatsApp('+60182402451')">
-                                    <img src="assets/waze.svg" alt="WhatsApp" class="square-icon">
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="contact-group">
-                        <h4>Keluarga Pengantin Lelaki</h4>
-                        <div class="contact-row">
-                            <span class="phone-number">📞 +60182402450</span>
-                            <div class="contact-buttons">
-                                <button class="call-btn" (click)="makeCall('+60182402450')">
-                                    <img src="assets/waze.svg" alt="Call" class="square-icon">
-                                </button>
-                                <button class="whatsapp-btn" (click)="openWhatsApp('+60182402450')">
-                                    <img src="assets/waze.svg" alt="WhatsApp" class="square-icon">
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- RSVP Modal -->
+  <div class="rsvp-modal-overlay" *ngIf="rsvpModalOpen" (click)="closeRSVPModal()">
+    <div class="rsvp-modal" (click)="$event.stopPropagation()">
+      <button class="close-modal" (click)="closeRSVPModal()">&times;</button>
+      <form class="rsvp-form" (ngSubmit)="submitRSVP()" #rsvpFormRef="ngForm">
+        <div class="rsvp-input-group">
+          <label for="name" style="margin-bottom: 4px; font-size: 0.98em; color: #b76e79;">Nama</label>
+          <input type="text" id="name" [(ngModel)]="rsvpForm.name" name="name" placeholder="Nama" required />
         </div>
-    </div>
-
-    <!-- Toast Message -->
-    <div *ngIf="showToast" class="toast-container"
-        [ngClass]="{'success': toastType === 'success', 'error': toastType === 'error'}">
-        <div class="toast-content">
-            <span class="toast-icon" [ngClass]="{'success': toastType === 'success', 'error': toastType === 'error'}">
-                {{ toastType === 'success' ? '✓' : '✕' }}
-            </span>
-            <span class="toast-message">{{ toastMessage }}</span>
+        <div class="rsvp-input-group">
+          <label for="jumlahRombongan" style="margin-bottom: 4px; font-size: 0.98em; color: #b76e79;">Jumlah Rombongan</label>
+          <input type="number" id="jumlahRombongan" name="jumlahRombongan" min="1" max="20" [(ngModel)]="rsvpForm.jumlahRombongan" placeholder="Jumlah Rombongan" />
         </div>
+        <div class="rsvp-checkbox-group">
+          <label class="rsvp-checkbox">
+            <input type="checkbox" [(ngModel)]="rsvpForm.hadir" name="hadir" (change)="rsvpForm.hadir ? rsvpForm.tidakHadir = false : null" /> Hadir
+          </label>
+          <label class="rsvp-checkbox">
+            <input type="checkbox" [(ngModel)]="rsvpForm.tidakHadir" name="tidakHadir" (change)="rsvpForm.tidakHadir ? rsvpForm.hadir = false : null" /> Tidak Hadir
+          </label>
+        </div>
+        <button type="submit" class="rsvp-gradient-btn" [disabled]="rsvpService.loading$ | async">Hantar RSVP</button>
+      </form>
     </div>
+  </div>
 
-    <!-- Bottom Navigation -->
-    <app-bottom-navigation (navigationClick)="onNavigationClick($event)" (musicToggle)="toggleMusic()">
-    </app-bottom-navigation>
-
-    <!-- Map Modal -->
-    <div class="modal-overlay" *ngIf="isMapModalOpen" [class.closing]="isClosing" (click)="closeMapModal()">
-        <div class="modal-content map-modal-content" [class.closing]="isClosing" (click)="$event.stopPropagation()">
-            <button class="close-modal" (click)="closeMapModal()">×</button>
-            <div class="map-container">
-                <div id="large-venue-map" class="large-venue-map"></div>
+  <!-- Location Modal -->
+  <div class="location-modal-overlay" *ngIf="locationModalOpen" (click)="closeLocationModal()">
+    <div class="location-modal" (click)="$event.stopPropagation()">
+      <button class="close-modal" (click)="closeLocationModal()">&times;</button>
+      <div class="rsvp-form" style="width:100%; margin-top:32px;">
+        <div style="width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:80px;">
+          <span style="font-size:1.05rem; color:#34699A; text-align:center;">Lokasi akan dipaparkan di sini</span>
+        </div>
+        <button type="button" class="location-gradient-btn">Lihat Lokasi</button>
+      </div>
+    </div>
+  </div>
+  <!-- Contact Modal -->
+  <div class="location-modal-overlay" *ngIf="contactModalOpen" (click)="closeContactModal()">
+    <div class="location-modal" (click)="$event.stopPropagation()">
+      <button class="close-modal" (click)="closeContactModal()">&times;</button>
+      <div class="rsvp-form" style="width:100%; margin-top:32px;">
+        <div style="width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:80px;">
+          <span style="font-size:1.05rem; color:#34699A; text-align:center;">Maklumat untuk dihubungi akan dipaparkan di sini</span>
+        </div>
+        <button type="button" class="location-gradient-btn">Hubungi Kami</button>
+      </div>
+    </div>
+  </div>
+  <!-- Wishes Modal -->
+  <div class="wishes-modal-overlay" *ngIf="wishesModalOpen" (click)="closeWishesModal()">
+    <div class="wishes-modal" (click)="$event.stopPropagation()">
+      <button class="close-modal" (click)="closeWishesModal()">&times;</button>
+      <div *ngIf="isLoadingWishes" class="loading-overlay">
+        <div class="loading-spinner"></div>
+      </div>
+      <div *ngIf="!isLoadingWishes && wishes.length === 0" class="no-wishes">Tiada ucapan lagi.</div>
+      <div *ngIf="!isLoadingWishes && wishes.length > 0" class="wishes-list">
+        <div *ngFor="let wish of wishes" class="wish-card-simple">
+          <div class="wish-avatar-simple">
+            <svg width="28" height="28" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="20" fill="#f3f3f3"/>
+              <path d="M20 21c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zm0 2c-4.418 0-8 2.239-8 5v2h16v-2c0-2.761-3.582-5-8-5z" fill="#bdbdbd"/>
+            </svg>
+          </div>
+          <div class="wish-main-simple">
+            <div class="wish-row-simple">
+              <span class="wish-name-simple">{{ wish.name }}</span>
+              <span class="wish-date-simple">Date</span>
             </div>
+            <div class="wish-message-simple">{{ wish.message }}</div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

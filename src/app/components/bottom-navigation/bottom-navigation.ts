@@ -26,11 +26,11 @@ export class BottomNavigation implements OnInit {
   isMusicPlaying = false;
 
   navigationItems: NavigationItem[] = [
-    { id: 'home', label: 'Home', icon: 'fa-solid fa-house' },
-    { id: 'wishes', label: 'Wishes', icon: 'fa-solid fa-heart' },
+    { id: 'location', label: 'Location', icon: 'fa-solid fa-location-dot' },
+    { id: 'contact', label: 'Contact', icon: 'fa-solid fa-phone' },
     { id: 'music', label: 'Music', icon: 'fa-solid fa-volume-high', isMusicButton: true },
-    { id: 'photos', label: 'Photos', icon: 'fa-solid fa-camera' },
-    { id: 'rsvp', label: 'RSVP', icon: 'fa-regular fa-envelope' }
+    { id: 'rsvp', label: 'RSVP', icon: 'fa-solid fa-envelope' },
+    { id: 'wishes', label: 'Wishes', icon: 'fa-solid fa-heart' }
   ];
 
   constructor(

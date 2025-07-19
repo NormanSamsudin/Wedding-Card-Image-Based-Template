@@ -1,7 +1,338 @@
-/* ===== FONT IMPORTS ===== */
-@import url('https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+/* Simple Wish Card for Modal */
+.wish-card-simple {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(80,80,80,0.04);
+  padding: 8px 10px 8px 8px;
+  margin-bottom: 10px;
+  gap: 8px;
+  min-width: 0;
+}
+.wish-avatar-simple {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f3f3f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 2px;
+}
+.wish-main-simple {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.wish-row-simple {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 1px;
+}
+.wish-name-simple {
+  font-weight: 500;
+  color: #222;
+  font-size: 1em;
+  margin-right: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wish-date-simple {
+  color: #bdbdbd;
+  font-size: 0.95em;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.wish-message-simple {
+  color: #888;
+  font-size: 0.97em;
+  margin-top: 1px;
+  font-weight: 400;
+  word-break: break-word;
+}
+/* Redesigned Wish Card */
+.wish-card-redesign {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(80,80,80,0.06);
+  padding: 14px 18px 10px 14px;
+  margin-bottom: 16px;
+  min-width: 0;
+  gap: 12px;
+}
+.wish-avatar-section {
+  flex: 0 0 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wish-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f3f3f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.wish-content-section {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.wish-header-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 2px;
+}
+.wish-name-bold {
+  font-weight: 600;
+  color: #222;
+  font-size: 1.08rem;
+  margin-right: 2px;
+}
+.wish-online-dot {
+  width: 9px;
+  height: 9px;
+  background: #4cd964;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 4px;
+  margin-top: 1px;
+}
+.wish-date {
+  color: #bdbdbd;
+  font-size: 0.98em;
+  margin-left: auto;
+}
+.wish-message-light {
+  color: #bdbdbd;
+  font-size: 0.98em;
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+
+
+/* Location Modal (same as RSVP modal) */
+.location-modal-overlay {
+  position: fixed;
+  left: 0; right: 0; top: 0; bottom: 0;
+  z-index: 9999;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: auto;
+  box-sizing: border-box;
+}
+.location-modal {
+    min-width: 300px;
+    height: 350px;
+    margin: 0 auto 24px auto;
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 80px;
+    /* height of bottom nav */
+    background: rgba(52, 105, 154, 0.10);
+    /* blue glassy */
+    border-radius: 28px;
+    box-shadow: 0 8px 32px 0 rgba(17, 63, 103, 0.18), 0 1.5px 8px 0 rgba(52, 105, 154, 0.10) inset;
+    padding: 0px 32px 24px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    animation: fadeInCard 0.3s cubic-bezier(.4, 0, .2, 1);
+    border: 1.5px solid #58A0C8;
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+}
+.location-gradient-btn {
+  width: 100%;
+  padding: 14px 0;
+  border: none;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #34699A 0%, #58A0C8 100%);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  box-shadow: 0 4px 16px rgba(52,105,154,0.15);
+  margin-top: 12px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.location-gradient-btn:active {
+  transform: scale(0.98);
+}
+
+.rsvp-form {
+  width: 100%;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.rsvp-input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  gap: 4px;
+}
+.rsvp-input-group input[type="text"],
+.rsvp-input-group input[type="email"] {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: none;
+  background: #f5f7fa;
+  font-size: 1rem;
+  box-shadow: 0 1px 4px rgba(80,80,80,0.04);
+  margin-bottom: 0;
+}
+.rsvp-input-group input[type="number"] {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: none;
+  background: #f5f7fa;
+  font-size: 1rem;
+  box-shadow: 0 1px 4px rgba(80,80,80,0.04);
+  margin-bottom: 0;
+  outline: none;
+  appearance: textfield;
+}
+.rsvp-input-group label {
+  margin-bottom: 4px;
+  font-size: 0.98em;
+  color: #b76e79;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.rsvp-checkbox-group {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  justify-content: flex-start;
+}
+.rsvp-checkbox {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  gap: 6px;
+  background: #f5f7fa;
+  border-radius: 8px;
+  padding: 6px 12px;
+  box-shadow: 0 1px 4px rgba(80,80,80,0.04);
+}
+.rsvp-checkbox input[type="checkbox"] {
+  accent-color: #ffb199;
+  width: 18px;
+  height: 18px;
+}
+.rsvp-stars {
+  display: flex;
+  gap: 6px;
+  margin: 8px 0 0 0;
+}
+.rsvp-stars .star {
+  font-size: 1.6rem;
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.rsvp-stars .star.filled {
+  color: #ffb199;
+  text-shadow: 0 2px 8px #ffb19944;
+}
+
+.rsvp-gradient-btn {
+  width: 100%;
+  padding: 14px 0;
+  border: none;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #34699A 0%, #58A0C8 100%);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  box-shadow: 0 4px 16px rgba(52,105,154,0.15);
+  margin-top: 12px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.rsvp-gradient-btn:active {
+  transform: scale(0.98);
+}
+
+/* ===== BOTTOM NAVIGATION BUTTONS ===== */
+.bottom-navigation {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 80px;
+  background: rgba(17,63,103,0.95);
+  box-shadow: 0 -2px 16px rgba(17,63,103,0.10);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 10000;
+  border-radius: 24px 24px 0 0;
+  padding: 0 12px;
+  backdrop-filter: blur(12px) saturate(160%);
+}
+
+.bottom-nav-btn {
+  background: #34699A;
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  padding: 10px 18px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(52,105,154,0.10);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.bottom-nav-btn:active {
+  transform: scale(0.97);
+  background: #113F67;
+}
+
+
+
+.fade-in-middle {
+  opacity: 0;
+  animation: fadeInMiddle 1.2s ease 0.8s forwards;
+}
+
+@keyframes fadeInMiddle {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
 /* ===== RESET & BASE STYLES ===== */
 * {
@@ -310,6 +641,125 @@ body {
     transform: scale(1.1);
 }
 
+/* ===== WISHES MODAL STYLES ===== */
+/* Wishes Modal (same as RSVP/Location modal) */
+.wishes-modal-overlay {
+  position: fixed;
+  left: 0; right: 0; top: 0; bottom: 0;
+  z-index: 9999;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: auto;
+  box-sizing: border-box;
+}
+.wishes-modal {
+  min-width: 300px;
+  height: 350px;
+  margin: 0 auto 24px auto;
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 80px; /* height of bottom nav */
+  background: rgba(52, 105, 154, 0.10); /* blue glassy */
+  border-radius: 28px;
+  box-shadow: 0 8px 32px 0 rgba(17, 63, 103, 0.18), 0 1.5px 8px 0 rgba(52, 105, 154, 0.10) inset;
+  padding: 40px 32px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  animation: fadeInCard 0.3s cubic-bezier(.4, 0, .2, 1);
+  border: 1.5px solid #58A0C8;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  overflow-y: auto;
+  max-height: 90vh;
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+.close-modal {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #b76e79;
+  cursor: pointer;
+  z-index: 2;
+}
+.page-title {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-size: 2rem;
+  color: #b76e79;
+  text-align: center;
+}
+/* Horizontal scroll for wishes list */
+.wishes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px 0 24px 0;
+  margin: 0;
+  width: 100%;
+}
+.wish-card-simple {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.wish-card {
+  background: #f8f6f3;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.wish-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.wish-name {
+  font-weight: 600;
+  color: #b76e79;
+  font-size: 1.1rem;
+}
+.wish-date {
+  font-size: 0.9rem;
+  color: #888;
+}
+.wish-message {
+  font-size: 1rem;
+  color: #333;
+  margin: 0;
+}
+.loading-wishes, .no-wishes {
+  text-align: center;
+  color: #888;
+  margin-top: 32px;
+}
+.spinner {
+  border: 4px solid #eee;
+  border-top: 4px solid #b76e79;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 12px auto;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* ===== ANIMATIONS ===== */
 @keyframes fadeIn {
     from {
@@ -448,4 +898,60 @@ body {
         font-size: 1.3rem;
         line-height: 1.5;
     }
+}
+
+.landing-bg-image {
+  min-height: 100vh;
+  width: 100vw;
+  padding: 0;
+  overflow: auto;
+}
+
+.landing-bg-scrollable {
+  display: block;
+  width: 100vw;
+  min-height: 100vh;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+
+.rsvp-modal-overlay {
+  position: fixed;
+  left: 0; right: 0; top: 0; bottom: 0;
+  z-index: 9999;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: auto;
+  padding-bottom: 100px; /* leave space for bottom nav */
+  box-sizing: border-box;
+}
+.rsvp-modal {
+  min-width: 300px;
+  height: 350px;
+  margin: 0 auto 24px auto;
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 80px; /* height of bottom nav */
+  background: rgba(52,105,154,0.10); /* blue glassy */
+  border-radius: 28px;
+  box-shadow: 0 8px 32px 0 rgba(17,63,103,0.18), 0 1.5px 8px 0 rgba(52,105,154,0.10) inset;
+  padding: 0px 32px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  animation: fadeInCard 0.3s cubic-bezier(.4,0,.2,1);
+  border: 1.5px solid #58A0C8;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+}
+
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
 }

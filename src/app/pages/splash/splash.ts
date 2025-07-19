@@ -1,59 +1,34 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-splash',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './splash.html',
-  styleUrls: ['./splash.css'],
-  animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('1.5s ease-in', style({ opacity: 1 }))
-      ]),
-      transition(':leave', [
-        animate('1.5s ease-out', style({ opacity: 0 }))
-      ])
-    ])
-  ]
+  styleUrls: ['./splash.css']
 })
-export class SplashComponent implements OnInit, AfterViewInit {
-  @ViewChild('backgroundVideo') videoElement!: ElementRef<HTMLVideoElement>;
+export class SplashComponent implements OnInit {
+  slideUp = false;
 
   constructor(private router: Router) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    // Preload landing images
+    this.preloadImage('/akak/landing_top.jpg');
+    this.preloadImage('/akak/landing_middle.jpg');
 
-  ngAfterViewInit() {
-    this.setupVideo();
+    setTimeout(() => {
+      this.slideUp = true;
+      setTimeout(() => {
+        this.router.navigate(['/landing']);
+      }, 4000); // animation duration (5s)
+    }, 6000); // how long splash stays before animating (1s)
   }
 
-  private setupVideo() {
-    if (this.videoElement && this.videoElement.nativeElement) {
-      const video = this.videoElement.nativeElement;
-      video.playbackRate = 1;
-
-      // Handle autoplay with sound muted
-      video.play().catch(error => {
-        console.log('Autoplay failed:', error);
-        // Try to play with muted sound
-        video.muted = true;
-        video.play();
-      });
-
-      // Add event listener for video end
-      video.addEventListener('ended', () => {
-        this.navigateToLanding();
-      });
-    }
-  }
-
-  onVideoEnd() {
-    this.navigateToLanding();
-  }
-
-  navigateToLanding() {
-    this.router.navigate(['/landing']);
+  preloadImage(src: string) {
+    const img = new window.Image();
+    img.src = src;
   }
 }

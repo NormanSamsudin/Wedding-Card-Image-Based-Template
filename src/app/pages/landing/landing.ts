@@ -4,6 +4,7 @@ import { BottomNavigation, NavigationItem } from '../../components/bottom-naviga
 import { ModalOverlay } from '../../components/modal-overlay/modal-overlay';
 import { ScrollAnimationDirective } from '../../directives/scroll-animation.directive';
 import { RSVPFirebaseService, RSVPData } from '../../services/rsvp-firebase.service';
+import { PhotosFirebaseService, Photo } from '../../services/photos-firebase.service';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Howl } from 'howler';
@@ -20,6 +21,10 @@ interface RSVPForm {
   numberOfGuests: number;
   attendanceStatus: 'Hadir' | 'Tidak Hadir';
   message: string;
+  hadir?: boolean;
+  tidakHadir?: boolean;
+  rating?: number;
+  jumlahRombongan?: number;
 }
 
 interface Wish {
@@ -31,7 +36,7 @@ interface Wish {
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [CommonModule, FormsModule, BottomNavigation, ScrollAnimationDirective],
+  imports: [CommonModule, FormsModule, BottomNavigation],
   templateUrl: './landing.html',
   styleUrls: ['./landing.css'],
   styles: [`
@@ -44,6 +49,14 @@ interface Wish {
   `]
 })
 export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  ngDoCheck() {
+    if (this.wishesModalOpen) {
+      document.body.classList.add('wishes-modal-open');
+    } else {
+      document.body.classList.remove('wishes-modal-open');
+    }
+  }
   // View Elements
   @ViewChild('backgroundMusic') backgroundMusic!: ElementRef<HTMLAudioElement>;
 
@@ -83,11 +96,19 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     email: '',
     numberOfGuests: 1,
     attendanceStatus: 'Hadir',
-    message: ''
+    message: '',
+    hadir: false,
+    tidakHadir: false,
+    rating: 0,
+    jumlahRombongan: 1
   };
+
+  // RSVP Modal State
+  rsvpModalOpen = false;
 
   constructor(
     public rsvpService: RSVPFirebaseService,
+    private photosService: PhotosFirebaseService,
     private router: Router,
     private musicService: MusicService
   ) {
@@ -131,18 +152,49 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   // Navigation Handlers
+
+  wishesModalOpen = false;
+  locationModalOpen = false;
+  contactModalOpen = false;
+  closeContactModal() {
+    this.contactModalOpen = false;
+  }
+
   onNavigationClick(item: NavigationItem) {
     switch (item.id) {
       case 'wishes':
-        this.router.navigate(['/wishes']);
+        this.wishesModalOpen = true;
         break;
-      case 'photos':
-        this.router.navigate(['/photos']);
+      case 'home':
+        this.router.navigate(['/landing']);
         break;
       case 'rsvp':
-        this.router.navigate(['/rsvp']);
+        this.openRSVPModal();
+        break;
+      case 'location':
+        this.locationModalOpen = true;
+        break;
+      case 'contact':
+        this.contactModalOpen = true;
         break;
     }
+  }
+
+  closeLocationModal() {
+    this.locationModalOpen = false;
+  }
+
+  closeWishesModal() {
+    this.wishesModalOpen = false;
+    document.body.classList.remove('wishes-modal-open');
+  }
+
+  openRSVPModal() {
+    this.rsvpModalOpen = true;
+  }
+
+  closeRSVPModal() {
+    this.rsvpModalOpen = false;
   }
 
   // Music Controls
@@ -281,7 +333,11 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
         email: '',
         numberOfGuests: 1,
         attendanceStatus: 'Hadir',
-        message: ''
+        message: '',
+        hadir: false,
+        tidakHadir: false,
+        rating: 0,
+        jumlahRombongan: 1
       };
       setTimeout(() => {
         this.loadWishes();
