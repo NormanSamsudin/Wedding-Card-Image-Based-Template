@@ -323,11 +323,20 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   // RSVP Functions
+  rsvpPopupMessage: string | null = null;
+  rsvpPopupType: 'error' | 'success' | null = null;
+
   async submitRSVP() {
+    // Validate all required fields
+    if (!this.rsvpForm.name || !this.rsvpForm.jumlahRombongan || !this.rsvpForm.message || (!this.rsvpForm.hadir && !this.rsvpForm.tidakHadir)) {
+      this.rsvpPopupMessage = 'Sila lengkapkan semua maklumat RSVP.';
+      this.rsvpPopupType = 'error';
+      return;
+    }
     try {
       await this.rsvpService.submitRSVP(this.rsvpForm);
-      this.showToastMessage('Terima kasih! RSVP anda telah berjaya dihantar.', 'success');
-      this.closeModal();
+      this.rsvpPopupMessage = 'Terima kasih! RSVP anda telah berjaya dihantar.';
+      this.rsvpPopupType = 'success';
       this.rsvpForm = {
         name: '',
         email: '',
@@ -344,7 +353,16 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
       }, 1000);
     } catch (error) {
       console.error('Error submitting RSVP:', error);
-      this.showToastMessage('Maaf, terdapat ralat. Sila cuba lagi.', 'error');
+      this.rsvpPopupMessage = 'Maaf, terdapat ralat. Sila cuba lagi.';
+      this.rsvpPopupType = 'error';
+    }
+  }
+
+  closeRSVPPopup() {
+    this.rsvpPopupMessage = null;
+    this.rsvpPopupType = null;
+    if (this.rsvpPopupType === 'success') {
+      this.closeModal();
     }
   }
 

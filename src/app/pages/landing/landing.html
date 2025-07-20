@@ -16,7 +16,7 @@
         </div>
         <div class="rsvp-input-group">
           <label for="jumlahRombongan" style="margin-bottom: 4px; font-size: 0.98em; color: #b76e79;">Jumlah Rombongan</label>
-          <input type="number" id="jumlahRombongan" name="jumlahRombongan" min="1" max="20" [(ngModel)]="rsvpForm.jumlahRombongan" placeholder="Jumlah Rombongan" />
+          <input type="number" id="jumlahRombongan" name="jumlahRombongan" min="1" max="20" [(ngModel)]="rsvpForm.jumlahRombongan" placeholder="Jumlah Rombongan" required />
         </div>
         <div class="rsvp-checkbox-group">
           <label class="rsvp-checkbox">
@@ -26,8 +26,19 @@
             <input type="checkbox" [(ngModel)]="rsvpForm.tidakHadir" name="tidakHadir" (change)="rsvpForm.tidakHadir ? rsvpForm.hadir = false : null" /> Tidak Hadir
           </label>
         </div>
+        <div class="rsvp-input-group">
+          <label for="message" style="margin-bottom: 4px; font-size: 0.98em; color: #b76e79;">Ucapan/Wishes</label>
+          <textarea id="message" name="message" [(ngModel)]="rsvpForm.message" placeholder="Tulis ucapan anda di sini..." rows="3" required style="width:100%;padding:12px 16px;border-radius:12px;border:none;background:#f5f7fa;font-size:1rem;box-shadow:0 1px 4px rgba(80,80,80,0.04);"></textarea>
+        </div>
         <button type="submit" class="rsvp-gradient-btn" [disabled]="rsvpService.loading$ | async">Hantar RSVP</button>
       </form>
+      <!-- RSVP Error/Success Popup -->
+      <div *ngIf="rsvpPopupMessage" class="rsvp-popup-message" [ngClass]="{'error': rsvpPopupType==='error', 'success': rsvpPopupType==='success'}">
+        <div class="rsvp-popup-content">
+          <span>{{ rsvpPopupMessage }}</span>
+          <button class="rsvp-popup-close" (click)="closeRSVPPopup()">Tutup</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -36,22 +47,85 @@
     <div class="location-modal" (click)="$event.stopPropagation()">
       <button class="close-modal" (click)="closeLocationModal()">&times;</button>
       <div class="rsvp-form" style="width:100%; margin-top:32px;">
-        <div style="width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:80px;">
-          <span style="font-size:1.05rem; color:#34699A; text-align:center;">Lokasi akan dipaparkan di sini</span>
+        <div style="width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:80px; gap:18px;">
+          <div style="width:100%; display:flex; justify-content:center;">
+            <iframe
+              width="98%"
+              height="220"
+              frameborder="0"
+              style="border-radius:14px; border:0; box-shadow:0 2px 12px rgba(80,80,80,0.08);"
+              src="https://www.google.com/maps?q=3.079934,101.5669504&z=16&output=embed"
+              allowfullscreen=""
+              aria-hidden="false"
+              tabindex="0"
+            ></iframe>
+          </div>
+          <div style="width:100%; display:flex; justify-content:center; gap:18px; margin-top:18px;">
+            <a href="https://www.google.com/maps/place/3.079934,101.5669504" target="_blank" class="rsvp-gradient-btn" style="display:inline-flex;align-items:center;gap:8px;min-width:0;padding:10px 18px;text-decoration:none!important;">
+              <img src="/akak/icon/google.png" alt="Google Maps" style="width:22px;height:22px;" /> Google Maps
+            </a>
+            <a href="https://www.waze.com/live-map/directions?to=ll.3.141983%2C101.513822" target="_blank" class="rsvp-gradient-btn" style="display:inline-flex;align-items:center;gap:8px;min-width:0;padding:10px 18px;text-decoration:none!important;">
+              <img src="/akak/icon/waze.png" alt="Waze" style="width:22px;height:22px;" /> Waze
+            </a>
+          </div>
         </div>
-        <button type="button" class="location-gradient-btn">Lihat Lokasi</button>
       </div>
     </div>
   </div>
   <!-- Contact Modal -->
-  <div class="location-modal-overlay" *ngIf="contactModalOpen" (click)="closeContactModal()">
-    <div class="location-modal" (click)="$event.stopPropagation()">
+  <div class="contact-modal-overlay" *ngIf="contactModalOpen" (click)="closeContactModal()">
+    <div class="contact-modal" (click)="$event.stopPropagation()">
       <button class="close-modal" (click)="closeContactModal()">&times;</button>
-      <div class="rsvp-form" style="width:100%; margin-top:32px;">
-        <div style="width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:80px;">
-          <span style="font-size:1.05rem; color:#34699A; text-align:center;">Maklumat untuk dihubungi akan dipaparkan di sini</span>
+      <div class="rsvp-form" style="width:100%; margin-top:18px;">
+        <div style="width:100%; display:flex; flex-direction:column; align-items:center;">
+          <div style="font-family:'Cinzel',serif; font-size:1.35em; font-weight:700; color:#a01e1e00; letter-spacing:1px; margin-bottom:18px; text-align:center;">CONTACT</div>
+          <div style="width:100%; display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <div style="display:flex; flex-direction:column;">
+                <span style="color:#34699A; font-weight:600; font-size:1.08em;">Samsudin</span>
+                <span style="color:#18202b; font-size:0.98em; font-style:italic; margin-top:2px;">Father</span>
+              </div>
+              <div style="display:flex; gap:16px;">
+                <a [href]="'https://wa.me/60142437636'" target="_blank" title="WhatsApp"><img src="akak/icon/whatsapp.png" alt="WhatsApp" style="width:26px;height:26px;vertical-align:middle;opacity:0.85;" /></a>
+                <a [href]="'tel:0182402451'" title="Call"><img src="/akak/icon/phone.svg" alt="Call"
+                    style="width:18px;height:18px;vertical-align:middle;opacity:0.85;" /></a>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:space-between; ">
+              <div style="display:flex; flex-direction:column;">
+                <span style="color:#34699A; font-weight:600; font-size:1.08em;">Fikry</span>
+                <span style="color:#18202b; font-size:0.98em; font-style:italic; margin-top:2px;">Brother</span>
+              </div>
+              <div style="display:flex; gap:16px;">
+                <a [href]="'https://wa.me/60172536079'" target="_blank" title="WhatsApp"><img src="akak/icon/whatsapp.png" alt="WhatsApp" style="width:26px;height:26px;vertical-align:middle;opacity:0.85;" /></a>
+                <a [href]="'tel:0182402451'" title="Call"><img src="/akak/icon/phone.svg" alt="Call"
+                    style="width:18px;height:18px;vertical-align:middle;opacity:0.85;" /></a>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:space-between; ">
+              <div style="display:flex; flex-direction:column;">
+                <span style="color:#34699A; font-weight:600; font-size:1.08em;">Fahmi</span>
+                <span style="color:#18202b; font-size:0.98em; font-style:italic; margin-top:2px;">Brother</span>
+              </div>
+              <div style="display:flex; gap:16px;">
+                <a [href]="'https://wa.me/6016234543345'" target="_blank" title="WhatsApp"><img src="akak/icon/whatsapp.png" alt="WhatsApp" style="width:26px;height:26px;vertical-align:middle;opacity:0.85;" /></a>
+                <a [href]="'tel:0182402451'" title="Call"><img src="/akak/icon/phone.svg" alt="Call"
+                    style="width:18px;height:18px;vertical-align:middle;opacity:0.85;" /></a>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:space-between; ">
+              <div style="display:flex; flex-direction:column;">
+                <span style="color:#34699A; font-weight:600; font-size:1.08em;">Norman</span>
+                <span style="color:#18202b; font-size:0.98em; font-style:italic; margin-top:2px;">Brother</span>
+              </div>
+              <div style="display:flex; gap:16px;">
+                <a [href]="'https://wa.me/60182402451'" target="_blank" title="WhatsApp"><img src="akak/icon/whatsapp.png" alt="WhatsApp" style="width:26px;height:26px;vertical-align:middle;opacity:0.85;" /></a>
+                <a [href]="'tel:0182402451'" title="Call"><img src="/akak/icon/phone.svg" alt="Call"
+                    style="width:18px;height:18px;vertical-align:middle;opacity:0.85;" /></a>
+              </div>
+            </div>
+          </div>
         </div>
-        <button type="button" class="location-gradient-btn">Hubungi Kami</button>
       </div>
     </div>
   </div>
@@ -74,7 +148,7 @@
           <div class="wish-main-simple">
             <div class="wish-row-simple">
               <span class="wish-name-simple">{{ wish.name }}</span>
-              <span class="wish-date-simple">Date</span>
+              <span class="wish-date-simple">{{ wish.timestamp | date:'dd MM yyyy' }}</span>
             </div>
             <div class="wish-message-simple">{{ wish.message }}</div>
           </div>
