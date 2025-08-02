@@ -1,9 +1,31 @@
-<div class="landing-container landing-bg-image">
-  <img src="/akak/landing_top.jpg" alt="Landing Background" class="landing-bg-scrollable" />
-  <img src="/akak/landing_middle.jpg" alt="Landing Middle" class="landing-bg-scrollable fade-in-middle" />
+<!-- Splash Overlay for Initial Animation -->
+<div class="splash-overlay" [class.splash-hidden]="splashHidden">
+  <div class="splash-content">
+    <img src="/akak/splash_new.jpg" alt="Wedding Splash" class="splash-image" />
+  </div>
+</div>
 
-  <!-- Bottom Navigation with RSVP button -->
-  <app-bottom-navigation (navigationClick)="onNavigationClick($event)" (musicToggle)="toggleMusic()"></app-bottom-navigation>
+<div class="landing-background-landing" [class.landing-visible]="splashHidden">
+  <div class="scrollable-content">
+    <div class="image-container">
+      <img 
+        src="/akak/landing_new2.jpg" 
+        alt="Landing Background" 
+        class="landing-image"
+      />
+    </div>
+  </div>
+  
+  <!-- Smooth scroll indicator -->
+  <div class="scroll-indicator">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7 14L12 19L17 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M7 8L12 13L17 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</div>
+<!-- Bottom Navigation with RSVP button -->
+<app-bottom-navigation (navigationClick)="onNavigationClick($event)" (musicToggle)="toggleMusic()"></app-bottom-navigation>
 
   <!-- RSVP Modal -->
   <div class="rsvp-modal-overlay" *ngIf="rsvpModalOpen" (click)="closeRSVPModal()">
@@ -156,4 +178,3 @@
       </div>
     </div>
   </div>
-</div>

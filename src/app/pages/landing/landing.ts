@@ -46,6 +46,12 @@ interface Wish {
       overflow-x: hidden;
       position: relative;
     }
+    .landing-background-landing {
+      pointer-events: auto;
+    }
+    .scrollable-content {
+      pointer-events: auto;
+    }
   `]
 })
 export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -75,6 +81,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   showToast = false;
   toastMessage = '';
   toastType: 'success' | 'error' = 'success';
+  splashHidden = false;
 
   // Countdown Variables
   daysLeft: number = 0;
@@ -129,6 +136,12 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.initMap();
     }, 1000);
+    
+    // Start splash animation
+    setTimeout(() => {
+      this.splashHidden = true;
+    }, 3000); // Show splash for 3 seconds
+    
     // Do not auto-play music here; wait for user interaction (see onDocumentClick)
   }
 

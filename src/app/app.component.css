@@ -15,15 +15,8 @@ body {
 }
 
 .main-content {
-    padding: 16px 12px 80px 12px;
     box-sizing: border-box;
     width: 100%;
-    max-width: 375px;
     margin: 0 auto;
 }
 
-@media (max-width: 375px) {
-    .main-content {
-        padding: 12px 0 64px 0;
-    }
-}
