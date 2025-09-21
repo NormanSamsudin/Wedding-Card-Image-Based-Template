@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ElementRef, HostListener, OnInit, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef, HostListener, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BottomNavigation, NavigationItem } from '../../components/bottom-navigation/bottom-navigation';
 import { ModalOverlay } from '../../components/modal-overlay/modal-overlay';
@@ -39,20 +39,6 @@ interface Wish {
   imports: [CommonModule, FormsModule, BottomNavigation],
   templateUrl: './landing.html',
   styleUrls: ['./landing.css'],
-  styles: [`
-    :host {
-      display: block;
-      width: 100%;
-      overflow-x: hidden;
-      position: relative;
-    }
-    .landing-background-landing {
-      pointer-events: auto;
-    }
-    .scrollable-content {
-      pointer-events: auto;
-    }
-  `]
 })
 export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -83,6 +69,10 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   toastType: 'success' | 'error' = 'success';
   splashHidden = false;
 
+  // Carousel Variables for Modal
+  currentWishIndex = 0;
+  private wishCarouselInterval: any;
+
   // Countdown Variables
   daysLeft: number = 0;
   hoursLeft: number = 0;
@@ -95,7 +85,18 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   private largeMap: any;
 
   // Data Collections
-  wishes: Wish[] = [];
+  wishes: Wish[] = [
+    {
+      name: 'Test User',
+      message: 'Congratulations on your wedding! This is a test wish.',
+      timestamp: new Date()
+    },
+    {
+      name: 'Another User',
+      message: 'Wishing you both a lifetime of happiness and love!',
+      timestamp: new Date()
+    }
+  ];
 
   // Form Data
   rsvpForm: RSVPForm = {
@@ -117,7 +118,8 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     public rsvpService: RSVPFirebaseService,
     private photosService: PhotosFirebaseService,
     private router: Router,
-    private musicService: MusicService
+    private musicService: MusicService,
+    private cdr: ChangeDetectorRef
   ) {
     this.loadWishes();
     this.startCountdown();
@@ -153,6 +155,9 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.countdownSubscription) {
       this.countdownSubscription.unsubscribe();
     }
+    if (this.wishCarouselInterval) {
+      clearInterval(this.wishCarouselInterval);
+    }
   }
 
   // Event Listeners
@@ -174,9 +179,12 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onNavigationClick(item: NavigationItem) {
+    // First, close all modals before opening a new one
+    this.closeAllModals();
+    
     switch (item.id) {
       case 'wishes':
-        this.wishesModalOpen = true;
+        this.openWishesModal();
         break;
       case 'home':
         this.router.navigate(['/landing']);
@@ -185,21 +193,68 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
         this.openRSVPModal();
         break;
       case 'location':
-        this.locationModalOpen = true;
+        this.openLocationModal();
         break;
       case 'contact':
-        this.contactModalOpen = true;
+        this.openContactModal();
         break;
     }
+  }
+
+  // Helper method to close all modals
+  closeAllModals() {
+    this.rsvpModalOpen = false;
+    this.locationModalOpen = false;
+    this.contactModalOpen = false;
+    this.wishesModalOpen = false;
+    
+    // Stop any running carousel if wishes modal was open
+    this.stopWishCarousel();
+  }
+
+  // Modal opening methods for consistency
+  openLocationModal() {
+    this.locationModalOpen = true;
+  }
+
+  openContactModal() {
+    this.contactModalOpen = true;
+  }
+
+  openWishesModal() {
+    this.wishesModalOpen = true;
+    if (this.wishes.length > 1) {
+      this.startWishCarousel();
+    }
+  }
+
+  closeWishesModal() {
+    this.wishesModalOpen = false;
+    this.stopWishCarousel();
+    document.body.classList.remove('wishes-modal-open');
+  }
+
+  private startWishCarousel() {
+    if (this.wishes.length <= 1) return;
+    
+    this.currentWishIndex = 0;
+    this.cdr.detectChanges(); // Update the active class
+    
+    this.wishCarouselInterval = setInterval(() => {
+      this.currentWishIndex = (this.currentWishIndex + 1) % this.wishes.length;
+      this.cdr.detectChanges(); // Update the active class
+    }, 3000); // Change every 3 seconds
   }
 
   closeLocationModal() {
     this.locationModalOpen = false;
   }
 
-  closeWishesModal() {
-    this.wishesModalOpen = false;
-    document.body.classList.remove('wishes-modal-open');
+  private stopWishCarousel() {
+    if (this.wishCarouselInterval) {
+      clearInterval(this.wishCarouselInterval);
+      this.wishCarouselInterval = null;
+    }
   }
 
   openRSVPModal() {
@@ -259,6 +314,13 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Map Functions
   private initMap() {
+    // Check if the map container exists before initializing
+    const mapContainer = document.getElementById('venue-map');
+    if (!mapContainer) {
+      console.log('Map container not found, skipping map initialization');
+      return;
+    }
+    
     this.map = L.map('venue-map').setView([this.VENUE_LAT, this.VENUE_LNG], 15);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,

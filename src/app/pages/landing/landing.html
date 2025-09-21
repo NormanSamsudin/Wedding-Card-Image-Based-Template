@@ -27,19 +27,44 @@
 <!-- Bottom Navigation with RSVP button -->
 <app-bottom-navigation (navigationClick)="onNavigationClick($event)" (musicToggle)="toggleMusic()"></app-bottom-navigation>
 
+  <!-- Wishes Modal -->
+  <div class="wishes-modal-overlay" *ngIf="wishesModalOpen" (click)="closeWishesModal()">
+    <div class="wishes-modal" (click)="$event.stopPropagation()">
+      <div *ngIf="isLoadingWishes" class="loading-wishes">
+        <div class="spinner"></div>
+      </div>
+      <div *ngIf="!isLoadingWishes && wishes.length === 0" class="no-wishes">Tiada ucapan lagi.</div>
+      <div *ngIf="!isLoadingWishes && wishes.length > 0" class="wishes-modal-carousel">
+        <div class="wishes-carousel-container">
+          <div *ngFor="let wish of wishes; let i = index" 
+               class="wish-card-modal" 
+               [class.active]="i === currentWishIndex">
+            <div class="wish-main-simple">
+              <div class="wish-message-simple">{{ wish.message }}</div>
+              <div class="wish-author-simple">- {{ wish.name }} -</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- RSVP Modal -->
   <div class="rsvp-modal-overlay" *ngIf="rsvpModalOpen" (click)="closeRSVPModal()">
     <div class="rsvp-modal" (click)="$event.stopPropagation()">
-      <button class="close-modal" (click)="closeRSVPModal()">&times;</button>
       <form class="rsvp-form" (ngSubmit)="submitRSVP()" #rsvpFormRef="ngForm">
-        <div class="rsvp-input-group">
-          <label for="name" style="margin-bottom: 4px; font-size: 0.98em; color: #b76e79;">Nama</label>
-          <input type="text" id="name" [(ngModel)]="rsvpForm.name" name="name" placeholder="Nama" required />
+        <div class="rsvp-row">
+          <div class="rsvp-input-group">
+            <label for="name">Nama</label>
+            <input type="text" id="name" [(ngModel)]="rsvpForm.name" name="name" required />
+          </div>
+          <div class="rsvp-input-group">
+            <label for="jumlahRombongan">Bil. Peserta</label>
+            <input type="number" id="jumlahRombongan" name="jumlahRombongan" min="1" max="20" [(ngModel)]="rsvpForm.jumlahRombongan"  required />
+          </div>
         </div>
-        <div class="rsvp-input-group">
-          <label for="jumlahRombongan" style="margin-bottom: 4px; font-size: 0.98em; color: #b76e79;">Jumlah Rombongan</label>
-          <input type="number" id="jumlahRombongan" name="jumlahRombongan" min="1" max="20" [(ngModel)]="rsvpForm.jumlahRombongan" placeholder="Jumlah Rombongan" required />
-        </div>
+        
+        <!-- Checkbox row -->
         <div class="rsvp-checkbox-group">
           <label class="rsvp-checkbox">
             <input type="checkbox" [(ngModel)]="rsvpForm.hadir" name="hadir" (change)="rsvpForm.hadir ? rsvpForm.tidakHadir = false : null" /> Hadir
@@ -48,11 +73,15 @@
             <input type="checkbox" [(ngModel)]="rsvpForm.tidakHadir" name="tidakHadir" (change)="rsvpForm.tidakHadir ? rsvpForm.hadir = false : null" /> Tidak Hadir
           </label>
         </div>
-        <div class="rsvp-input-group">
-          <label for="message" style="margin-bottom: 4px; font-size: 0.98em; color: #b76e79;">Ucapan/Wishes</label>
-          <textarea id="message" name="message" [(ngModel)]="rsvpForm.message" placeholder="Tulis ucapan anda di sini..." rows="3" required style="width:100%;padding:12px 16px;border-radius:12px;border:none;background:#f5f7fa;font-size:1rem;box-shadow:0 1px 4px rgba(80,80,80,0.04);"></textarea>
+        
+        <!-- Full width message field -->
+        <div class="rsvp-input-group full-width">
+          <label for="message">Ucapan</label>
+          <textarea id="message" name="message" [(ngModel)]="rsvpForm.message" rows="3" required></textarea>
         </div>
-        <button type="submit" class="rsvp-gradient-btn" [disabled]="rsvpService.loading$ | async">Hantar RSVP</button>
+        <br />
+        <button type="submit" class="rsvp-gradient-btn" [disabled]="rsvpService.loading$ | async">Hantar</button>
+  
       </form>
       <!-- RSVP Error/Success Popup -->
       <div *ngIf="rsvpPopupMessage" class="rsvp-popup-message" [ngClass]="{'error': rsvpPopupType==='error', 'success': rsvpPopupType==='success'}">
@@ -67,13 +96,11 @@
   <!-- Location Modal -->
   <div class="location-modal-overlay" *ngIf="locationModalOpen" (click)="closeLocationModal()">
     <div class="location-modal" (click)="$event.stopPropagation()">
-      <button class="close-modal" (click)="closeLocationModal()">&times;</button>
-      <div class="rsvp-form" style="width:100%; margin-top:32px;">
-        <div style="width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:80px; gap:18px;">
+        <div style="width:100%; display:flex; flex-direction:column; ">
           <div style="width:100%; display:flex; justify-content:center;">
             <iframe
               width="98%"
-              height="220"
+              height="100"
               frameborder="0"
               style="border-radius:14px; border:0; box-shadow:0 2px 12px rgba(80,80,80,0.08);"
               src="https://www.google.com/maps?q=3.079934,101.5669504&z=16&output=embed"
@@ -82,97 +109,76 @@
               tabindex="0"
             ></iframe>
           </div>
-          <div style="width:100%; display:flex; justify-content:center; gap:18px; margin-top:18px;">
-            <a href="https://www.google.com/maps/place/3.079934,101.5669504" target="_blank" class="rsvp-gradient-btn" style="display:inline-flex;align-items:center;gap:8px;min-width:0;padding:10px 18px;text-decoration:none!important;">
-              <img src="/akak/icon/google.png" alt="Google Maps" style="width:22px;height:22px;" /> Google Maps
+          <div style="width:100%; display:flex; justify-content:center; gap:8px; margin-top:18px;">
+            <a href="https://www.google.com/maps/place/3.079934,101.5669504" target="_blank" class="location-gradient-btn" style="display:inline-flex;align-items:center;gap:8px;min-width:0;padding:10px 18px;text-decoration:none!important;">
+              <img src="/akak/icon/google.png" alt="Google Maps" style="width:22px;height:22px;filter:brightness(0) invert(1);" /> Google Maps
             </a>
-            <a href="https://www.waze.com/live-map/directions?to=ll.3.141983%2C101.513822" target="_blank" class="rsvp-gradient-btn" style="display:inline-flex;align-items:center;gap:8px;min-width:0;padding:10px 18px;text-decoration:none!important;">
-              <img src="/akak/icon/waze.png" alt="Waze" style="width:22px;height:22px;" /> Waze
+            <a href="https://www.waze.com/live-map/directions?to=ll.3.141983%2C101.513822" target="_blank" class="location-gradient-btn" style="display:inline-flex;align-items:center;gap:8px;min-width:0;padding:10px 18px;text-decoration:none!important;">
+              <img src="/akak/icon/waze.png" alt="Waze" style="width:22px;height:22px;filter:brightness(0) invert(1);" /> Waze
             </a>
           </div>
         </div>
-      </div>
     </div>
   </div>
+
   <!-- Contact Modal -->
   <div class="contact-modal-overlay" *ngIf="contactModalOpen" (click)="closeContactModal()">
     <div class="contact-modal" (click)="$event.stopPropagation()">
-      <button class="close-modal" (click)="closeContactModal()">&times;</button>
-      <div class="rsvp-form" style="width:100%; margin-top:18px;">
-        <div style="width:100%; display:flex; flex-direction:column; align-items:center;">
-          <div style="font-family:'Cinzel',serif; font-size:1.35em; font-weight:700; color:#a01e1e00; letter-spacing:1px; margin-bottom:18px; text-align:center;">CONTACT</div>
-          <div style="width:100%; display:flex; flex-direction:column; gap:16px;">
-            <div style="display:flex; align-items:center; justify-content:space-between;">
-              <div style="display:flex; flex-direction:column;">
-                <span style="color:#34699A; font-weight:600; font-size:1.08em;">Samsudin</span>
-                <span style="color:#18202b; font-size:0.98em; font-style:italic; margin-top:2px;">Father</span>
-              </div>
-              <div style="display:flex; gap:16px;">
-                <a [href]="'https://wa.me/60142437636'" target="_blank" title="WhatsApp"><img src="akak/icon/whatsapp.png" alt="WhatsApp" style="width:26px;height:26px;vertical-align:middle;opacity:0.85;" /></a>
-                <a [href]="'tel:0182402451'" title="Call"><img src="/akak/icon/phone.svg" alt="Call"
-                    style="width:18px;height:18px;vertical-align:middle;opacity:0.85;" /></a>
-              </div>
-            </div>
-            <div style="display:flex; align-items:center; justify-content:space-between; ">
-              <div style="display:flex; flex-direction:column;">
-                <span style="color:#34699A; font-weight:600; font-size:1.08em;">Fikry</span>
-                <span style="color:#18202b; font-size:0.98em; font-style:italic; margin-top:2px;">Brother</span>
-              </div>
-              <div style="display:flex; gap:16px;">
-                <a [href]="'https://wa.me/60172536079'" target="_blank" title="WhatsApp"><img src="akak/icon/whatsapp.png" alt="WhatsApp" style="width:26px;height:26px;vertical-align:middle;opacity:0.85;" /></a>
-                <a [href]="'tel:0182402451'" title="Call"><img src="/akak/icon/phone.svg" alt="Call"
-                    style="width:18px;height:18px;vertical-align:middle;opacity:0.85;" /></a>
-              </div>
-            </div>
-            <div style="display:flex; align-items:center; justify-content:space-between; ">
-              <div style="display:flex; flex-direction:column;">
-                <span style="color:#34699A; font-weight:600; font-size:1.08em;">Fahmi</span>
-                <span style="color:#18202b; font-size:0.98em; font-style:italic; margin-top:2px;">Brother</span>
-              </div>
-              <div style="display:flex; gap:16px;">
-                <a [href]="'https://wa.me/6016234543345'" target="_blank" title="WhatsApp"><img src="akak/icon/whatsapp.png" alt="WhatsApp" style="width:26px;height:26px;vertical-align:middle;opacity:0.85;" /></a>
-                <a [href]="'tel:0182402451'" title="Call"><img src="/akak/icon/phone.svg" alt="Call"
-                    style="width:18px;height:18px;vertical-align:middle;opacity:0.85;" /></a>
-              </div>
-            </div>
-            <div style="display:flex; align-items:center; justify-content:space-between; ">
-              <div style="display:flex; flex-direction:column;">
-                <span style="color:#34699A; font-weight:600; font-size:1.08em;">Norman</span>
-                <span style="color:#18202b; font-size:0.98em; font-style:italic; margin-top:2px;">Brother</span>
-              </div>
-              <div style="display:flex; gap:16px;">
-                <a [href]="'https://wa.me/60182402451'" target="_blank" title="WhatsApp"><img src="akak/icon/whatsapp.png" alt="WhatsApp" style="width:26px;height:26px;vertical-align:middle;opacity:0.85;" /></a>
-                <a [href]="'tel:0182402451'" title="Call"><img src="/akak/icon/phone.svg" alt="Call"
-                    style="width:18px;height:18px;vertical-align:middle;opacity:0.85;" /></a>
-              </div>
-            </div>
+      <div class="contact-content">
+        <div class="contact-item">
+          <div class="contact-info">
+            <span class="contact-name">Samsudin</span>
+            <span class="contact-role">Father</span>
+          </div>
+          <div class="contact-actions">
+            <a [href]="'https://wa.me/60142437636'" target="_blank" title="WhatsApp">
+              <img src="akak/icon/whatsapp.png" alt="WhatsApp" class="contact-icon" />
+            </a>
+            <a [href]="'tel:0182402451'" title="Call">
+              <img src="/akak/icon/phone.svg" alt="Call" class="contact-icon phone" />
+            </a>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <!-- Wishes Modal -->
-  <div class="wishes-modal-overlay" *ngIf="wishesModalOpen" (click)="closeWishesModal()">
-    <div class="wishes-modal" (click)="$event.stopPropagation()">
-      <button class="close-modal" (click)="closeWishesModal()">&times;</button>
-      <div *ngIf="isLoadingWishes" class="loading-overlay">
-        <div class="loading-spinner"></div>
-      </div>
-      <div *ngIf="!isLoadingWishes && wishes.length === 0" class="no-wishes">Tiada ucapan lagi.</div>
-      <div *ngIf="!isLoadingWishes && wishes.length > 0" class="wishes-list">
-        <div *ngFor="let wish of wishes" class="wish-card-simple">
-          <div class="wish-avatar-simple">
-            <svg width="28" height="28" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="20" cy="20" r="20" fill="#f3f3f3"/>
-              <path d="M20 21c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zm0 2c-4.418 0-8 2.239-8 5v2h16v-2c0-2.761-3.582-5-8-5z" fill="#bdbdbd"/>
-            </svg>
+        <div class="contact-item">
+          <div class="contact-info">
+            <span class="contact-name">Fikry</span>
+            <span class="contact-role">Brother</span>
           </div>
-          <div class="wish-main-simple">
-            <div class="wish-row-simple">
-              <span class="wish-name-simple">{{ wish.name }}</span>
-              <span class="wish-date-simple">{{ wish.timestamp | date:'dd MM yyyy' }}</span>
-            </div>
-            <div class="wish-message-simple">{{ wish.message }}</div>
+          <div class="contact-actions">
+            <a [href]="'https://wa.me/60172536079'" target="_blank" title="WhatsApp">
+              <img src="akak/icon/whatsapp.png" alt="WhatsApp" class="contact-icon" />
+            </a>
+            <a [href]="'tel:0182402451'" title="Call">
+              <img src="/akak/icon/phone.svg" alt="Call" class="contact-icon phone" />
+            </a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-info">
+            <span class="contact-name">Fahmi</span>
+            <span class="contact-role">Brother</span>
+          </div>
+          <div class="contact-actions">
+            <a [href]="'https://wa.me/6016234543345'" target="_blank" title="WhatsApp">
+              <img src="akak/icon/whatsapp.png" alt="WhatsApp" class="contact-icon" />
+            </a>
+            <a [href]="'tel:0182402451'" title="Call">
+              <img src="/akak/icon/phone.svg" alt="Call" class="contact-icon phone" />
+            </a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-info">
+            <span class="contact-name">Norman</span>
+            <span class="contact-role">Brother</span>
+          </div>
+          <div class="contact-actions">
+            <a [href]="'https://wa.me/60182402451'" target="_blank" title="WhatsApp">
+              <img src="akak/icon/whatsapp.png" alt="WhatsApp" class="contact-icon" />
+            </a>
+            <a [href]="'tel:0182402451'" title="Call">
+              <img src="/akak/icon/phone.svg" alt="Call" class="contact-icon phone" />
+            </a>
           </div>
         </div>
       </div>

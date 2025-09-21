@@ -1,4 +1,4 @@
-# InvitaionCard
+# InvitationCard
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
 reference:
@@ -69,5 +69,10 @@ For more information on using the Angular CLI, including detailed command refere
 - Great Vibes: brides name
 - Alex Brush (long text): doa, wishes
 - 
+
+
+Theme Blue
+
+- background: rgba(3, 72, 133, 0.95);
 
 

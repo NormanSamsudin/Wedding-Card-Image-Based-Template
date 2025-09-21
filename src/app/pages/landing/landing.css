@@ -9,10 +9,13 @@
   align-items: center;
   justify-content: center;
   z-index: 20000;
+  font-family: 'Roboto', sans-serif;
+  color: rgba(3, 72, 133, 0.95);
+  font-size: 0.9rem;
 }
 .rsvp-popup-content {
   background: #fff;
-  border-radius: 18px;
+  border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.13);
   padding: 32px 28px 24px 28px;
   min-width: 220px;
@@ -21,20 +24,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
+  gap: 12px;
+
 }
 .rsvp-popup-message.error .rsvp-popup-content {
-  border: 2px solid #e57373;
+  border: 1px solid #ff6f6f;
 }
 .rsvp-popup-message.success .rsvp-popup-content {
-  border: 2px solid #4cd964;
+  border: 1px solid rgba(3, 72, 133, 0.95);
 }
 .rsvp-popup-close {
   margin-top: 8px;
-  padding: 8px 24px;
   border: none;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #34699A 0%, #58A0C8 100%);
+  border-radius: 8px;
+  padding: 12px 16px;
+  background: rgba(3, 72, 133, 0.95);
   color: #fff;
   font-size: 1rem;
   font-weight: 600;
@@ -51,7 +55,7 @@
   flex-direction: row;
   align-items: flex-start;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 16px;
   box-shadow: 0 1px 4px rgba(80,80,80,0.04);
   padding: 8px 10px 8px 8px;
   margin-bottom: 10px;
@@ -62,7 +66,7 @@
   flex: 0 0 28px;
   width: 28px;
   height: 28px;
-  border-radius: 50%;
+  border-radius: 16px;
   background: #f3f3f3;
   display: flex;
   align-items: center;
@@ -76,6 +80,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 .wish-row-simple {
   display: flex;
@@ -101,17 +107,29 @@
 .wish-message-simple {
   color: #888;
   font-size: 0.97em;
-  margin-top: 1px;
+  margin-bottom: 8px;
   font-weight: 400;
   word-break: break-word;
+  text-align: center;
+  line-height: 1.4;
 }
+
+.wish-author-simple {
+  color: #b76e79;
+  font-size: 0.85em;
+  font-style: italic;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 4px;
+}
+
 /* Redesigned Wish Card */
 .wish-card-redesign {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   background: #fff;
-  border-radius: 14px;
+  border-radius: 16px;
   box-shadow: 0 2px 8px rgba(80,80,80,0.06);
   padding: 14px 18px 10px 14px;
   margin-bottom: 16px;
@@ -127,7 +145,7 @@
 .wish-avatar-placeholder {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: 16px;
   background: #f3f3f3;
   display: flex;
   align-items: center;
@@ -157,7 +175,7 @@
   width: 9px;
   height: 9px;
   background: #4cd964;
-  border-radius: 50%;
+  border-radius: 16px;
   display: inline-block;
   margin-right: 4px;
   margin-top: 1px;
@@ -179,7 +197,7 @@
   position: fixed;
   left: 0;
   right: 0;
-  top: 0;
+  top: 16px;
   bottom: 0;
   z-index: 9999;
   background: transparent;
@@ -194,16 +212,14 @@
 
 .contact-modal {
   position: fixed;
-  left: 19px;
-  right: 19px;
-  height: 300px;
-  bottom: 80px;
-  /* height of bottom nav */
+  left: 16px;
+  right: 16px;
+  height: 200px;
+  bottom: 90px;
   background: rgba(52, 105, 154, 0.10);
-  /* blue glassy */
-  border-radius: 28px;
+  border-radius: 16px;
   box-shadow: 0 8px 32px 0 rgba(17, 63, 103, 0.18), 0 1.5px 8px 0 rgba(52, 105, 154, 0.10) inset;
-  padding: 0px 32px 24px 32px;
+  padding: 16px 16px 16px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -214,11 +230,72 @@
   -webkit-backdrop-filter: blur(24px) saturate(180%);
 }
 
+/* Contact Modal Content */
+.contact-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(52, 105, 154, 0.1);
+}
+
+.contact-item:last-child {
+  border-bottom: none;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-name {
+  color: rgba(3, 72, 133, 0.95); 
+  font-weight: 600;
+  font-size: 1.00em;
+  margin-bottom: 2px;
+}
+
+.contact-role {
+  color: #18202b;
+  font-size: 0.70em;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.contact-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.contact-icon {
+  width: 30px;
+  height: 30px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  filter: brightness(0) saturate(100%) invert(13%) sepia(85%) saturate(4492%) hue-rotate(202deg) brightness(95%) contrast(101%);
+}
+
+.contact-icon.phone {
+  width: 24px;
+  height: 24px;
+}
+
+.contact-actions a:hover .contact-icon {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
 .contact-gradient-btn {
   width: 100%;
   padding: 14px 0;
   border: none;
-  border-radius: 24px;
+  border-radius: 16px;
   background: linear-gradient(135deg, #34699A 0%, #58A0C8 100%);
   color: #fff;
   font-size: 1.1rem;
@@ -243,23 +320,23 @@
   display: flex;
   justify-content: center;
   width: 100vw;
-  height: 100vh;
+  height: 50vh;
   pointer-events: auto;
   box-sizing: border-box;
   animation: fadeIn 0.3s ease-out;
 }
 .location-modal {
   position: fixed;
-    left: 19px;
-    right: 19px;
-    height: 380px;
-    bottom: 80px;
+    left: 16px;
+    right: 16px;
+    height: 200px;
+    bottom: 90px;
     /* height of bottom nav */
     background: rgba(52, 105, 154, 0.10);
     /* blue glassy */
-    border-radius: 28px;
-    box-shadow: 0 8px 32px 0 rgba(17, 63, 103, 0.18), 0 1.5px 8px 0 rgba(52, 105, 154, 0.10) inset;
-    padding: 0px 32px 24px 32px;
+    border-radius: 16px;
+    /* box-shadow: 0 8px 32px 0 rgba(17, 63, 103, 0.18), 0 1.5px 8px 0 rgba(52, 105, 154, 0.10) inset; */
+    padding: 0px 16px 0px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -273,7 +350,7 @@
   width: 100%;
   padding: 14px 0;
   border: none;
-  border-radius: 24px;
+  border-radius: 16px;
   background: linear-gradient(135deg, #34699A 0%, #58A0C8 100%);
   color: #fff;
   font-size: 1.1rem;
@@ -289,69 +366,99 @@
 
 .rsvp-form {
   width: 100%;
-  margin-top: 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
 }
+
+/* Container for side-by-side inputs */
+.rsvp-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Responsive: Stack on smaller screens */
+@media (max-width: 375px) {
+  .rsvp-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
 .rsvp-input-group {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  flex: 1;
+  gap: 2px;
+}
+
+/* Full width for single inputs */
+.rsvp-input-group.full-width {
   width: 100%;
-  gap: 4px;
 }
 .rsvp-input-group input[type="text"],
 .rsvp-input-group input[type="email"] {
   width: 100%;
-  padding: 12px 16px;
-  border-radius: 12px;
+  padding: 8px 8px;
+  border-radius: 8px;
   border: none;
   background: #f5f7fa;
-  font-size: 1rem;
-  box-shadow: 0 1px 4px rgba(80,80,80,0.04);
+  font-size: 0.90rem;
   margin-bottom: 0;
 }
 .rsvp-input-group input[type="number"] {
   width: 100%;
-  padding: 12px 16px;
+  padding: 8px 8px;
+  border-radius: 8px;
+  border: none;
+  background: #f5f7fa;
+  font-size: 0.90rem;
+  margin-bottom: 0;
+  appearance: textfield;
+}
+
+.rsvp-input-group textarea {
+  width: 100%;
+  padding: 8px 8px;
   border-radius: 12px;
   border: none;
   background: #f5f7fa;
   font-size: 1rem;
   box-shadow: 0 1px 4px rgba(80,80,80,0.04);
-  margin-bottom: 0;
-  outline: none;
-  appearance: textfield;
+  resize: vertical;
+  font-family: inherit;
 }
 .rsvp-input-group label {
-  margin-bottom: 4px;
-  font-size: 0.98em;
-  color: #b76e79;
+  margin-bottom: 2px;
+  font-size: 0.90em;
+  color: rgba(3, 72, 133, 0.95);  
   font-weight: 500;
   letter-spacing: 0.5px;
 }
 .rsvp-checkbox-group {
   display: flex;
-  gap: 16px;
+  gap: 8px;
   width: 100%;
   justify-content: flex-start;
 }
 .rsvp-checkbox {
   display: flex;
   align-items: center;
-  font-size: 1rem;
-  gap: 6px;
-  background: #f5f7fa;
-  border-radius: 8px;
-  padding: 6px 12px;
-  box-shadow: 0 1px 4px rgba(80,80,80,0.04);
+  font-size: 0.8rem;
+  gap: 4px;
+  padding: 6px 6px;
+  font-family: 'Roboto', sans-serif;
+  color: rgba(3, 72, 133, 0.95);
 }
 .rsvp-checkbox input[type="checkbox"] {
-  accent-color: #ffb199;
   width: 18px;
   height: 18px;
+  border-radius: 50%; /* Fully rounded checkboxes */
+  accent-color: rgba(3, 72, 133, 0.95);
+
 }
 .rsvp-stars {
   display: flex;
@@ -371,17 +478,20 @@
 
 .rsvp-gradient-btn {
   width: 100%;
-  padding: 14px 0;
+  height: 40px;
   border: none;
-  border-radius: 24px;
-  background: linear-gradient(135deg, #34699A 0%, #58A0C8 100%);
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: bold;
-  box-shadow: 0 4px 16px rgba(52,105,154,0.15);
-  margin-top: 12px;
+  border-radius: 16px;
+  background: rgba(3, 72, 133, 0.95);
+  color: #ffffff;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .rsvp-gradient-btn:active {
   transform: scale(0.98);
@@ -401,7 +511,7 @@
   align-items: center;
   justify-content: space-around;
   z-index: 10000;
-  border-radius: 24px 24px 0 0;
+  border-radius: 16px;
   padding: 0 12px;
   backdrop-filter: blur(12px) saturate(160%);
 }
@@ -410,7 +520,7 @@
   background: #34699A;
   color: #fff;
   border: none;
-  border-radius: 18px;
+  border-radius: 16px;
   padding: 10px 18px;
   font-size: 1.05rem;
   font-weight: 600;
@@ -471,7 +581,7 @@
 .wedding-card {
     flex: 1;
     background: #fff;
-    border-radius: 0;
+    border-radius: 16px;
     box-shadow: none;
     width: 100%;
     max-width: 375px;
@@ -612,7 +722,7 @@
     width: 8px;
     height: 8px;
     background: #b76e79;
-    border-radius: 50%;
+    border-radius: 16px;
     top: -3px;
 }
 
@@ -657,7 +767,7 @@
     margin: 8px 0;
     padding: 12px;
     background: rgba(248, 249, 250, 0.8);
-    border-radius: 8px;
+    border-radius: 16px;
 }
 
 .schedule-item .time {
@@ -686,6 +796,24 @@
 .location-section.animate {
     opacity: 1;
     transform: translateY(0);
+}
+
+.location-gradient-btn {
+  width: 100%;
+  border: none;
+  border-radius: 16px;
+  background: rgba(3, 72, 133, 0.95);
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+
+.location-gradient-btn:active {
+  transform: scale(0.98);
 }
 
 /* ===== MODAL STYLES ===== */
@@ -718,7 +846,7 @@
     border: none;
     width: 36px;
     height: 36px;
-    border-radius: 50%;
+    border-radius: 16px;
     font-size: 24px;
     line-height: 1;
     cursor: pointer;
@@ -754,16 +882,15 @@
   position: fixed;
   left: 19px;
   right: 19px;
-  bottom: 80px;
-  max-height: 70vh;
+  bottom: 90px;
+  height: 130px; /* Auto height to fit content */
+  min-height: 120px; /* Reduced minimum height */
+  max-height: 50vh; /* Maximum height constraint */
   background: rgba(52, 105, 154, 0.10);
-  border-radius: 28px;
-  box-shadow: 0 8px 32px 0 rgba(17, 63, 103, 0.18), 0 1.5px 8px 0 rgba(52, 105, 154, 0.10) inset;
-  padding: 40px 32px 0px 32px;
+  border-radius: 16px;
+  padding: 16px 16px 16px 16px; /* Further reduced padding */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
   overflow-y: auto;
   animation: slideUpModal 0.35s cubic-bezier(.4, 0, .2, 1);
   border: 1.5px solid #58A0C8;
@@ -786,13 +913,86 @@
   z-index: 2;
 }
 .page-title {
-  margin-top: 24px;
-  margin-bottom: 16px;
-  font-size: 2rem;
+  margin-top: 0px; /* Remove top margin */
+  margin-bottom: 8px; /* Further reduced bottom margin */
+  font-size: 1.6rem; /* Smaller font */
   color: #b76e79;
   text-align: center;
 }
-/* Horizontal scroll for wishes list */
+
+/* Modal Carousel for wishes */
+.wishes-modal-carousel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px; /* Further reduced gap */
+  padding: 0; /* Remove padding */
+}
+
+.wishes-carousel-container {
+  position: relative;
+  width: 100%;
+  height: auto; /* Auto height instead of fixed */
+  min-height: 60px; /* Reduced minimum height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wish-card-modal {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 12px 14px;
+  /* gap: 10px; */
+  width: 100%;
+  max-width: 100%;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Opacity fade effect */
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
+}
+
+.wish-card-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Carousel indicators */
+.carousel-indicators {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4px; /* Minimal top margin */
+  margin-bottom: 0px; /* No bottom margin */
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 16px;
+  background: rgba(183, 110, 121, 0.4);
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.indicator.active {
+  background: #b76e79;
+  transform: scale(1.2);
+}
+
+/* Horizontal scroll for wishes list - Legacy (remove if not needed) */
 .wishes-list {
   display: flex;
   flex-direction: column;
@@ -809,7 +1009,7 @@
 }
 .wish-card {
   background: #f8f6f3;
-  border-radius: 12px;
+  border-radius: 16px;
   margin-bottom: 16px;
   padding: 16px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.04);
@@ -837,11 +1037,13 @@
   text-align: center;
   color: #888;
   margin-top: 32px;
+  font-size: 0.9rem;
+  font-family: 'Roboto', sans-serif;
 }
 .spinner {
   border: 4px solid #eee;
   border-top: 4px solid #b76e79;
-  border-radius: 50%;
+  border-radius: 16px;
   width: 32px;
   height: 32px;
   animation: spin 1s linear infinite;
@@ -1042,12 +1244,12 @@
 
 .scrollable-content::-webkit-scrollbar-track {
   background: rgba(0,0,0,0.1);
-  border-radius: 3px;
+  border-radius: 16px;
 }
 
 .scrollable-content::-webkit-scrollbar-thumb {
   background: rgba(183,110,121,0.5);
-  border-radius: 3px;
+  border-radius: 16px;
 }
 
 .scrollable-content::-webkit-scrollbar-thumb:hover {
@@ -1089,12 +1291,12 @@
   position: fixed;
   left: 19px;
   right: 19px;
-  height: 460px;
-  bottom: 80px; /* height of bottom nav */
-  background: rgba(52,105,154,0.10); /* blue glassy */
-  border-radius: 28px;
+  height: 300px;
+  bottom: 90px;
+  background: rgba(52,105,154,0.10);
+  border-radius: 16px;
   box-shadow: 0 8px 32px 0 rgba(17,63,103,0.18), 0 1.5px 8px 0 rgba(52,105,154,0.10) inset;
-  padding: 0px 32px 24px 32px;
+  padding: 0px 16px 0px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
