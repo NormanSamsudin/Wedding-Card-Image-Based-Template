@@ -1,28 +1,28 @@
 <!-- Splash Overlay for Initial Animation -->
 <div class="splash-overlay" [class.splash-hidden]="splashHidden">
   <div class="splash-content">
-    <img src="/akak/splash_new.jpg" alt="Wedding Splash" class="splash-image" />
+    <img src="/akak/home_muaz_shafiqah.png" alt="Wedding Splash" class="splash-image" />
   </div>
 </div>
 
 <div class="landing-background-landing" [class.landing-visible]="splashHidden">
-  <div class="scrollable-content">
-    <div class="image-container">
-      <img 
-        src="/akak/landing_new2.jpg" 
-        alt="Landing Background" 
-        class="landing-image"
-      />
-    </div>
-  </div>
-  
-  <!-- Smooth scroll indicator -->
-  <div class="scroll-indicator">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M7 14L12 19L17 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M7 8L12 13L17 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </div>
+  <!-- Scrollable container with video background -->
+  <div style="height: 100vh; overflow-y: auto; overflow-x: hidden; position: relative; width: 100%; scrollbar-width: none; -ms-overflow-style: none;" class="hide-scrollbar">
+    <!-- Background Video Layer -->
+    <video 
+      #backgroundVideo
+      muted 
+      playsinline
+      preload="auto"
+      autoplay
+      loop
+      (loadeddata)="onVideoLoaded()"
+      (error)="onVideoError($event)"
+      (canplay)="onVideoCanPlay()"
+      (timeupdate)="onVideoTimeUpdate($event)"
+    >
+      <source src="assets/muazzshafiqah.mp4" type="video/mp4">
+    </video>
 </div>
 <!-- Bottom Navigation with RSVP button -->
 <app-bottom-navigation (navigationClick)="onNavigationClick($event)" (musicToggle)="toggleMusic()"></app-bottom-navigation>
@@ -103,17 +103,17 @@
               height="100"
               frameborder="0"
               style="border-radius:14px; border:0; box-shadow:0 2px 12px rgba(80,80,80,0.08);"
-              src="https://www.google.com/maps?q=3.079934,101.5669504&z=16&output=embed"
+              src="https://www.google.com/maps?q=Dewan+Tun+Rahah+Yayasan+Tun+Razak,Malaysia&z=16&output=embed"
               allowfullscreen=""
               aria-hidden="false"
               tabindex="0"
             ></iframe>
           </div>
           <div style="width:100%; display:flex; justify-content:center; gap:8px; margin-top:18px;">
-            <a href="https://www.google.com/maps/place/3.079934,101.5669504" target="_blank" class="location-gradient-btn" style="display:inline-flex;align-items:center;gap:8px;min-width:0;padding:10px 18px;text-decoration:none!important;">
+            <a href="https://www.google.com/maps/place/Dewan+Tun+Rahah+Yayasan+Tun+Razak/@3.1479049,101.7162644,842m/data=!3m2!1e3!4b1!4m6!3m5!1s0x31cc36324b413a75:0x6aed2bee089f3139!8m2!3d3.1478995!4d101.7188393!16s%2Fg%2F1hdz8gqll" target="_blank" class="location-gradient-btn" style="display:inline-flex;align-items:center;gap:8px;min-width:0;padding:10px 18px;text-decoration:none!important;">
               <img src="/akak/icon/google.png" alt="Google Maps" style="width:22px;height:22px;filter:brightness(0) invert(1);" /> Google Maps
             </a>
-            <a href="https://www.waze.com/live-map/directions?to=ll.3.141983%2C101.513822" target="_blank" class="location-gradient-btn" style="display:inline-flex;align-items:center;gap:8px;min-width:0;padding:10px 18px;text-decoration:none!important;">
+            <a href="https://waze.com/ul?q=Dewan%20Tun%20Rahah%20Yayasan%20Tun%20Razak&navigate=yes" target="_blank" class="location-gradient-btn" style="display:inline-flex;align-items:center;gap:8px;min-width:0;padding:10px 18px;text-decoration:none!important;">
               <img src="/akak/icon/waze.png" alt="Waze" style="width:22px;height:22px;filter:brightness(0) invert(1);" /> Waze
             </a>
           </div>

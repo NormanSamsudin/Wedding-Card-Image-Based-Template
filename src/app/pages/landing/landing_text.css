@@ -1,0 +1,225 @@
+/* Wedding Invitation Text Styles */
+
+/* Container for all wedding content */
+.wedding-invitation-container {
+  width: 100%;
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 20px 16px;
+  text-align: center;
+  font-family: 'Times New Roman', serif;
+  line-height: 1.6;
+  color: #f5f5f5;
+  background-color: #800020;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Main Title */
+.main-title {
+  font-size: 1.5rem;
+  color: #e9b123;
+  margin-bottom: 20px;
+  letter-spacing: 0px;
+  font-family: "Lavishly Yours", cursive;    /* font-weight: 400; */
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Section containers */
+.greeting-section,
+.parents-section,
+.invitation-section,
+.couples-section,
+.venue-section,
+.closing-section,
+.link-section,
+.schedule-section {
+  margin-bottom: 25px;
+  padding: 0 10px;
+}
+
+/* Greeting text */
+.greeting-text {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #e6e6e6;
+  margin-bottom: 15px;
+}
+
+/* Parents introduction */
+.parents-intro {
+  font-size: 1rem;
+  color: #d4d4d4;
+  margin-bottom: 10px;
+}
+
+.parents-names {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #b76e79;
+  margin: 15px 0;
+  letter-spacing: 1px;
+}
+
+/* Invitation message */
+.invitation-message {
+  font-size: 1rem;
+  color: #e6e6e6;
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+/* Couples names */
+.couples-container {
+  margin: 20px 0;
+}
+
+.couple-name {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #b76e79;
+  margin: 10px 0;
+  letter-spacing: 0.5px;
+}
+
+.couple-connector {
+  font-size: 1rem;
+  color: #d4d4d4;
+  margin: 8px 0;
+  font-style: italic;
+}
+
+.couples-separator {
+  font-size: 1.2rem;
+  color: #b76e79;
+  margin: 15px 0;
+  font-weight: bold;
+}
+
+/* Venue details */
+.venue-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f5f5f5;
+  margin-bottom: 10px;
+}
+
+.venue-details {
+  font-size: 1rem;
+  color: #e6e6e6;
+  line-height: 1.5;
+}
+
+.venue-date {
+  font-weight: bold;
+  color: #b76e79;
+  margin-bottom: 8px;
+}
+
+.venue-location {
+  margin-bottom: 5px;
+}
+
+/* Closing message */
+.closing-message {
+  font-size: 1rem;
+  color: #e6e6e6;
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* Link invitation */
+.link-message {
+  font-size: 1rem;
+  color: #d4d4d4;
+  margin-bottom: 10px;
+}
+
+/* Schedule section */
+.schedule-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #b76e79;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.schedule-item {
+  font-size: 1rem;
+  color: #e6e6e6;
+  margin: 8px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.schedule-time {
+  font-weight: bold;
+  color: #b76e79;
+  min-width: 60px;
+}
+
+.schedule-event {
+  color: #f5f5f5;
+  text-align: left;
+  flex: 1;
+  max-width: 200px;
+}
+
+/* Decorative elements */
+.decorative-divider {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #b76e79, transparent);
+  margin: 20px auto;
+  position: relative;
+}
+
+.decorative-divider::before,
+.decorative-divider::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #b76e79;
+  top: -2px;
+}
+
+.decorative-divider::before {
+  left: -10px;
+}
+
+.decorative-divider::after {
+  right: -10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 375px) {
+  .main-title {
+    font-size: 2rem;
+  }
+  
+  .couple-name {
+    font-size: 1.2rem;
+  }
+  
+  .parents-names {
+    font-size: 1.1rem;
+  }
+  
+  .wedding-invitation-container {
+    padding: 15px 12px;
+  }
+}
+
+@media (max-width: 320px) {
+  .main-title {
+    font-size: 1.8rem;
+  }
+  
+  .couple-name {
+    font-size: 1.1rem;
+  }
+}

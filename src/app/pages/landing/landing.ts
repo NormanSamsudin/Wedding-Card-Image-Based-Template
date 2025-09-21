@@ -38,7 +38,7 @@ interface Wish {
   standalone: true,
   imports: [CommonModule, FormsModule, BottomNavigation],
   templateUrl: './landing.html',
-  styleUrls: ['./landing.css'],
+  styleUrls: ['./landing.css', './landing_text.css'],
 })
 export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -51,6 +51,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   // View Elements
   @ViewChild('backgroundMusic') backgroundMusic!: ElementRef<HTMLAudioElement>;
+  @ViewChild('backgroundVideo') backgroundVideo!: ElementRef<HTMLVideoElement>;
 
   // Constants
   private readonly VENUE_LAT = 3.079934;
@@ -68,6 +69,15 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   toastMessage = '';
   toastType: 'success' | 'error' = 'success';
   splashHidden = false;
+
+  // Video State Variables
+  videoLoading = true;
+  videoError = false;
+  videoPausedNearEnd = false;
+  videoDelayActive = false;
+  private videoInitialized = false;
+  private videoPauseSequenceStarted = false;
+  private videoMonitoringInterval: any;
 
   // Carousel Variables for Modal
   currentWishIndex = 0;
@@ -142,6 +152,10 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     // Start splash animation
     setTimeout(() => {
       this.splashHidden = true;
+      // Wait for splash fade-out animation to complete before starting video
+      setTimeout(() => {
+        this.initializeVideoBackground();
+      }, 1000); // Wait 1 second after splash is hidden for animation to complete
     }, 3000); // Show splash for 3 seconds
     
     // Do not auto-play music here; wait for user interaction (see onDocumentClick)
@@ -157,6 +171,9 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     if (this.wishCarouselInterval) {
       clearInterval(this.wishCarouselInterval);
+    }
+    if (this.videoMonitoringInterval) {
+      clearInterval(this.videoMonitoringInterval);
     }
   }
 
@@ -459,6 +476,189 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     } finally {
       this.isLoadingWishes = false;
     }
+  }
+
+  // Video handling methods
+  initializeVideoBackground() {
+    if (this.backgroundVideo?.nativeElement && !this.videoInitialized) {
+      const video = this.backgroundVideo.nativeElement;
+      
+      // Mark as initialized to prevent multiple calls
+      this.videoInitialized = true;
+      
+      // Set video properties for background video
+      video.muted = true;
+      video.autoplay = false; // Manual control of playback
+      video.loop = false;
+      video.playsInline = true;
+      video.preload = 'auto';
+      video.playbackRate = 0.5; // Set video speed to 50% (0.5x slower)
+      
+      // Start precise video monitoring (but don't start playing yet)
+      this.startVideoMonitoring();
+      
+      // Only start video playback after ensuring splash is completely hidden
+      if (this.splashHidden) {
+        console.log('Starting video playback sequence (splash animation completed) at 0.5x speed');
+        this.startVideoWithPauseSequence();
+      }
+    }
+  }
+
+  private startVideoWithPauseSequence() {
+    if (this.backgroundVideo?.nativeElement && !this.videoPauseSequenceStarted) {
+      const video = this.backgroundVideo.nativeElement;
+      
+      // Mark sequence as started to prevent multiple calls
+      this.videoPauseSequenceStarted = true;
+      
+      // Start playing the video
+      this.attemptVideoPlay();
+      
+      // Pause after 1 millisecond
+      setTimeout(() => {
+        video.pause();
+        console.log('Video paused after 1ms');
+        
+        // Resume playing after 2 seconds
+        setTimeout(() => {
+          console.log('Resuming video playback after 2 second pause');
+          this.attemptVideoPlay();
+        }, 2000);
+      }, 1);
+    }
+  }
+
+  private startVideoMonitoring() {
+    // Clear any existing interval
+    if (this.videoMonitoringInterval) {
+      clearInterval(this.videoMonitoringInterval);
+    }
+    
+    // Check video time every 100ms for precise control
+    this.videoMonitoringInterval = setInterval(() => {
+      if (this.backgroundVideo?.nativeElement && !this.videoPausedNearEnd) {
+        const video = this.backgroundVideo.nativeElement;
+        
+        if (video.duration && video.currentTime) {
+          const timeRemaining = video.duration - video.currentTime;
+          
+          // Log progress every 5 seconds
+          if (Math.floor(video.currentTime) % 5 === 0 && video.currentTime % 1 < 0.1) {
+            console.log(`Video: ${video.currentTime.toFixed(1)}s / ${video.duration.toFixed(1)}s`);
+          }
+          
+          // Pause when 0.1 seconds remaining
+          if (timeRemaining <= 0.1) {
+            video.pause();
+            this.videoPausedNearEnd = true;
+            console.log('Video paused before end (interval method)');
+            clearInterval(this.videoMonitoringInterval);
+          }
+        }
+      }
+    }, 100); // Check every 100ms
+  }
+
+  onVideoLoaded() {
+    console.log('Video loaded successfully');
+    this.videoLoading = false;
+    this.videoError = false;
+    // Don't auto-play here, let the pause sequence handle it
+  }
+
+  onVideoError(event: any) {
+    console.error('Video failed to load:', event);
+    this.videoLoading = false;
+    this.videoError = true;
+    // Don't auto-retry here, let the pause sequence handle it
+  }
+
+  onVideoCanPlay() {
+    console.log('Video can start playing');
+    this.videoLoading = false;
+    // Don't auto-play here, let the pause sequence handle it
+  }
+
+  onVideoTimeUpdate(event: any) {
+    const video = event.target as HTMLVideoElement;
+    
+    // Debug: Basic logging every few seconds
+    if (Math.floor(video.currentTime) % 5 === 0 && video.currentTime % 1 < 0.1) {
+      console.log(`Video playing: ${video.currentTime.toFixed(1)}s / ${video.duration.toFixed(1)}s`);
+    }
+    
+    // Check if we're very close to the end
+    if (video.duration && video.currentTime && !this.videoPausedNearEnd) {
+      const timeRemaining = video.duration - video.currentTime;
+      
+      // Debug logging when close to end
+      if (timeRemaining < 1) {
+        console.log(`Time remaining: ${timeRemaining.toFixed(3)}s`);
+      }
+      
+      // Pause when there's 0.1 seconds or less remaining (more reliable than 1ms)
+      if (timeRemaining <= 0.1) {
+        video.pause();
+        this.videoPausedNearEnd = true;
+        console.log('Video paused before end to prevent looping');
+      }
+    }
+  }
+
+  private attemptVideoPlay() {
+    if (this.backgroundVideo?.nativeElement && !this.videoError) {
+      const video = this.backgroundVideo.nativeElement;
+      
+      // Ensure video properties are set correctly
+      video.muted = true;
+      video.loop = false;
+      video.playsInline = true;
+      
+      // Multiple play attempts for better compatibility
+      const playVideo = () => {
+        const playPromise = video.play();
+        
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              console.log('Video is playing successfully');
+              this.videoLoading = false;
+              this.videoError = false;
+            })
+            .catch(error => {
+              console.warn('Auto-play failed, trying again:', error);
+              // Try again after user interaction
+              this.retryVideoPlay();
+            });
+        }
+      };
+
+      // Initial play attempt
+      playVideo();
+      
+      // Additional attempts if needed
+      setTimeout(playVideo, 500);
+      setTimeout(playVideo, 1000);
+    }
+  }
+
+  private retryVideoPlay() {
+    // Set up click listener to play video on user interaction
+    const playOnInteraction = () => {
+      if (this.backgroundVideo?.nativeElement) {
+        this.backgroundVideo.nativeElement.play()
+          .then(() => {
+            console.log('Video playing after user interaction');
+            document.removeEventListener('click', playOnInteraction);
+            document.removeEventListener('touchstart', playOnInteraction);
+          })
+          .catch(err => console.warn('Video play failed even after interaction:', err));
+      }
+    };
+
+    document.addEventListener('click', playOnInteraction, { once: true });
+    document.addEventListener('touchstart', playOnInteraction, { once: true });
   }
 }
 

@@ -61,8 +61,8 @@ ng e2e
 
 background Color: rgba(3, 72, 133, 0.95)
 Contact Information
-Location Information
-Wedding Title
+Location Information : 3.1479049,101.7162644
+Wedding Title : Walimatul Urus
 Background Image
 Song Theme
 Firebase API Key
