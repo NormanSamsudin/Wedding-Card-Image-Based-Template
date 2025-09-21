@@ -57,22 +57,14 @@ For end-to-end (e2e) testing, run:
 ng e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+# What need to change from this template
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-
-## Typography
-
-1. FontFamily:
-- Great Vibes: brides name
-- Alex Brush (long text): doa, wishes
-- 
-
-
-Theme Blue
-
-- background: rgba(3, 72, 133, 0.95);
-
-
+background Color: rgba(3, 72, 133, 0.95)
+Contact Information
+Location Information
+Wedding Title
+Background Image
+Song Theme
+Firebase API Key
+Setup Firebase Project for each project
+Update Firebase Link

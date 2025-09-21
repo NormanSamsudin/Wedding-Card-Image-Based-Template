@@ -9,6 +9,7 @@ export class MusicService {
     private isPlayingSubject = new BehaviorSubject<boolean>(false);
     isPlaying$ = this.isPlayingSubject.asObservable();
     private hasUserInteracted = false;
+    private wasPlayingBeforeHidden = false; // Track if music was playing before page became hidden
 
     constructor() {
         this.audio = new Audio('qalbi_fi_madina.mov');
@@ -34,6 +35,30 @@ export class MusicService {
         this.audio.addEventListener('error', (e) => {
             console.error('Audio error:', e);
             this.isPlayingSubject.next(false);
+        });
+
+        // Add Page Visibility API listener to handle browser minimize/sleep
+        this.setupVisibilityListener();
+    }
+
+    private setupVisibilityListener() {
+        // Listen for page visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                // Page is hidden (minimized, tab switched, phone sleep)
+                if (this.isPlayingSubject.value) {
+                    this.wasPlayingBeforeHidden = true;
+                    this.pause();
+                }
+            } else {
+                // Page is visible again
+                // Optionally resume music if it was playing before
+                // Comment out the next 3 lines if you don't want auto-resume
+                if (this.wasPlayingBeforeHidden) {
+                    this.play();
+                    this.wasPlayingBeforeHidden = false;
+                }
+            }
         });
     }
 
