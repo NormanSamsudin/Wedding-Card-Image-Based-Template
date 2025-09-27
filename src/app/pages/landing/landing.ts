@@ -143,8 +143,8 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
       // Wait for splash fade-out animation to complete before starting video
       setTimeout(() => {
         this.initializeVideoBackground();
-      }, 1000); // Wait 1 second after splash is hidden for animation to complete
-    }, 3000); // Show splash for 3 seconds
+      }, 3000); // Wait 3 seconds after splash is hidden for animation to complete
+    }, 1000); // Show splash for 1 seconds
     
     // Do not auto-play music here; wait for user interaction (see onDocumentClick)
   }
