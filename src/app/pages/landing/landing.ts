@@ -8,7 +8,6 @@ import { PhotosFirebaseService, Photo } from '../../services/photos-firebase.ser
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Howl } from 'howler';
-import { Timestamp } from 'firebase/firestore';
 import { Router } from '@angular/router';
 import { MusicService } from '../../services/music.service';
 import { interval } from 'rxjs';
@@ -95,18 +94,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   private largeMap: any;
 
   // Data Collections
-  wishes: Wish[] = [
-    {
-      name: 'Test User',
-      message: 'Congratulations on your wedding! This is a test wish.',
-      timestamp: new Date()
-    },
-    {
-      name: 'Another User',
-      message: 'Wishing you both a lifetime of happiness and love!',
-      timestamp: new Date()
-    }
-  ];
+  wishes: Wish[] = [];
 
   // Form Data
   rsvpForm: RSVPForm = {
@@ -239,7 +227,12 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openWishesModal() {
+    console.log('Opening wishes modal, current wishes count:', this.wishes.length);
     this.wishesModalOpen = true;
+    
+    // Reload wishes when modal is opened to ensure fresh data
+    this.loadWishes();
+    
     if (this.wishes.length > 1) {
       this.startWishCarousel();
     }
@@ -462,19 +455,29 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   private async loadWishes() {
     try {
       this.isLoadingWishes = true;
+      console.log('Loading wishes...');
       const rsvps = await this.rsvpService.getRSVPs();
+      console.log('RSVP data received:', rsvps);
       this.wishes = rsvps
         .filter(rsvp => rsvp.message && rsvp.message.trim() !== '')
         .map(rsvp => ({
           name: rsvp.name,
           message: rsvp.message,
-          timestamp: (rsvp.timestamp as Timestamp).toDate()
+          timestamp: rsvp.timestamp instanceof Date ? rsvp.timestamp : new Date(rsvp.timestamp)
         }))
         .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
+      console.log('Filtered wishes:', this.wishes);
+      console.log('Wishes count after loading:', this.wishes.length);
+      
+      // Trigger change detection
+      this.cdr.detectChanges();
     } catch (error) {
       console.error('Error loading wishes:', error);
     } finally {
       this.isLoadingWishes = false;
+      console.log('isLoadingWishes set to false');
+      // Trigger change detection again
+      this.cdr.detectChanges();
     }
   }
 

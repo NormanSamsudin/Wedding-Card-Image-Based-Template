@@ -27,22 +27,11 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
     ),
     provideFirebaseApp(() => {
-      console.log('🔥 Initializing Firebase app...');
       const app = initializeApp(environment.firebase);
-      console.log('✅ Firebase app initialized:', app.name);
-      console.log('📝 Firebase config:', environment.firebase);
       return app;
     }),
-    provideFirestore(() => {
-      console.log('🔥 Initializing Firestore...');
-      const firestore = getFirestore();
-      console.log('✅ Firestore initialized for app:', firestore.app.name);
-      return firestore;
-    }),
     provideStorage(() => {
-      console.log('🔥 Initializing Firebase Storage...');
       const storage = getStorage();
-      console.log('✅ Firebase Storage initialized for app:', storage.app.name);
       return storage;
     }),
   ]
