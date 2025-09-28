@@ -12,7 +12,7 @@ export class MusicService {
     private wasPlayingBeforeHidden = false; // Track if music was playing before page became hidden
 
     constructor() {
-        this.audio = new Audio('qalbi_fi_madina.mov');
+    this.audio = new Audio('chill_music.mp3');
         this.audio.loop = true;
         this.audio.muted = true; // Start muted to comply with autoplay policies
 
