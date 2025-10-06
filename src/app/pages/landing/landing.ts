@@ -283,7 +283,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Countdown Timer
   private startCountdown() {
-    const weddingDate = new Date('2025-05-12T16:00:00');
+    const weddingDate = new Date('2025-12-28T16:00:00');
 
     this.countdownSubscription = interval(1000).subscribe(() => {
       const now = new Date();
