@@ -34,6 +34,9 @@
       <div *ngIf="isLoadingWishes" class="loading-wishes">
         <div class="spinner"></div>
       </div>
+      <div *ngIf="!isLoadingWishes" class="total-guests-display">
+        <h3>Jumlah Kehadiran: {{ totalGuests }} orang</h3>
+      </div>
       <div *ngIf="!isLoadingWishes && wishes.length === 0" class="no-wishes">Tiada ucapan lagi</div>
       <div *ngIf="!isLoadingWishes && wishes.length > 0" class="wishes-modal-carousel">
         <div class="wishes-carousel-container">

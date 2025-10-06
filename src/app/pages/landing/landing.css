@@ -882,7 +882,7 @@
   left: 19px;
   right: 19px;
   bottom: 90px;
-  height: 130px; /* Auto height to fit content */
+  height: 160px; /* Auto height to fit content */
   min-height: 120px; /* Reduced minimum height */
   max-height: 50vh; /* Maximum height constraint */
   background: rgba(52, 105, 154, 0.10);
@@ -895,6 +895,21 @@
   border: 1.5px solid #ffffff;
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
+}
+
+.total-guests-display {
+  text-align: center;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border-radius: 12px;
+}
+
+.total-guests-display h3 {
+  margin: 0;
+  font-size: 1.0rem;
+  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+  font-weight: 600;
 }
 @keyframes slideUp {
   from { transform: translateY(100%); }

@@ -95,6 +95,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Data Collections
   wishes: Wish[] = [];
+  totalGuests: number = 0;
 
   // Form Data
   rsvpForm: RSVPForm = {
@@ -458,6 +459,12 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
       console.log('Loading wishes...');
       const rsvps = await this.rsvpService.getRSVPs();
       console.log('RSVP data received:', rsvps);
+      
+      // Calculate total guests for those who are attending
+      this.totalGuests = rsvps
+        .filter(rsvp => rsvp.attendanceStatus === 'Hadir')
+        .reduce((total, rsvp) => total + (rsvp.numberOfGuests || 0), 0);
+      
       this.wishes = rsvps
         .filter(rsvp => rsvp.message && rsvp.message.trim() !== '')
         .map(rsvp => ({
@@ -467,6 +474,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
         }))
         .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
       console.log('Filtered wishes:', this.wishes);
+      console.log('Total guests attending:', this.totalGuests);
       console.log('Wishes count after loading:', this.wishes.length);
       
       // Trigger change detection
