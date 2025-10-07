@@ -213,7 +213,7 @@
   position: fixed;
   left: 16px;
   right: 16px;
-  height: 200px;
+  /* height: 200px; */
   bottom: 90px;
   background: rgba(52, 105, 154, 0.10);
   border-radius: 16px;
@@ -335,7 +335,7 @@
     /* blue glassy */
     border-radius: 16px;
     /* box-shadow: 0 8px 32px 0 rgba(17, 63, 103, 0.18), 0 1.5px 8px 0 rgba(52, 105, 154, 0.10) inset; */
-    padding: 0px 16px 0px 16px;
+    padding: 16px 16px 16px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -390,7 +390,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  flex: 1;
+  width: 100%;
   gap: 2px;
 }
 
@@ -439,25 +439,44 @@
 }
 .rsvp-checkbox-group {
   display: flex;
-  gap: 8px;
+  gap: 20px;
   width: 100%;
-  justify-content: flex-start;
+  justify-content: center;
+  margin: 16px 0;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
 .rsvp-checkbox {
   display: flex;
   align-items: center;
-  font-size: 0.8rem;
-  gap: 4px;
-  padding: 6px 6px;
+  font-size: 0.9rem;
+  gap: 8px;
+  padding: 8px 12px;
   font-family: 'Roboto', sans-serif;
   color: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s;
 }
-.rsvp-checkbox input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%; /* Fully rounded checkboxes */
-  accent-color: rgba(253, 253, 253, 0.95);
 
+.rsvp-checkbox:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.rsvp-checkbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  accent-color: #ffffff;
+  cursor: pointer;
+}
+
+.checkbox-text {
+  font-weight: 500;
+  user-select: none;
 }
 .rsvp-stars {
   display: flex;
@@ -1353,12 +1372,11 @@
   position: fixed;
   left: 19px;
   right: 19px;
-  height: 300px;
   bottom: 90px;
   background: rgba(52,105,154,0.10);
   border-radius: 16px;
   box-shadow: 0 8px 32px 0 rgba(17,63,103,0.18), 0 1.5px 8px 0 rgba(52,105,154,0.10) inset;
-  padding: 0px 16px 0px 16px;
+  padding: 16px 16px 16px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
