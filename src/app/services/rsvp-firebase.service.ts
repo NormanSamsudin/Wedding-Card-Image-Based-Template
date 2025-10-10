@@ -38,11 +38,31 @@ export class RSVPFirebaseService {
       const attendanceStatus = data.hadir ? 'Hadir' : (data.tidakHadir ? 'Tidak Hadir' : data.attendanceStatus || 'Hadir');
       const numberOfGuests = data.jumlahRombongan || data.numberOfGuests || 1;
       
-        // Sanitize message to remove leading '='
-        let message = String(data.message || '');
-        if (message.startsWith('=')) {
-          message = message.substring(1);
-        }
+      // Sanitize message to remove leading '=' characters
+      let message = String(data.message || '').trim();
+      const originalMessage = message; // Keep original for debugging
+      
+      // Remove all leading '=' characters
+      while (message.startsWith('=')) {
+        message = message.substring(1);
+      }
+      message = message.trim(); // Remove any extra whitespace after cleaning
+      
+      // Debug logging to confirm sanitization
+      if (originalMessage !== message) {
+        console.log('Message sanitized:', {
+          original: originalMessage,
+          cleaned: message,
+          removedEquals: originalMessage.length - message.length
+        });
+      }
+      
+      // Double check - ensure no leading '=' remains
+      if (message.startsWith('=')) {
+        console.error('WARNING: Message still contains leading "=" after sanitization:', message);
+        message = message.replace(/^=+/, ''); // Force remove all leading '=' as backup
+        console.log('Backup sanitization applied. Final message:', message);
+      }
         const requestBody = {
           name: String(data.name || ''),
           attendanceStatus: String(attendanceStatus),
@@ -104,14 +124,23 @@ export class RSVPFirebaseService {
         console.log('RSVP data from API:', rsvpData);
         
         // Transform API data to match RSVPData interface
-        const transformedData = rsvpData.map((item: any) => ({
-          name: item.name || '',
-          email: item.email || '',
-          numberOfGuests: item.numberOfGuests || 0,
-          attendanceStatus: item.attendanceStatus as 'Hadir' | 'Tidak Hadir',
-          message: item.message || '',
-          timestamp: item.timestamp ? new Date(item.timestamp) : new Date()
-        })).filter((rsvp: any) => rsvp.name); // Filter out entries without names
+        const transformedData = rsvpData.map((item: any) => {
+          // Clean message from any leading '=' characters (for existing data)
+          let cleanMessage = String(item.message || '').trim();
+          while (cleanMessage.startsWith('=')) {
+            cleanMessage = cleanMessage.substring(1);
+          }
+          cleanMessage = cleanMessage.trim();
+          
+          return {
+            name: item.name || '',
+            email: item.email || '',
+            numberOfGuests: item.numberOfGuests || 0,
+            attendanceStatus: item.attendanceStatus as 'Hadir' | 'Tidak Hadir',
+            message: cleanMessage,
+            timestamp: item.timestamp ? new Date(item.timestamp) : new Date()
+          };
+        }).filter((rsvp: any) => rsvp.name); // Filter out entries without names
         
         console.log('Transformed RSVP data:', transformedData);
         return transformedData;
