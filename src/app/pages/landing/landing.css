@@ -1452,3 +1452,41 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Developer Footer */
+.developer-footer {
+  position: fixed;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 10px;
+  z-index: 1100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.developer-footer.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.developer-footer p {
+  margin: 0;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+.developer-footer a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.developer-footer a:hover {
+  color: rgba(255, 255, 255, 1);
+  text-decoration: underline;
+}

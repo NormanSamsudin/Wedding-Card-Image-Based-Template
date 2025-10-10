@@ -12,9 +12,9 @@ export class MusicService {
     private wasPlayingBeforeHidden = false; // Track if music was playing before page became hidden
 
     constructor() {
-    this.audio = new Audio('chill_music.mp3');
+        this.audio = new Audio('chill_music.mp3');
         this.audio.loop = true;
-        this.audio.muted = true; // Start muted to comply with autoplay policies
+        this.audio.muted = false; // Start unmuted for immediate autoplay attempt
 
         // Add event listeners to handle audio state
         this.audio.addEventListener('play', () => {
@@ -39,6 +39,9 @@ export class MusicService {
 
         // Add Page Visibility API listener to handle browser minimize/sleep
         this.setupVisibilityListener();
+        
+        // Try to start playing immediately
+        this.attemptAutoplay();
     }
 
     private setupVisibilityListener() {
@@ -110,5 +113,33 @@ export class MusicService {
         this.audio.pause();
         this.audio.currentTime = 0;
         this.isPlayingSubject.next(false);
+    }
+
+    // Attempt to start music automatically
+    private attemptAutoplay() {
+        this.hasUserInteracted = true; // Mark as interacted to allow unmuted playback
+        const playPromise = this.audio.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log('Music autoplay started successfully');
+            }).catch(error => {
+                console.log('Autoplay blocked by browser, will start on user interaction:', error);
+                // If autoplay fails, set up a one-time click listener
+                this.setupAutoplayOnInteraction();
+            });
+        }
+    }
+
+    private setupAutoplayOnInteraction() {
+        const startMusicOnClick = () => {
+            this.audio.muted = false;
+            this.play();
+            document.removeEventListener('click', startMusicOnClick);
+            document.removeEventListener('touchstart', startMusicOnClick);
+        };
+
+        document.addEventListener('click', startMusicOnClick, { once: true });
+        document.addEventListener('touchstart', startMusicOnClick, { once: true });
     }
 } 

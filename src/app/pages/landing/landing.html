@@ -7,7 +7,7 @@
 
 <div class="landing-background-landing" [class.landing-visible]="splashHidden">
   <!-- Scrollable container with video background -->
-  <div style="height: 100vh; overflow-y: auto; overflow-x: hidden; position: relative; width: 100%; scrollbar-width: none; -ms-overflow-style: none;" class="hide-scrollbar">
+  <div style="height: 100vh; overflow-y: auto; overflow-x: hidden; position: relative; width: 100%; scrollbar-width: none; -ms-overflow-style: none;" class="hide-scrollbar" (scroll)="onScroll($event)">
     <!-- Background Video Layer -->
     <video 
       #backgroundVideo
@@ -23,6 +23,11 @@
     >
       <source src="assets/muazz_shafiqah_11_oct.mp4" type="video/mp4">
     </video>
+    
+    <!-- Developer Credit Footer - only shows when scrolled to bottom -->
+    <div class="developer-footer" [class.show]="showDeveloperFooter">
+      <p>Developed by <a href="https://normansamsudin.netlify.app/about" target="_blank">youknowtech.com</a></p>
+    </div>
   </div>
 </div>
 <!-- Bottom Navigation with RSVP button -->

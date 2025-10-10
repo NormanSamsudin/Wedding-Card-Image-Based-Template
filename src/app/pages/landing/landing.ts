@@ -96,6 +96,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   // Data Collections
   wishes: Wish[] = [];
   totalGuests: number = 0;
+  showDeveloperFooter: boolean = false;
 
   // Form Data
   rsvpForm: RSVPForm = {
@@ -171,7 +172,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   onDocumentClick() {
     if (!this.hasUserInteracted) {
       this.hasUserInteracted = true;
-      this.musicService.play(); // Start music on first user interaction
+      // Music will start automatically via MusicService
     }
   }
 
@@ -617,6 +618,17 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  onScroll(event: any) {
+    const element = event.target;
+    const scrollTop = element.scrollTop;
+    const scrollHeight = element.scrollHeight;
+    const clientHeight = element.clientHeight;
+    
+    // Check if user has scrolled to the bottom (within 10px tolerance)
+    const isAtBottom = scrollTop + clientHeight >= scrollHeight - 10;
+    this.showDeveloperFooter = isAtBottom;
+  }
+
   private attemptVideoPlay() {
     if (this.backgroundVideo?.nativeElement && !this.videoError) {
       const video = this.backgroundVideo.nativeElement;
@@ -672,4 +684,3 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     document.addEventListener('touchstart', playOnInteraction, { once: true });
   }
 }
-
