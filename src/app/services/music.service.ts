@@ -117,29 +117,51 @@ export class MusicService {
 
     // Attempt to start music automatically
     private attemptAutoplay() {
-        this.hasUserInteracted = true; // Mark as interacted to allow unmuted playback
+        // Try immediate autoplay first
         const playPromise = this.audio.play();
         
         if (playPromise !== undefined) {
             playPromise.then(() => {
                 console.log('Music autoplay started successfully');
+                this.hasUserInteracted = true;
             }).catch(error => {
-                console.log('Autoplay blocked by browser, will start on user interaction:', error);
-                // If autoplay fails, set up a one-time click listener
+                console.log('Autoplay blocked by browser, setting up interaction listeners:', error);
+                // If autoplay fails, set up listeners for any user interaction
                 this.setupAutoplayOnInteraction();
             });
+        } else {
+            // Fallback for older browsers
+            this.setupAutoplayOnInteraction();
         }
     }
 
     private setupAutoplayOnInteraction() {
-        const startMusicOnClick = () => {
+        const startMusicOnInteraction = () => {
+            this.hasUserInteracted = true;
             this.audio.muted = false;
-            this.play();
-            document.removeEventListener('click', startMusicOnClick);
-            document.removeEventListener('touchstart', startMusicOnClick);
+            const playPromise = this.audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log('Music started after user interaction');
+                }).catch(error => {
+                    console.error('Failed to start music even after interaction:', error);
+                });
+            }
+            
+            // Remove all listeners after first interaction
+            document.removeEventListener('click', startMusicOnInteraction);
+            document.removeEventListener('touchstart', startMusicOnInteraction);
+            document.removeEventListener('keydown', startMusicOnInteraction);
+            document.removeEventListener('scroll', startMusicOnInteraction);
         };
 
-        document.addEventListener('click', startMusicOnClick, { once: true });
-        document.addEventListener('touchstart', startMusicOnClick, { once: true });
+        // Listen for various types of user interactions
+        document.addEventListener('click', startMusicOnInteraction, { passive: true });
+        document.addEventListener('touchstart', startMusicOnInteraction, { passive: true });
+        document.addEventListener('keydown', startMusicOnInteraction, { passive: true });
+        document.addEventListener('scroll', startMusicOnInteraction, { passive: true });
+        
+        console.log('Music will start on first user interaction (touch, click, scroll, or key press)');
     }
 } 

@@ -1,7 +1,10 @@
 <!-- Splash Overlay for Initial Animation -->
-<div class="splash-overlay" [class.splash-hidden]="splashHidden">
+<div class="splash-overlay" [class.splash-hidden]="splashHidden" (click)="onSplashClick()">
   <div class="splash-content">
     <img src="/akak/home_muazz_shafiqah_new.png" alt="Wedding Splash" class="splash-image" />
+    <div class="splash-prompt">
+      <p>Mula</p>
+    </div>
   </div>
 </div>
 

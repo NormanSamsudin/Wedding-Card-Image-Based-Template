@@ -176,6 +176,18 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  onSplashClick() {
+    // Start music immediately when splash is clicked
+    this.musicService.play();
+    // Hide splash screen immediately on click
+    if (!this.splashHidden) {
+      this.splashHidden = true;
+      setTimeout(() => {
+        this.initializeVideoBackground();
+      }, 300); // Shorter delay since user has already interacted
+    }
+  }
+
   // Navigation Handlers
 
   wishesModalOpen = false;

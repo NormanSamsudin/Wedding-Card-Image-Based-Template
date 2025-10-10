@@ -1205,10 +1205,12 @@
 
 .splash-content {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .splash-image {
@@ -1216,6 +1218,30 @@
   height: 100vh;
   object-fit: cover;
   animation: splashFadeIn 1s ease-out;
+}
+
+.splash-prompt {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 10;
+}
+
+.splash-prompt p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: pulseText 2s ease-in-out infinite;
+}
+
+@keyframes pulseText {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
 }
 
 .landing-background-landing {
