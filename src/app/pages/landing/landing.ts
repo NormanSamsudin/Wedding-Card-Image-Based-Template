@@ -139,16 +139,8 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
       this.initMap();
     }, 1000);
     
-    // Start splash animation
-    setTimeout(() => {
-      this.splashHidden = true;
-      // Wait for splash fade-out animation to complete before starting video
-      setTimeout(() => {
-        this.initializeVideoBackground();
-      }, 3000); // Wait 3 seconds after splash is hidden for animation to complete
-    }, 1000); // Show splash for 1 seconds
-    
-    // Do not auto-play music here; wait for user interaction (see onDocumentClick)
+    // Do not auto-hide splash - wait for user click
+    // Do not auto-play music here; wait for user interaction (see onSplashClick)
   }
 
   ngOnDestroy() {
@@ -179,13 +171,14 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   onSplashClick() {
     // Start music immediately when splash is clicked
     this.musicService.play();
+    
     // Hide splash screen immediately on click
-    if (!this.splashHidden) {
-      this.splashHidden = true;
-      setTimeout(() => {
-        this.initializeVideoBackground();
-      }, 300); // Shorter delay since user has already interacted
-    }
+    this.splashHidden = true;
+    
+    // Initialize video background after splash is hidden
+    setTimeout(() => {
+      this.initializeVideoBackground();
+    }, 300); // Short delay for animation
   }
 
   // Navigation Handlers
