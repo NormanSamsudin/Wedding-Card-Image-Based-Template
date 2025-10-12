@@ -1,7 +1,7 @@
 <!-- Splash Overlay for Initial Animation -->
 <div class="splash-overlay" [class.splash-hidden]="splashHidden" (click)="onSplashClick()">
   <div class="splash-content">
-    <img src="/akak/home_muazz_shafiqah_new.png" alt="Wedding Splash" class="splash-image" />
+    <img src="/akak/splash_new.jpg" alt="Wedding Splash" class="splash-image" />
     <div class="splash-prompt">
       <p>Sentuh untuk mula</p>
     </div>
@@ -12,7 +12,7 @@
   <!-- Scrollable container with video background -->
   <div style="height: 100vh; overflow-y: auto; overflow-x: hidden; position: relative; width: 100%; scrollbar-width: none; -ms-overflow-style: none;" class="hide-scrollbar" (scroll)="onScroll($event)">
     <!-- Background Video Layer -->
-    <video 
+    <!-- <video 
       #backgroundVideo
       muted 
       playsinline
@@ -25,7 +25,13 @@
       (timeupdate)="onVideoTimeUpdate($event)"
     >
       <source src="assets/muazz_shafiqah_11_oct.mp4" type="video/mp4">
-    </video>
+    </video> -->
+
+    <div class="scrollable-content">
+      <div class="image-container">
+        <img src="/akak/landing_new2.jpg" alt="Landing Background" class="landing-image" />
+      </div>
+    </div>
     
     <!-- Developer Credit Footer - only shows when scrolled to bottom -->
     <div class="developer-footer" [class.show]="showDeveloperFooter">
