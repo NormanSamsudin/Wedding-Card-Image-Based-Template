@@ -1277,6 +1277,7 @@
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   pointer-events: auto;
+  padding-bottom: 80px; /* Add padding to account for bottom navigation (80px + 20px extra) */
 }
 
 .image-container {
