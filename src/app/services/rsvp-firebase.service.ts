@@ -15,7 +15,7 @@ export interface RSVPData {
   providedIn: 'root'
 })
 export class RSVPFirebaseService {
-  private readonly API_URL = 'https://normansamsudin.duckdns.org/webhook/post-muazzshafiqah';
+  private readonly API_URL = 'https://normansamsudin.duckdns.org/webhook/post-intanizzudin';
   isLoading = false;
   message: { text: string; type: 'success' | 'error' } | null = null;
 
@@ -109,7 +109,7 @@ export class RSVPFirebaseService {
   async getRSVPs(): Promise<RSVPData[]> {
     try {
       console.log('Fetching RSVPs from API...');
-      const response = await fetch('https://normansamsudin.duckdns.org/webhook/get-muazzshafiqah');
+      const response = await fetch('https://normansamsudin.duckdns.org/webhook/get-intanizzudin');
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

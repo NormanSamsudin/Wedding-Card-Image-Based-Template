@@ -1232,7 +1232,7 @@
 
 .splash-prompt p {
   margin: 0;
-  color: rgba(255, 255, 255, 0.9);
+  color: #2e2e2e;
   font-size: 0.9rem;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
