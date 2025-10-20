@@ -892,7 +892,7 @@
   display: flex;
   justify-content: center;
   width: 100vw;
-  height: 100vh;
+  height: auto;
   pointer-events: auto;
   box-sizing: border-box;
   animation: fadeIn 0.3s ease-out;
@@ -902,25 +902,32 @@
   left: 19px;
   right: 19px;
   bottom: 90px;
-  height: 260px; /* Auto height to fit content */
-  min-height: 120px; /* Reduced minimum height */
-  max-height: 50vh; /* Maximum height constraint */
+  min-height: 300px; /* Increased from 200px to 300px */
+  max-height: 80vh; /* Increased from 60vh to 70vh */
   background: rgba(52, 105, 154, 0.10);
   border-radius: 16px;
-  padding: 16px 16px 16px 16px; /* Further reduced padding */
+  padding: 16px 16px 16px 16px;
   display: flex;
   flex-direction: column;
+  gap: 16px; /* 8px spacing between sections */
   overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
   animation: slideUpModal 0.35s cubic-bezier(.4, 0, .2, 1);
   border: 1.5px solid #ffffff;
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.wishes-modal::-webkit-scrollbar {
+  display: none;
+}
+
 .total-guests-display {
   text-align: center;
-  margin-bottom: 12px;
-  padding: 8px 12px;
+  margin-bottom: 0px; /* Removed margin completely */
+  padding: 2px 0px; /* Minimal padding - reduced from 4px to 2px */
   border-radius: 12px;
 }
 
@@ -932,10 +939,26 @@
   font-weight: 600;
 }
 
+/* Modal Section Layouts */
+.modal-top-section {
+  flex-shrink: 0; /* Don't shrink this section */
+}
+
+.modal-middle-section {
+  flex-shrink: 0; /* Don't expand, just fit content */
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-bottom-section {
+  flex-shrink: 0; /* Don't shrink this section */
+  margin-top: 0; /* Removed auto margin */
+}
+
 .countdown-display {
   text-align: center;
-  margin-bottom: 12px;
-  padding: 12px;
+  margin-bottom: 0px; /* Removed margin completely */
+  padding: 4px; /* Minimal padding - reduced from 6px to 4px */
   background: rgba(0, 0, 0, 0.95);
   border-radius: 12px;
 }
@@ -943,7 +966,7 @@
 .countdown-timer {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 12px; /* Reduced gap between countdown items from 16px to 12px */
   flex-wrap: wrap;
 }
 
@@ -993,6 +1016,7 @@
 /* Modal Carousel for wishes */
 .wishes-modal-carousel {
   width: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1020,6 +1044,7 @@
   padding: 12px 14px;
   /* gap: 10px; */
   width: 100%;
+  height: auto;
   max-width: 100%;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);

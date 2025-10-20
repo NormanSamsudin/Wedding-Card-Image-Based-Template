@@ -49,42 +49,50 @@
         <div class="spinner"></div>
       </div>
 
-      <div *ngIf="!isLoadingWishes" class="total-guests-display">
-        <h3>Jumlah Kehadiran: {{ totalGuests }} orang</h3>
+      <!-- Top Section: Jumlah Kehadiran -->
+      <div *ngIf="!isLoadingWishes" class="modal-top-section">
+        <div class="total-guests-display">
+          <h3>Jumlah Kehadiran: {{ totalGuests }} orang</h3>
+        </div>
       </div>
-      <div *ngIf="!isLoadingWishes && wishes.length === 0" class="no-wishes">Tiada ucapan lagi</div>
-      <div *ngIf="!isLoadingWishes && wishes.length > 0" class="wishes-modal-carousel">
-        <div class="wishes-carousel-container">
-          <div *ngFor="let wish of wishes; let i = index" 
-               class="wish-card-modal" 
-               [class.active]="i === currentWishIndex">
-            <div class="wish-main-simple">
-              <div class="wish-message-simple">{{ wish.message }}</div>
-              <div class="wish-author-simple">- {{ wish.name }} -</div>
+
+      <!-- Middle Section: Countdown -->
+      <div *ngIf="!isLoadingWishes" class="modal-middle-section">
+        <div class="countdown-display">
+          <div class="countdown-timer">
+            <div class="countdown-item">
+              <span class="countdown-number">{{ daysLeft }}</span>
+              <span class="countdown-label">Hari</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-number">{{ hoursLeft }}</span>
+              <span class="countdown-label">Jam</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-number">{{ minutesLeft }}</span>
+              <span class="countdown-label">Minit</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-number">{{ secondsLeft }}</span>
+              <span class="countdown-label">Saat</span>
             </div>
           </div>
         </div>
-           
       </div>
-      <br>
-      <br>
-      <div *ngIf="!isLoadingWishes" class="countdown-display">
-        <div class="countdown-timer">
-          <div class="countdown-item">
-            <span class="countdown-number">{{ daysLeft }}</span>
-            <span class="countdown-label">Hari</span>
-          </div>
-          <div class="countdown-item">
-            <span class="countdown-number">{{ hoursLeft }}</span>
-            <span class="countdown-label">Jam</span>
-          </div>
-          <div class="countdown-item">
-            <span class="countdown-number">{{ minutesLeft }}</span>
-            <span class="countdown-label">Minit</span>
-          </div>
-          <div class="countdown-item">
-            <span class="countdown-number">{{ secondsLeft }}</span>
-            <span class="countdown-label">Saat</span>
+
+      <!-- Bottom Section: Wish Cards -->
+      <div *ngIf="!isLoadingWishes" class="modal-bottom-section">
+        <div *ngIf="wishes.length === 0" class="no-wishes">Tiada ucapan lagi</div>
+        <div *ngIf="wishes.length > 0" class="wishes-modal-carousel">
+          <div class="wishes-carousel-container">
+            <div *ngFor="let wish of wishes; let i = index" 
+                 class="wish-card-modal" 
+                 [class.active]="i === currentWishIndex">
+              <div class="wish-main-simple">
+                <div class="wish-message-simple">{{ wish.message }}</div>
+                <div class="wish-author-simple">- {{ wish.name }} -</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
