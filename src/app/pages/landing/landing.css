@@ -964,7 +964,7 @@
   left: 19px;
   right: 19px;
   bottom: 90px;
-  height: 260px; /* Auto height to fit content */
+  height: 270px; /* Auto height to fit content */
   min-height: 120px; /* Reduced minimum height */
   max-height: 50vh; /* Maximum height constraint */
   background: rgba(52, 105, 154, 0.10);
