@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Howl } from 'howler';
 import { Router } from '@angular/router';
-import { MusicService } from '../../services/music.service';
+// import { MusicService } from '../../services/music.service';
 import { interval } from 'rxjs';
 
 declare let L: any;
@@ -59,7 +59,9 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // State Variables
   activeModal: string | null = null;
-  isMusicPlaying = true;
+  // isMusicPlaying = true;
+  // QR Modal State
+  qrModalOpen = false;
   private hasUserInteracted = false;
   isMapModalOpen = false;
   isClosing = false;
@@ -118,7 +120,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     public rsvpService: RSVPFirebaseService,
     private photosService: PhotosFirebaseService,
     private router: Router,
-    private musicService: MusicService,
+    // private musicService: MusicService,
     private cdr: ChangeDetectorRef
   ) {
     this.loadWishes();
@@ -169,8 +171,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSplashClick() {
-    // Start music immediately when splash is clicked
-    this.musicService.play();
+  // Start music immediately when splash is clicked (removed)
     
     // Hide splash screen immediately on click
     this.splashHidden = true;
@@ -193,7 +194,6 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   onNavigationClick(item: NavigationItem) {
     // First, close all modals before opening a new one
     this.closeAllModals();
-    
     switch (item.id) {
       case 'wishes':
         this.openWishesModal();
@@ -210,7 +210,17 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
       case 'contact':
         this.openContactModal();
         break;
+      case 'qr':
+        this.openQRModal();
+        break;
     }
+  }
+  openQRModal() {
+    this.qrModalOpen = true;
+  }
+
+  closeQRModal() {
+    this.qrModalOpen = false;
   }
 
   // Helper method to close all modals
@@ -282,10 +292,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     this.rsvpModalOpen = false;
   }
 
-  // Music Controls
-  toggleMusic() {
-    this.musicService.toggle();
-  }
+  // Music Controls removed
 
   // Countdown Timer
   private startCountdown() {

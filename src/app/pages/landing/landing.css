@@ -1,3 +1,66 @@
+/* QR Modal Styles */
+.qr-modal-overlay {
+  position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 9999;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: auto;
+    box-sizing: border-box;
+    animation: fadeIn 0.3s ease-out;
+}
+.qr-modal {
+  position: fixed;
+    left: 19px;
+    right: 19px;
+    bottom: 90px;
+    /* Auto height to fit content */
+    min-height: 120px;
+    /* Reduced minimum height */
+    max-height: 50vh;
+    /* Maximum height constraint */
+    background: rgba(52, 105, 154, 0.10);
+    border-radius: 16px;
+    padding: 16px 16px 16px 16px;
+    /* Further reduced padding */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    animation: slideUpModal 0.35s cubic-bezier(.4, 0, .2, 1);
+    border: 1.5px solid #ffffff;
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+}
+
+.qr-image {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  border-radius: 12px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.qr-image {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(200,30,90,0.08);
+}
+.qr-modal-caption {
+  text-align: center;
+    color: rgba(255, 255, 255, 0.95);
+    margin-top: 32px;
+    font-size: 0.9rem;
+    font-family: 'Roboto', sans-serif;
+}
 /* RSVP Popup Message Styles */
 .rsvp-popup-message {
   position: fixed;

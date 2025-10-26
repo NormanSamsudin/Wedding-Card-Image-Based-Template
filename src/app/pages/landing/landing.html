@@ -1,7 +1,7 @@
 <!-- Splash Overlay for Initial Animation -->
 <div class="splash-overlay" [class.splash-hidden]="splashHidden" (click)="onSplashClick()">
   <div class="splash-content">
-    <img src="/akak/home_muazz_shafiqah_new.png" alt="Wedding Splash" class="splash-image" />
+    <img src="/akak/home_muazz_shafiqah_new_27_oct.png" alt="Wedding Splash" class="splash-image" />
     <div class="splash-prompt">
       <p>Sentuh untuk mula</p>
     </div>
@@ -34,7 +34,16 @@
   </div>
 </div>
 <!-- Bottom Navigation with RSVP button -->
-<app-bottom-navigation (navigationClick)="onNavigationClick($event)" (musicToggle)="toggleMusic()"></app-bottom-navigation>
+<app-bottom-navigation (navigationClick)="onNavigationClick($event)"></app-bottom-navigation>
+<!-- QR Modal  -->
+<div class="qr-modal-overlay" *ngIf="qrModalOpen" (click)="closeQRModal()">
+  <div class="qr-modal" (click)="$event.stopPropagation()">
+    <!-- <div class="qr-modal-content"> -->
+      <img src="/akak/qr_muazz_shaf_27_oct.jpg" alt="QR Code Duit" class="qr-image" />
+      <div class="qr-modal-caption">Terima kasih atas sumbangan anda</div>
+    <!-- </div> -->
+  </div>
+</div>
 
   <!-- Wishes Modal -->
   <div class="wishes-modal-overlay" *ngIf="wishesModalOpen" (click)="closeWishesModal()">
