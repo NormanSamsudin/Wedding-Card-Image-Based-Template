@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Howl } from 'howler';
 import { Router } from '@angular/router';
-// import { MusicService } from '../../services/music.service';
+import { MusicService } from '../../services/music.service';
 import { interval } from 'rxjs';
 
 declare let L: any;
@@ -120,7 +120,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     public rsvpService: RSVPFirebaseService,
     private photosService: PhotosFirebaseService,
     private router: Router,
-    // private musicService: MusicService,
+    private musicService: MusicService,
     private cdr: ChangeDetectorRef
   ) {
     this.loadWishes();
@@ -162,20 +162,20 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   // Event Listeners
+
   @HostListener('document:click')
   onDocumentClick() {
     if (!this.hasUserInteracted) {
       this.hasUserInteracted = true;
-      // Music will start automatically via MusicService
+      this.musicService.play();
     }
   }
 
   onSplashClick() {
-  // Start music immediately when splash is clicked (removed)
-    
+    // Start music immediately when splash is clicked
+    this.musicService.play();
     // Hide splash screen immediately on click
     this.splashHidden = true;
-    
     // Initialize video background after splash is hidden
     setTimeout(() => {
       this.initializeVideoBackground();
