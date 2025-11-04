@@ -510,6 +510,9 @@
   background: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Ensure touch events work properly */
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
 }
 
 .rsvp-checkbox {
@@ -523,10 +526,11 @@
   cursor: pointer;
   border-radius: 8px;
   transition: background-color 0.2s;
-}
-
-.rsvp-checkbox:hover {
-  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  min-height: 44px; /* Ensure touch target is large enough */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+  user-select: none; /* Prevent text selection */
+  -webkit-user-select: none;
 }
 
 .rsvp-checkbox input[type="checkbox"] {
@@ -535,11 +539,23 @@
   border-radius: 4px;
   accent-color: #ffffff;
   cursor: pointer;
+  margin: 0;
+  flex-shrink: 0;
+  /* Ensure checkbox is clickable on all devices */
+  -webkit-appearance: checkbox;
+  appearance: checkbox;
+  opacity: 1;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .checkbox-text {
   font-weight: 500;
   user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  flex: 1;
 }
 .rsvp-stars {
   display: flex;
