@@ -100,14 +100,14 @@
           <input type="text" id="name" [(ngModel)]="rsvpForm.name" name="name" required />
         </div>
 
-        <!-- Checkbox row -->
+        <!-- Radio button row -->
         <div class="rsvp-checkbox-group">
-          <label class="rsvp-checkbox" (click)="toggleHadir()">
-            <input type="checkbox" [(ngModel)]="rsvpForm.hadir" name="hadir" [checked]="rsvpForm.hadir" readonly /> 
+          <label class="rsvp-checkbox">
+            <input type="radio" [(ngModel)]="rsvpForm.attendance" name="attendance" value="hadir" /> 
             <span class="checkbox-text">Hadir</span>
           </label>
-          <label class="rsvp-checkbox" (click)="toggleTidakHadir()">
-            <input type="checkbox" [(ngModel)]="rsvpForm.tidakHadir" name="tidakHadir" [checked]="rsvpForm.tidakHadir" readonly /> 
+          <label class="rsvp-checkbox">
+            <input type="radio" [(ngModel)]="rsvpForm.attendance" name="attendance" value="tidak_hadir" /> 
             <span class="checkbox-text">Tidak Hadir</span>
           </label>
         </div>

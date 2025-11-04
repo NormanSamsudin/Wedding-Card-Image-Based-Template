@@ -20,8 +20,7 @@ interface RSVPForm {
   numberOfGuests: number;
   attendanceStatus: 'Hadir' | 'Tidak Hadir';
   message: string;
-  hadir?: boolean;
-  tidakHadir?: boolean;
+  attendance?: string;
   rating?: number;
   jumlahRombongan?: number;
 }
@@ -107,8 +106,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     numberOfGuests: 1,
     attendanceStatus: 'Hadir',
     message: '',
-    hadir: false,
-    tidakHadir: false,
+    attendance: '',
     rating: 0,
     jumlahRombongan: 1
   };
@@ -427,7 +425,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   async submitRSVP() {
     // Validate all required fields
-    if (!this.rsvpForm.name || !this.rsvpForm.jumlahRombongan || !this.rsvpForm.message || (!this.rsvpForm.hadir && !this.rsvpForm.tidakHadir)) {
+    if (!this.rsvpForm.name || !this.rsvpForm.jumlahRombongan || !this.rsvpForm.message || !this.rsvpForm.attendance) {
       this.rsvpPopupMessage = 'Sila lengkapkan semua maklumat RSVP.';
       this.rsvpPopupType = 'error';
       return;
@@ -442,8 +440,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
         numberOfGuests: 1,
         attendanceStatus: 'Hadir',
         message: '',
-        hadir: false,
-        tidakHadir: false,
+        attendance: '',
         rating: 0,
         jumlahRombongan: 1
       };
@@ -462,21 +459,6 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     this.rsvpPopupType = null;
     if (this.rsvpPopupType === 'success') {
       this.closeModal();
-    }
-  }
-
-  // Checkbox toggle methods for iOS compatibility
-  toggleHadir() {
-    this.rsvpForm.hadir = !this.rsvpForm.hadir;
-    if (this.rsvpForm.hadir) {
-      this.rsvpForm.tidakHadir = false;
-    }
-  }
-
-  toggleTidakHadir() {
-    this.rsvpForm.tidakHadir = !this.rsvpForm.tidakHadir;
-    if (this.rsvpForm.tidakHadir) {
-      this.rsvpForm.hadir = false;
     }
   }
 
