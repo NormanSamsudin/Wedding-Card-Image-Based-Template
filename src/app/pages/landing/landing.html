@@ -102,14 +102,12 @@
 
         <!-- Checkbox row -->
         <div class="rsvp-checkbox-group">
-          <label class="rsvp-checkbox">
-            <input type="checkbox" [(ngModel)]="rsvpForm.hadir" name="hadir"
-              (change)="rsvpForm.hadir ? rsvpForm.tidakHadir = false : null" /> 
+          <label class="rsvp-checkbox" (click)="toggleHadir()">
+            <input type="checkbox" [(ngModel)]="rsvpForm.hadir" name="hadir" [checked]="rsvpForm.hadir" readonly /> 
             <span class="checkbox-text">Hadir</span>
           </label>
-          <label class="rsvp-checkbox">
-            <input type="checkbox" [(ngModel)]="rsvpForm.tidakHadir" name="tidakHadir"
-              (change)="rsvpForm.tidakHadir ? rsvpForm.hadir = false : null" /> 
+          <label class="rsvp-checkbox" (click)="toggleTidakHadir()">
+            <input type="checkbox" [(ngModel)]="rsvpForm.tidakHadir" name="tidakHadir" [checked]="rsvpForm.tidakHadir" readonly /> 
             <span class="checkbox-text">Tidak Hadir</span>
           </label>
         </div>

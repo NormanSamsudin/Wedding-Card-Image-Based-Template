@@ -465,6 +465,21 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  // Checkbox toggle methods for iOS compatibility
+  toggleHadir() {
+    this.rsvpForm.hadir = !this.rsvpForm.hadir;
+    if (this.rsvpForm.hadir) {
+      this.rsvpForm.tidakHadir = false;
+    }
+  }
+
+  toggleTidakHadir() {
+    this.rsvpForm.tidakHadir = !this.rsvpForm.tidakHadir;
+    if (this.rsvpForm.tidakHadir) {
+      this.rsvpForm.hadir = false;
+    }
+  }
+
   // Wishes Functions
   private async loadWishes() {
     try {

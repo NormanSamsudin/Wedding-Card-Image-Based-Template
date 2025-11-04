@@ -528,9 +528,15 @@
   transition: background-color 0.2s;
   position: relative;
   min-height: 44px; /* Ensure touch target is large enough */
-  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1); /* Light tap highlight for iOS */
   user-select: none; /* Prevent text selection */
   -webkit-user-select: none;
+  /* Improve touch handling on iOS */
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 }
 
 .rsvp-checkbox input[type="checkbox"] {
