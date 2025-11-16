@@ -470,8 +470,29 @@
   width: 20px;
   height: 20px;
   border-radius: 4px;
-  accent-color: #ffffff;
   cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  background: transparent;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.rsvp-checkbox input[type="checkbox"]:checked {
+  background: #000000;
+  border-color: #000000;
+}
+
+.rsvp-checkbox input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .checkbox-text {
