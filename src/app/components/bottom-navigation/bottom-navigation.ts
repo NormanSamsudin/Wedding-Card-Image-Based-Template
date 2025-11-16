@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router,  NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-// import { MusicService } from '../../services/music.service';
+import { MusicService } from '../../services/music.service';
 
 export interface NavigationItem {
   id: string;
@@ -23,18 +23,19 @@ export class BottomNavigation implements OnInit {
   @Output() musicToggle = new EventEmitter<void>();
 
   selectedItem: string | null = null;
-  // isMusicPlaying = false;
+  isMusicPlaying = false;
 
   navigationItems: NavigationItem[] = [
     { id: 'location', label: 'Location', icon: 'fa-solid fa-location-dot' },
     { id: 'contact', label: 'Contact', icon: 'fa-solid fa-phone' },
-    { id: 'qr', label: 'QR', icon: 'fa-solid fa-qrcode' },
+    { id: 'music', label: 'Music', icon: 'fa-solid fa-music', isMusicButton: true },
     { id: 'rsvp', label: 'RSVP', icon: 'fa-solid fa-envelope' },
     { id: 'wishes', label: 'Wishes', icon: 'fa-solid fa-heart' }
   ];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private musicService: MusicService
   ) { }
 
   ngOnInit() {
@@ -48,7 +49,10 @@ export class BottomNavigation implements OnInit {
       this.setSelectedItemFromRoute();
     });
 
-    // Music button removed, no need to subscribe
+    // Subscribe to music service playing state
+    this.musicService.isPlaying$.subscribe(isPlaying => {
+      this.isMusicPlaying = isPlaying;
+    });
   }
 
   private setSelectedItemFromRoute() {
@@ -57,8 +61,13 @@ export class BottomNavigation implements OnInit {
   }
 
   onNavClick(item: NavigationItem) {
-    this.selectedItem = item.id;
-    this.navigationClick.emit(item);
+    if (item.isMusicButton) {
+      this.musicService.toggle();
+      this.musicToggle.emit();
+    } else {
+      this.selectedItem = item.id;
+      this.navigationClick.emit(item);
+    }
   }
 }
 

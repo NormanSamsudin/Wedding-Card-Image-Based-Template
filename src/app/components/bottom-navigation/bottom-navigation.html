@@ -2,7 +2,9 @@
     <div class="nav-container">
         <button *ngFor="let item of navigationItems" class="nav-item" [class.selected]="selectedItem === item.id" (click)="onNavClick(item)">
             <div class="nav-icon">
-                <i [class]="item.icon"></i>
+                <i *ngIf="!item.isMusicButton" [class]="item.icon"></i>
+                <i *ngIf="item.isMusicButton && !isMusicPlaying" class="fa-solid fa-play"></i>
+                <i *ngIf="item.isMusicButton && isMusicPlaying" class="fa-solid fa-pause"></i>
             </div>
             <span class="nav-label">{{ item.label }}</span>
         </button>
